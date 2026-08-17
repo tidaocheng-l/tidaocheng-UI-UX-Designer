@@ -1163,8 +1163,8 @@ main {
 .capability-card:hover::before,
 .capability-card.is-hovered::before,
 .capability-card:focus-within::before {
-  opacity: 1;
-  transform: translate3d(18px, 0, 0);
+  opacity: 0;
+  transform: none;
 }
 
 .capability-card.motion-card {
