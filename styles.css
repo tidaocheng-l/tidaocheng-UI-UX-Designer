@@ -857,7 +857,16 @@ main {
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
+  filter: none;
   object-fit: contain;
+}
+
+.button-primary .button-icon-img {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .button-primary .button-icon-img {
+  filter: none;
 }
 
 .hero {
