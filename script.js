@@ -23,6 +23,12 @@ const scrollMotionItems = Array.from(document.querySelectorAll(".motion-card:not
 const workflowParticles = document.querySelector(".workflow-particles");
 const darkNavSections = Array.from(document.querySelectorAll(".workflow"));
 const toast = document.querySelector("[data-site-toast]");
+const portfolioFilterButtons = Array.from(document.querySelectorAll("[data-portfolio-filter]"));
+const portfolioCards = Array.from(document.querySelectorAll("[data-portfolio-card]"));
+const workCards = Array.from(document.querySelectorAll("[data-work-card]"));
+const portfolioIntro = document.querySelector(".portfolio-page-intro");
+const portfolioIntroTitle = portfolioIntro?.querySelector("#portfolio-page-title");
+const portfolioIntroTagline = portfolioIntro?.querySelector(".portfolio-page-intro-tagline");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const canAnimateScroll = !prefersReducedMotion.matches;
 
@@ -36,6 +42,43 @@ const splashPhrases = [
   "让好奇心先到场",
   "把生活感装进页面"
 ];
+const splashSeenStorageKey = "portfolio-splash-seen";
+const portfolioTagLabels = {
+  uiux: "UI设计",
+  web: "网页设计",
+  brand: "品牌VI",
+  poster: "海报设计",
+  video: "视频剪辑",
+  photo: "摄影"
+};
+const portfolioWorkCatalog = {
+  "personal-site": {
+    href: "work-detail.html",
+    image: "./assets/work-detail-hero.png",
+    imageWidth: 2400,
+    imageHeight: 970,
+    title: "我的个人网站，是怎么从一个想法变成现实的",
+    description: "让作品被看见，也让设计思考留下来",
+    tagKeys: ["web", "uiux"],
+    categories: "web uiux"
+  }
+};
+
+const hasSeenSplash = () => {
+  try {
+    return window.sessionStorage.getItem(splashSeenStorageKey) === "true";
+  } catch {
+    return false;
+  }
+};
+
+const markSplashSeen = () => {
+  try {
+    window.sessionStorage.setItem(splashSeenStorageKey, "true");
+  } catch {
+    // Session storage can be unavailable in restricted browsing contexts.
+  }
+};
 
 const createSplashChar = (char, index, options = {}) => {
   const charWrap = document.createElement("span");
@@ -135,13 +178,31 @@ const finishSplash = () => {
   }, prefersReducedMotion.matches ? 20 : 700);
 };
 
-prepareSplashTitle();
+const skipSplash = () => {
+  body?.classList.remove("is-loading");
+  body?.classList.add("is-splash-done");
+
+  if (!splash) return;
+  splash.classList.add("is-hidden");
+  splash.setAttribute("hidden", "");
+  splash.style.setProperty("--splash-progress", "100%");
+  if (splashProgress) splashProgress.style.setProperty("--splash-progress", "100%");
+  if (splashPercent) splashPercent.textContent = "100%";
+};
 
 const startSplash = () => {
   if (!splash) {
-    body?.classList.remove("is-loading");
+    skipSplash();
     return;
   }
+
+  if (hasSeenSplash()) {
+    skipSplash();
+    return;
+  }
+
+  markSplashSeen();
+  prepareSplashTitle();
 
   if (prefersReducedMotion.matches) {
     if (splashPercent) splashPercent.textContent = "100%";
@@ -199,9 +260,28 @@ const updateNavHeight = () => {
   root.style.setProperty("--nav-height", `${Math.ceil(nav.getBoundingClientRect().height)}px`);
 };
 
+let isNavScrolled = false;
+let hasUserScrolledNav = false;
+
+const enableNavScrolledState = () => {
+  hasUserScrolledNav = true;
+  setScrolledState();
+};
+
+const resetNavScrolledState = () => {
+  hasUserScrolledNav = false;
+  isNavScrolled = false;
+  nav?.classList.remove("is-scrolled");
+  setScrolledState();
+};
+
 const setScrolledState = () => {
   if (!nav) return;
-  nav.classList.toggle("is-scrolled", window.scrollY > 10);
+  const shouldBeScrolled = hasUserScrolledNav && (isNavScrolled ? window.scrollY > 72 : window.scrollY > 90);
+  if (shouldBeScrolled !== isNavScrolled) {
+    isNavScrolled = shouldBeScrolled;
+    nav.classList.toggle("is-scrolled", isNavScrolled);
+  }
 
   const navProbeY = nav.getBoundingClientRect().bottom - 1;
   const isOverDarkSection = darkNavSections.some(section => {
@@ -310,19 +390,197 @@ const resetPointerGradient = () => {
   root.style.removeProperty("--gradient-y");
 };
 
+const applyPortfolioFilter = filter => {
+  if (!portfolioFilterButtons.length || !portfolioCards.length) return;
+
+  portfolioFilterButtons.forEach(button => {
+    const isActive = button.dataset.portfolioFilter === filter;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+
+  portfolioCards.forEach(card => {
+    const categories = (card.dataset.portfolioCategory || "").split(/\s+/).filter(Boolean);
+    const isVisible = filter === "all" || categories.includes(filter);
+    card.hidden = !isVisible;
+    card.classList.toggle("is-hidden", !isVisible);
+  });
+};
+
+const getPortfolioFilterFromHash = () => {
+  const hash = window.location.hash.replace("#", "");
+  const filterKey = hash.replace("filter-", "");
+  const matchedButton = portfolioFilterButtons.find(button => button.id === hash || button.dataset.portfolioFilter === filterKey);
+
+  return matchedButton?.dataset.portfolioFilter || "all";
+};
+
+const splitWorkKeys = value => {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  return String(value || "")
+    .split(/\s+/)
+    .filter(Boolean);
+};
+
+const getWorkTagLabels = work => {
+  const customTags = Array.isArray(work.tags) ? work.tags.filter(Boolean) : [];
+  const tagKeys = splitWorkKeys(work.tagKeys || work.categories);
+  const inferredTags = tagKeys.map(key => portfolioTagLabels[key] || key).filter(Boolean);
+
+  return Array.from(new Set([...customTags, ...inferredTags]));
+};
+
+const getOrCreatePortfolioTags = content => {
+  if (!content) return null;
+
+  const tags = content.querySelector(".portfolio-tags");
+  if (tags) return tags;
+
+  const createdTags = document.createElement("span");
+  createdTags.className = "portfolio-tags";
+  content.appendChild(createdTags);
+  return createdTags;
+};
+
+const syncPortfolioWorkCards = () => {
+  workCards.forEach(card => {
+    const work = portfolioWorkCatalog[card.dataset.workCard];
+    if (!work) return;
+
+    const link = card.querySelector(".portfolio-link");
+    const media = card.querySelector(".portfolio-media");
+    const content = card.querySelector(".portfolio-content");
+    const title = card.querySelector(".portfolio-title-row strong");
+    const description = card.querySelector(".portfolio-desc");
+    const tagLabels = getWorkTagLabels(work);
+    const tags = tagLabels.length ? getOrCreatePortfolioTags(content) : card.querySelector(".portfolio-tags");
+    const image = media?.querySelector("img");
+
+    if (link) {
+      link.href = work.href;
+      link.setAttribute("aria-label", `查看 ${work.title}`);
+    }
+
+    if (image) {
+      if (image.parentElement?.tagName === "PICTURE") {
+        media.replaceChildren(image);
+      }
+      image.src = work.image;
+      image.alt = `${work.title}作品预览图`;
+      image.width = work.imageWidth;
+      image.height = work.imageHeight;
+    }
+
+    if (title) title.textContent = work.title;
+    if (description) description.textContent = work.description;
+
+    if (tags && tagLabels.length) {
+      tags.setAttribute("aria-label", "作品标签");
+      tags.replaceChildren(
+        ...tagLabels.map(tag => {
+          const tagElement = document.createElement("span");
+          tagElement.textContent = tag;
+          return tagElement;
+        })
+      );
+    } else if (tags) {
+      tags.remove();
+    }
+
+    if (card.matches("[data-portfolio-card]") && work.categories) {
+      card.dataset.portfolioCategory = work.categories;
+    }
+  });
+};
+
+const splitPortfolioIntroText = (element, className, delayBase, delayStep) => {
+  if (!element) return;
+
+  const text = element.textContent || "";
+  const fragment = document.createDocumentFragment();
+  element.setAttribute("aria-label", text);
+
+  Array.from(text).forEach((char, index) => {
+    const span = document.createElement("span");
+    const yOffset = ((index % 4) - 1.5) * 7;
+    const rotation = ((index % 5) - 2) * 1.5;
+
+    span.className = `${className}${char.trim() ? "" : " portfolio-intro-space"}`;
+    span.textContent = char;
+    span.style.setProperty("--intro-char-index", index);
+    span.style.setProperty("--intro-char-y", `${yOffset.toFixed(1)}px`);
+    span.style.setProperty("--intro-char-rotate", `${rotation.toFixed(1)}deg`);
+    span.style.setProperty("--intro-char-delay", `${delayBase + index * delayStep}ms`);
+    fragment.appendChild(span);
+  });
+
+  element.replaceChildren(fragment);
+};
+
+const setupPortfolioIntroMotion = () => {
+  if (!portfolioIntro || prefersReducedMotion.matches) return;
+
+  splitPortfolioIntroText(portfolioIntroTitle, "portfolio-intro-char", 120, 42);
+  splitPortfolioIntroText(portfolioIntroTagline, "portfolio-intro-tagline-char", 760, 34);
+  requestAnimationFrame(() => portfolioIntro.classList.add("is-intro-ready"));
+
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+
+  const resetIntroParallax = () => {
+    portfolioIntro.style.setProperty("--intro-shift-x", "0px");
+    portfolioIntro.style.setProperty("--intro-shift-y", "0px");
+    portfolioIntro.style.setProperty("--intro-tilt-x", "0deg");
+    portfolioIntro.style.setProperty("--intro-tilt-y", "0deg");
+  };
+
+  portfolioIntro.addEventListener(
+    "pointermove",
+    event => {
+      const rect = portfolioIntro.getBoundingClientRect();
+      const normalizedX = (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      const normalizedY = (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+      const x = Math.max(-1, Math.min(1, normalizedX));
+      const y = Math.max(-1, Math.min(1, normalizedY));
+
+      portfolioIntro.style.setProperty("--intro-shift-x", `${(x * 7).toFixed(2)}px`);
+      portfolioIntro.style.setProperty("--intro-shift-y", `${(y * 4).toFixed(2)}px`);
+      portfolioIntro.style.setProperty("--intro-tilt-x", `${(y * -1.1).toFixed(2)}deg`);
+      portfolioIntro.style.setProperty("--intro-tilt-y", `${(x * 1.6).toFixed(2)}deg`);
+    },
+    { passive: true }
+  );
+  portfolioIntro.addEventListener("pointerleave", resetIntroParallax);
+};
+
 const storedTheme = readStoredTheme();
 if (storedTheme === "dark") {
   root.dataset.theme = "dark";
 }
 
 updateNavHeight();
-setScrolledState();
+resetNavScrolledState();
 updateScrollEffects();
 syncThemeToggle();
+syncPortfolioWorkCards();
 startSplash();
+setupPortfolioIntroMotion();
 
 window.addEventListener("scroll", setScrolledState, { passive: true });
 window.addEventListener("scroll", queueScrollEffects, { passive: true });
+window.addEventListener("wheel", enableNavScrolledState, { passive: true });
+window.addEventListener("touchmove", enableNavScrolledState, { passive: true });
+window.addEventListener("pointerdown", event => {
+  if (event.clientX >= document.documentElement.clientWidth - 20) {
+    enableNavScrolledState();
+  }
+});
+window.addEventListener("keydown", event => {
+  const scrollKeys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " ", "Spacebar"];
+  if (scrollKeys.includes(event.key)) {
+    enableNavScrolledState();
+  }
+});
+window.addEventListener("pageshow", resetNavScrolledState);
 window.addEventListener("resize", updateNavHeight);
 window.addEventListener("resize", queueScrollEffects);
 
@@ -390,6 +648,21 @@ if (themeToggle) {
     storeTheme(nextTheme);
     syncThemeToggle();
   });
+}
+
+if (portfolioFilterButtons.length) {
+  applyPortfolioFilter(getPortfolioFilterFromHash());
+
+  portfolioFilterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.portfolioFilter || "all";
+      applyPortfolioFilter(filter);
+      const nextUrl = filter === "all" ? window.location.pathname : `#filter-${filter}`;
+      window.history.replaceState(null, "", nextUrl);
+    });
+  });
+
+  window.addEventListener("hashchange", () => applyPortfolioFilter(getPortfolioFilterFromHash()));
 }
 
 document.querySelectorAll("[data-toast]").forEach(control => {
