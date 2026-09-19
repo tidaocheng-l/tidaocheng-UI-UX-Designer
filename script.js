@@ -12,10 +12,12 @@ const themeToggle = document.querySelector("[data-theme-toggle]");
 const contactTriggers = document.querySelectorAll("[data-contact-trigger]");
 const contactPopup = document.querySelector("[data-contact-popup]");
 const contactHost = contactPopup?.closest(".hero");
+const contactArea = contactPopup?.closest(".contact-button-wrap");
 const revealItems = document.querySelectorAll(".reveal");
 const capabilityCards = document.querySelectorAll(".capability-card");
 const tiltItems = document.querySelectorAll("[data-tilt]");
 const workflowToys = document.querySelectorAll("[data-workflow-toy]");
+const navMenu = document.querySelector(".nav-menu");
 const navLinks = Array.from(document.querySelectorAll(".nav-link[href^='#']"));
 const navAnchors = Array.from(document.querySelectorAll(".nav-menu a[href^='#']"));
 const navDropdowns = document.querySelectorAll(".nav-dropdown");
@@ -29,7 +31,17 @@ const workCards = Array.from(document.querySelectorAll("[data-work-card]"));
 const portfolioIntro = document.querySelector(".portfolio-page-intro");
 const portfolioIntroTitle = portfolioIntro?.querySelector("#portfolio-page-title");
 const portfolioIntroTagline = portfolioIntro?.querySelector(".portfolio-page-intro-tagline");
+const photoTiles = Array.from(document.querySelectorAll("[data-photo-index]"));
+const photoLightbox = document.querySelector("[data-photo-lightbox]");
+const photoLightboxDialog = photoLightbox?.querySelector(".photo-lightbox-dialog");
+const photoLightboxImage = photoLightbox?.querySelector("[data-photo-lightbox-image]");
+const photoLightboxCaption = photoLightbox?.querySelector("[data-photo-lightbox-caption]");
+const photoLightboxCounter = photoLightbox?.querySelector("[data-photo-counter]");
+const photoLightboxClose = photoLightbox?.querySelector(".photo-lightbox-close");
+const photoLightboxPrev = photoLightbox?.querySelector("[data-photo-prev]");
+const photoLightboxNext = photoLightbox?.querySelector("[data-photo-next]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mobileNavMedia = window.matchMedia("(max-width: 920px)");
 const canAnimateScroll = !prefersReducedMotion.matches;
 
 if (canAnimateScroll) {
@@ -45,6 +57,7 @@ const splashPhrases = [
 const splashSeenStorageKey = "portfolio-splash-seen";
 const portfolioTagLabels = {
   uiux: "UI设计",
+  app: "APP界面",
   web: "网页设计",
   brand: "品牌VI",
   poster: "海报设计",
@@ -61,8 +74,81 @@ const portfolioWorkCatalog = {
     description: "让作品被看见，也让设计思考留下来",
     tagKeys: ["web", "uiux"],
     categories: "web uiux"
+  },
+  harden: {
+    href: "work-harden.html",
+    image: "./assets/work-harden-thumb-20260821.webp",
+    imageWidth: 1200,
+    imageHeight: 485,
+    title: "翰德恩网站改版（实际上线效果为准）",
+    description: "点击链接查看：www.hardenx.cn/index.html",
+    tagKeys: ["web", "uiux"],
+    categories: "web uiux"
+  },
+  zentao: {
+    href: "work-zentao.html",
+    image: "./assets/work-zentao-thumb-20260821.webp",
+    imageWidth: 1200,
+    imageHeight: 485,
+    title: "禅道学院（实际上线效果为准）",
+    description: "点击链接查看：www.zentao.net/page/college.html",
+    tagKeys: ["web", "uiux"],
+    categories: "web uiux"
+  },
+  lingkuai: {
+    href: "work-lingkuai.html",
+    image: "./assets/work-lingkuai-thumb-20260821.webp",
+    imageWidth: 1200,
+    imageHeight: 676,
+    title: "灵快摄影（练手作品）",
+    description: "一个集创作、分享、学习、互动于一体的全方位摄影生态系统",
+    tagKeys: ["app", "uiux"],
+    categories: "app uiux"
+  },
+  yingyi: {
+    href: "work-yingyi.html",
+    image: "./assets/work-yingyi-thumb-20260821.webp",
+    imageWidth: 1200,
+    imageHeight: 676,
+    title: "盈翼金融（练手作品）",
+    description: "提供多种金融服务并利用AI进行个性化推荐",
+    tagKeys: ["app", "uiux"],
+    categories: "app uiux"
   }
 };
+
+const portfolioDropdownItems = [
+  {
+    href: "portfolio.html",
+    title: "全部作品",
+    description: "查看当前已整理上线的作品"
+  },
+  {
+    href: "portfolio.html#filter-ui",
+    title: "UI/UX 设计",
+    description: "界面设计、交互体验与产品视觉"
+  },
+  {
+    href: "portfolio.html#filter-app",
+    title: "APP 界面",
+    description: "移动端产品界面与练手作品"
+  },
+  {
+    href: "portfolio.html#filter-web",
+    title: "网页设计",
+    description: "网页视觉、落地页与站点体验"
+  },
+  {
+    href: "portfolio.html#filter-poster",
+    title: "海报设计",
+    description: "活动海报、宣传物料与平面视觉"
+  },
+  {
+    href: "portfolio.html#filter-video",
+    title: "视频",
+    description: "动效演示、宣传片与创意视频"
+  }
+];
 
 const hasSeenSplash = () => {
   try {
@@ -352,13 +438,24 @@ const openContactPopup = () => {
   contactPopup.setAttribute("aria-hidden", "false");
 };
 
+const isContactPopupEngaged = () =>
+  Boolean(
+    contactArea?.matches(":hover") ||
+    contactPopup?.matches(":hover") ||
+    Array.from(contactTriggers).some(trigger => trigger.matches(":focus, :focus-visible"))
+  );
+
 const closeContactPopup = () => {
   if (!contactHost || !contactPopup) return;
   window.clearTimeout(openContactPopup.closeTimer);
   openContactPopup.closeTimer = window.setTimeout(() => {
+    if (isContactPopupEngaged()) {
+      openContactPopup();
+      return;
+    }
     contactHost.classList.remove("is-contact-open");
     contactPopup.setAttribute("aria-hidden", "true");
-  }, 140);
+  }, 360);
 };
 
 const readStoredTheme = () => {
@@ -399,9 +496,11 @@ const applyPortfolioFilter = filter => {
     button.setAttribute("aria-selected", isActive ? "true" : "false");
   });
 
+  document.body.classList.toggle("is-poster-filter", filter === "poster");
+
   portfolioCards.forEach(card => {
     const categories = (card.dataset.portfolioCategory || "").split(/\s+/).filter(Boolean);
-    const isVisible = filter === "all" || categories.includes(filter);
+    const isVisible = categories.includes(filter) || (filter === "all" && !card.hasAttribute("data-portfolio-exclude-all"));
     card.hidden = !isVisible;
     card.classList.toggle("is-hidden", !isVisible);
   });
@@ -493,6 +592,129 @@ const syncPortfolioWorkCards = () => {
   });
 };
 
+const syncPortfolioDropdowns = () => {
+  navDropdowns.forEach(dropdown => {
+    const panel = dropdown.querySelector(".nav-dropdown-panel");
+    if (!panel) return;
+
+    const items = portfolioDropdownItems.map(item => {
+      const link = document.createElement("a");
+      link.className = "nav-dropdown-item";
+      link.href = item.href;
+
+      const copy = document.createElement("span");
+      const title = document.createElement("strong");
+      const description = document.createElement("small");
+      const arrow = document.createElement("span");
+
+      title.textContent = item.title;
+      description.textContent = item.description;
+      arrow.className = "nav-dropdown-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "›";
+
+      copy.append(title, description);
+      link.append(copy, arrow);
+      return link;
+    });
+
+    panel.replaceChildren(...items);
+  });
+};
+
+const setupMobileNavigation = () => {
+  if (!nav || !navMenu || nav.querySelector("[data-mobile-menu-toggle]")) return;
+
+  const mobileMenuId = "mobile-site-menu";
+  navMenu.id = navMenu.id || mobileMenuId;
+
+  const toggle = document.createElement("button");
+  toggle.className = "mobile-menu-toggle";
+  toggle.type = "button";
+  toggle.setAttribute("aria-label", "打开导航菜单");
+  toggle.setAttribute("aria-controls", navMenu.id);
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("data-mobile-menu-toggle", "");
+  toggle.innerHTML = '<span></span><span></span>';
+
+  const backdrop = document.createElement("button");
+  backdrop.className = "mobile-nav-backdrop";
+  backdrop.type = "button";
+  backdrop.setAttribute("aria-label", "关闭导航菜单");
+  backdrop.setAttribute("data-mobile-menu-close", "");
+
+  const mobileHeader = document.createElement("span");
+  mobileHeader.className = "mobile-menu-header";
+  const mobileBrand = nav.querySelector(".brand")?.cloneNode(true);
+  mobileBrand?.classList.add("mobile-menu-brand");
+  const close = document.createElement("button");
+  close.className = "mobile-menu-close";
+  close.type = "button";
+  close.setAttribute("aria-label", "关闭导航菜单");
+  close.setAttribute("data-mobile-menu-close", "");
+  close.innerHTML = '<span></span><span></span>';
+  if (mobileBrand) mobileHeader.appendChild(mobileBrand);
+  mobileHeader.appendChild(close);
+
+  const mobileActions = document.createElement("span");
+  mobileActions.className = "mobile-menu-actions";
+  mobileActions.innerHTML = '<a class="mobile-menu-cta" href="index.html#contact">联系我</a>';
+
+  navMenu.prepend(mobileHeader);
+  navMenu.appendChild(mobileActions);
+  themeToggle?.after(toggle);
+  nav.after(backdrop);
+
+  const setMobileMenuOpen = open => {
+    body.classList.toggle("mobile-nav-open", open);
+    nav.classList.toggle("is-mobile-menu-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "关闭导航菜单" : "打开导航菜单");
+  };
+
+  toggle.addEventListener("click", () => setMobileMenuOpen(!body.classList.contains("mobile-nav-open")));
+  backdrop.addEventListener("click", () => setMobileMenuOpen(false));
+  nav.querySelectorAll("[data-mobile-menu-close]").forEach(control => {
+    control.addEventListener("click", () => setMobileMenuOpen(false));
+  });
+
+  navMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (mobileNavMedia.matches && body.classList.contains("mobile-nav-open") && link.matches(".nav-dropdown-trigger")) return;
+      setMobileMenuOpen(false);
+    });
+  });
+
+  navDropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector(".nav-dropdown-trigger");
+    trigger?.addEventListener("click", event => {
+      if (!mobileNavMedia.matches || !body.classList.contains("mobile-nav-open")) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const nextExpanded = !dropdown.classList.contains("is-mobile-expanded");
+      navDropdowns.forEach(item => {
+        if (item !== dropdown) item.classList.remove("is-mobile-expanded");
+        item.querySelector(".nav-dropdown-trigger")?.setAttribute("aria-expanded", "false");
+      });
+      dropdown.classList.toggle("is-mobile-expanded", nextExpanded);
+      trigger.setAttribute("aria-expanded", nextExpanded ? "true" : "false");
+    }, { capture: true });
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && body.classList.contains("mobile-nav-open")) {
+      setMobileMenuOpen(false);
+    }
+  });
+
+  mobileNavMedia.addEventListener("change", event => {
+    if (!event.matches) {
+      setMobileMenuOpen(false);
+      navDropdowns.forEach(dropdown => dropdown.classList.remove("is-mobile-expanded"));
+    }
+  });
+};
+
 const splitPortfolioIntroText = (element, className, delayBase, delayStep) => {
   if (!element) return;
 
@@ -552,6 +774,106 @@ const setupPortfolioIntroMotion = () => {
   portfolioIntro.addEventListener("pointerleave", resetIntroParallax);
 };
 
+const setupPhotoGallery = () => {
+  if (!photoTiles.length || !photoLightbox || !photoLightboxImage) return;
+
+  const photos = photoTiles.map(tile => ({
+    src: tile.dataset.photoSrc || tile.querySelector("img")?.currentSrc || tile.querySelector("img")?.src || "",
+    alt: tile.dataset.photoAlt || tile.querySelector("img")?.alt || "",
+    caption: tile.dataset.photoCaption || ""
+  }));
+  let activeIndex = 0;
+  let activeTrigger = null;
+  let closeTimer = 0;
+
+  const showPhoto = index => {
+    activeIndex = (index + photos.length) % photos.length;
+    const photo = photos[activeIndex];
+    if (!photo?.src) return;
+
+    photoLightboxImage.src = photo.src;
+    photoLightboxImage.alt = photo.alt;
+    photoLightboxImage.width = Number(photoTiles[activeIndex]?.querySelector("img")?.getAttribute("width")) || 1600;
+    photoLightboxImage.height = Number(photoTiles[activeIndex]?.querySelector("img")?.getAttribute("height")) || 1000;
+    if (photoLightboxCaption) photoLightboxCaption.textContent = photo.caption;
+    if (photoLightboxCounter) {
+      photoLightboxCounter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+    }
+  };
+
+  const closeLightbox = () => {
+    if (photoLightbox.hidden && !photoLightbox.classList.contains("is-open")) return;
+
+    window.clearTimeout(closeTimer);
+    photoLightbox.classList.remove("is-open");
+    photoLightbox.setAttribute("aria-hidden", "true");
+    body.classList.remove("photo-lightbox-open");
+    closeTimer = window.setTimeout(() => {
+      photoLightbox.hidden = true;
+      activeTrigger?.focus({ preventScroll: true });
+      activeTrigger = null;
+    }, prefersReducedMotion.matches ? 0 : 220);
+  };
+
+  const openLightbox = index => {
+    activeIndex = (index + photos.length) % photos.length;
+    activeTrigger = photoTiles[activeIndex] || document.activeElement;
+    window.clearTimeout(closeTimer);
+    showPhoto(activeIndex);
+    photoLightbox.hidden = false;
+    photoLightbox.setAttribute("aria-hidden", "false");
+    body.classList.add("photo-lightbox-open");
+    requestAnimationFrame(() => photoLightbox.classList.add("is-open"));
+    photoLightboxClose?.focus({ preventScroll: true });
+  };
+
+  const movePhoto = offset => showPhoto(activeIndex + offset);
+
+  photoTiles.forEach((tile, index) => {
+    tile.addEventListener("click", () => openLightbox(index));
+  });
+
+  photoLightbox.querySelectorAll("[data-photo-close]").forEach(control => {
+    control.addEventListener("click", closeLightbox);
+  });
+  photoLightboxPrev?.addEventListener("click", () => movePhoto(-1));
+  photoLightboxNext?.addEventListener("click", () => movePhoto(1));
+
+  document.addEventListener("keydown", event => {
+    if (photoLightbox.hidden || !photoLightbox.classList.contains("is-open")) return;
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeLightbox();
+      return;
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      movePhoto(-1);
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      movePhoto(1);
+      return;
+    }
+
+    if (event.key !== "Tab" || !photoLightboxDialog) return;
+    const focusable = [photoLightboxClose, photoLightboxPrev, photoLightboxNext].filter(Boolean);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+};
+
 const storedTheme = readStoredTheme();
 if (storedTheme === "dark") {
   root.dataset.theme = "dark";
@@ -561,9 +883,12 @@ updateNavHeight();
 resetNavScrolledState();
 updateScrollEffects();
 syncThemeToggle();
+syncPortfolioDropdowns();
+setupMobileNavigation();
 syncPortfolioWorkCards();
 startSplash();
 setupPortfolioIntroMotion();
+setupPhotoGallery();
 
 window.addEventListener("scroll", setScrolledState, { passive: true });
 window.addEventListener("scroll", queueScrollEffects, { passive: true });
@@ -671,7 +996,9 @@ document.querySelectorAll("[data-toast]").forEach(control => {
 
 contactTriggers.forEach(trigger => {
   trigger.addEventListener("pointerenter", openContactPopup);
-  trigger.addEventListener("pointerleave", closeContactPopup);
+  if (!contactArea) {
+    trigger.addEventListener("pointerleave", closeContactPopup);
+  }
   trigger.addEventListener("focusin", openContactPopup);
   trigger.addEventListener("focusout", closeContactPopup);
   trigger.addEventListener("click", event => {
@@ -680,6 +1007,14 @@ contactTriggers.forEach(trigger => {
     }
   });
 });
+
+if (contactArea) {
+  contactArea.addEventListener("pointerenter", openContactPopup);
+  contactArea.addEventListener("pointerleave", closeContactPopup);
+} else if (contactPopup) {
+  contactPopup.addEventListener("pointerenter", openContactPopup);
+  contactPopup.addEventListener("pointerleave", closeContactPopup);
+}
 
 navDropdowns.forEach(dropdown => {
   const trigger = dropdown.querySelector(".nav-dropdown-trigger");
