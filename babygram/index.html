@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BabyGram · UI 作品集 / Baby Memory &amp; AI Creation App</title>
+<meta name="description" content="BabyGram 母婴记录与 AI 创作 App 的完整 UI 作品集：129 屏高保真界面、25 个功能模块、完整设计系统与状态设计。">
+<style>
+/* ============ BabyGram UI Portfolio ============ */
+:root{
+  --bg:#08080A;
+  --bg-2:#0E0E12;
+  --surface:#131318;
+  --surface-2:#1A1A21;
+  --line:rgba(255,255,255,.075);
+  --line-2:rgba(255,255,255,.14);
+  --tx:#F6F4F0;
+  --tx-2:#A8A8B3;
+  --tx-3:#6E6E7A;
+  --amber:#FFC667;
+  --amber-2:#E8A63C;
+  --coral:#FF7072;
+  --violet:#B05CF2;
+  --blue:#67B5FF;
+  --r:14px;
+  --max:1240px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--tx);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.02em}
+h1,h2,h3,h4{font-weight:640;letter-spacing:-.02em;line-height:1.2}
+em{font-style:normal}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--amber);color:#141414}
+
+/* ---- scrollbar ---- */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
+
+/* ---- progress ---- */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:90;background:transparent}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--coral));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
+
+/* ---- nav ---- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;gap:28px;
+  padding:16px 40px;backdrop-filter:blur(18px) saturate(160%);
+  background:linear-gradient(180deg,rgba(8,8,10,.86),rgba(8,8,10,.55));border-bottom:1px solid transparent;
+  transition:border-color .3s}
+.brand{display:flex;align-items:center;gap:9px;font-weight:680;letter-spacing:-.02em;font-size:15px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 0 4px rgba(255,198,103,.14);animation:pulse 2.6s var(--ease) infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,198,103,.14)}50%{box-shadow:0 0 0 9px rgba(255,198,103,0)}}
+.nav-links{display:flex;gap:26px;margin-left:auto;font-size:13.5px;color:var(--tx-2)}
+.nav-links a{position:relative;transition:color .2s}
+.nav-links a:hover{color:var(--tx)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--amber);transition:width .3s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-badge{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-3);
+  border:1px solid var(--line-2);border-radius:99px;padding:5px 12px}
+@media(max-width:1080px){.nav-links{display:none}}
+
+/* ---- hero ---- */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:130px 40px 70px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(760px 520px at 78% 18%,rgba(255,198,103,.16),transparent 62%),
+    radial-gradient(620px 460px at 14% 78%,rgba(255,112,114,.11),transparent 66%),
+    radial-gradient(900px 700px at 50% 120%,rgba(176,92,242,.09),transparent 70%);
+}
+.hero-bg::after{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:74px 74px;
+  mask-image:radial-gradient(ellipse 80% 62% at 50% 42%,#000,transparent 78%)}
+.hero-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;width:100%;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:48px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--tx-2);border:1px solid var(--line-2);border-radius:99px;padding:7px 15px;margin-bottom:26px}
+.eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:pulse 2.6s infinite}
+.hero h1{font-size:clamp(52px,7.4vw,96px);letter-spacing:-.045em;line-height:1.12;padding-bottom:.06em;
+  background:linear-gradient(170deg,#FFFFFF 6%,#FFE6BC 46%,#E8A63C 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px}
+.hero-sub{color:var(--tx-2);font-size:16px;max-width:520px;line-height:1.85}
+.hero-meta{display:flex;gap:34px;margin-top:40px;flex-wrap:wrap}
+.hero-meta div{display:flex;flex-direction:column;gap:3px}
+.hero-meta strong{font-size:24px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hero-meta span{font-size:11.5px;color:var(--tx-3);letter-spacing:.04em}
+.hero-stack{display:flex;justify-content:center;align-items:center;height:min(74vh,620px);position:relative}
+.hero-phone{position:absolute;width:172px;border-radius:22px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);background:#111;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,.9),0 0 0 6px rgba(255,255,255,.02);
+  transform:translateX(calc((var(--i) - 2.5) * 76px)) rotate(calc((var(--i) - 2.5) * 3.1deg))
+            translateY(calc(abs(var(--i) - 2.5) * 15px));
+  z-index:calc(10 - abs(var(--i) - 2.5));
+  will-change:translate;backface-visibility:hidden;
+  animation:float 7s ease-in-out infinite;animation-delay:calc(var(--i) * -.6s)}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -13px}}
+.hero-phone img{width:100%;height:auto}
+@media(max-width:920px){
+  .hero-inner{grid-template-columns:1fr;gap:56px}
+  .hero-stack{height:440px}
+  .hero-phone{width:126px;transform:translateX(calc((var(--i) - 2.5) * 54px)) rotate(calc((var(--i) - 2.5) * 3deg))}
+}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3);animation:float 3s infinite}
+
+/* ---- section shell ---- */
+.sec{max-width:var(--max);margin:0 auto;padding:110px 40px;position:relative}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.sec-no{font-family:ui-monospace,monospace;font-size:12px;color:var(--amber);letter-spacing:.1em}
+.sec-head h2{font-size:clamp(26px,3.2vw,38px);letter-spacing:-.03em}
+.sec-en{margin-left:auto;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3)}
+.sec-lead{color:var(--tx-2);max-width:660px;margin:-18px 0 46px;font-size:15px}
+
+/* ---- overview ---- */
+.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.ov-col{padding:26px;border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,0));transition:border-color .3s,transform .4s var(--ease)}
+.ov-col:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.ov-col h4{font-size:14px;letter-spacing:.02em;margin-bottom:12px;color:var(--amber);font-weight:600}
+.ov-col p{color:var(--tx-2);font-size:14px;line-height:1.9}
+.ov-col b{color:var(--tx);font-weight:600}
+@media(max-width:920px){.overview{grid-template-columns:1fr}}
+
+.facts{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;margin-top:52px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.fact{background:var(--bg-2);padding:24px 18px;display:flex;flex-direction:column;gap:4px}
+.fact b{font-size:26px;letter-spacing:-.035em;font-variant-numeric:tabular-nums;color:var(--tx)}
+.fact span{font-size:12.5px;color:var(--tx-2)}
+.fact em{font-size:10.5px;color:var(--tx-3);letter-spacing:.05em}
+@media(max-width:920px){.facts{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.facts{grid-template-columns:repeat(2,1fr)}}
+
+/* ---- design system ---- */
+.sys-block{margin-bottom:74px}
+.sys-title{font-size:17px;letter-spacing:-.01em;margin-bottom:10px;display:flex;align-items:baseline;gap:10px}
+.sys-title em{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3);font-weight:400}
+.sys-desc{color:var(--tx-2);font-size:14px;max-width:760px;margin-bottom:26px}
+.sys-desc code{color:var(--amber);background:rgba(255,198,103,.08);padding:2px 6px;border-radius:5px}
+
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:920px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.sw{display:flex;gap:13px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:11px;
+  background:var(--surface);transition:border-color .25s}
+.sw:hover{border-color:var(--line-2)}
+.sw-chip{width:44px;height:44px;border-radius:9px;flex:0 0 44px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.sw-meta{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sw-meta code{color:var(--tx);font-size:11.5px}
+.sw-meta span{font-size:12.5px;color:var(--tx-2)}
+.sw-meta em{font-size:10.5px;color:var(--tx-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.grads{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:920px){.grads{grid-template-columns:repeat(2,1fr)}}
+.grad{height:96px;border-radius:12px;position:relative;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);display:flex;align-items:flex-end;padding:12px}
+.grad span{font-size:11.5px;font-weight:600;color:#17130C;background:rgba(255,255,255,.72);
+  backdrop-filter:blur(6px);padding:3px 9px;border-radius:99px}
+
+.types{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.type-row{display:grid;grid-template-columns:88px 1fr auto;align-items:baseline;gap:22px;
+  padding:14px 22px;border-bottom:1px solid var(--line)}
+.type-row:last-child{border-bottom:0}
+.type-size{font-weight:640;letter-spacing:-.03em;color:var(--tx);font-variant-numeric:tabular-nums}
+.type-name{font-size:13.5px;color:var(--tx-2)}
+.type-use{font-size:11.5px;color:var(--tx-3)}
+@media(max-width:600px){.type-row{grid-template-columns:64px 1fr}.type-use{display:none}}
+
+.fam-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fam-row span{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--tx-2);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;background:var(--surface)}
+.fam-row em{font-size:10.5px;color:var(--amber);font-variant-numeric:tabular-nums}
+
+.radii{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+@media(max-width:920px){.radii{grid-template-columns:repeat(3,1fr)}}
+.rad{display:flex;flex-direction:column;gap:8px}
+.rad-demo{height:74px;background:linear-gradient(150deg,#2A2A33,#1A1A21);
+  border:1px solid var(--line-2)}
+.rad code{color:var(--tx)}
+.rad span{font-size:11.5px;color:var(--tx-3)}
+
+/* ---- module index ---- */
+.idx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1080px){.idx-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.idx-grid{grid-template-columns:repeat(2,1fr)}}
+.idx-card{position:relative;display:flex;flex-direction:column;gap:5px;padding:20px 18px 18px;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--surface);
+  transition:border-color .3s,transform .35s var(--ease),background .3s}
+.idx-card:hover{border-color:rgba(255,198,103,.42);transform:translateY(-4px);background:var(--surface-2)}
+.idx-tag{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--amber);letter-spacing:.08em}
+.idx-cn{font-size:15px;font-weight:620;letter-spacing:-.01em;
+  color:var(--tx);text-shadow:0 0 0 transparent;transition:color .3s}
+.idx-card:hover .idx-cn{color:var(--amber)}
+.idx-en{font-size:11.5px;color:var(--tx-3)}
+.idx-n{margin-top:8px;font-size:20px;font-weight:640;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.idx-n em{font-size:11px;color:var(--tx-3);margin-left:3px;font-weight:400}
+
+/* ---- module / rail ---- */
+.module{padding:56px 0 10px;border-top:1px solid var(--line)}
+.module:first-of-type{border-top:0}
+.module-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:22px}
+.module-tag{font-family:ui-monospace,monospace;font-size:12px;color:var(--amber);
+  border:1px solid rgba(255,198,103,.3);border-radius:7px;padding:4px 9px;background:rgba(255,198,103,.07);
+  flex:0 0 auto;margin-top:3px}
+.module-title{display:flex;flex-direction:column;gap:3px;min-width:0}
+.module-title h3{font-size:23px;letter-spacing:-.025em}
+.module-title .en{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tx-3)}
+.module-count{margin-left:auto;font-size:26px;font-weight:640;letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;color:var(--tx);flex:0 0 auto}
+.module-count em{font-size:11px;color:var(--tx-3);letter-spacing:.1em;text-transform:uppercase;margin-left:5px;font-weight:400}
+.module-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:36px;margin-bottom:32px}
+@media(max-width:920px){.module-body{grid-template-columns:1fr;gap:18px}}
+.module-desc{color:var(--tx-2);font-size:14.5px;line-height:1.9;max-width:640px}
+.points{list-style:none;display:flex;flex-direction:column;gap:9px}
+.points li{position:relative;padding-left:19px;font-size:13.5px;color:var(--tx-2);line-height:1.75}
+.points li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;
+  background:var(--amber);box-shadow:0 0 0 3px rgba(255,198,103,.13)}
+
+.rail{position:relative}
+.rail-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;
+  padding:6px 2px 20px;cursor:grab;scrollbar-width:none}
+.rail-track::-webkit-scrollbar{display:none}
+.rail-track.grab{cursor:grabbing}
+.shot{flex:0 0 auto;width:230px;scroll-snap-align:start}
+.shot-frame{border-radius:19px;overflow:hidden;border:1px solid var(--line-2);background:#101014;
+  box-shadow:0 22px 46px -22px rgba(0,0,0,.95);transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s}
+.shot:hover .shot-frame{transform:translateY(-7px);box-shadow:0 34px 62px -22px rgba(0,0,0,1);
+  border-color:rgba(255,198,103,.45)}
+.shot img{width:100%;height:auto;cursor:zoom-in}
+.shot figcaption{margin-top:11px;font-size:11.5px;color:var(--tx-3);display:flex;gap:7px;align-items:baseline;line-height:1.5}
+.shot-idx{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--amber);flex:0 0 auto;opacity:.75}
+.rail-btn{position:absolute;top:calc(50% - 34px);z-index:4;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line-2);background:rgba(16,16,20,.82);backdrop-filter:blur(10px);color:var(--tx);
+  font-size:19px;line-height:1;cursor:pointer;display:grid;place-items:center;
+  transition:opacity .25s,background .25s,transform .25s}
+.rail-btn:hover{background:var(--amber);color:#141414;border-color:var(--amber);transform:scale(1.06)}
+.rail-btn.prev{left:-13px}
+.rail-btn.next{right:-13px}
+.rail-btn.off{opacity:0;pointer-events:none}
+@media(max-width:760px){.rail-btn{display:none}.shot{width:180px}}
+
+/* ---- states ---- */
+.states{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+@media(max-width:1080px){.states{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.states{grid-template-columns:repeat(2,1fr)}}
+.state-card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface);
+  transition:border-color .3s,transform .4s var(--ease)}
+.state-card:hover{border-color:rgba(255,112,114,.45);transform:translateY(-5px)}
+.state-img{background:#0D0D11;overflow:hidden}
+.state-img img{width:100%;cursor:zoom-in}
+.state-card figcaption{padding:13px 14px 15px;display:flex;flex-direction:column;gap:4px}
+.state-card strong{font-size:13px;font-weight:620}
+.state-card span{font-size:11px;color:var(--tx-3);line-height:1.55}
+
+/* ---- closing ---- */
+.closing{padding-bottom:50px}
+.close-card{border:1px solid var(--line);border-radius:22px;padding:64px 48px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(620px 320px at 88% 6%,rgba(255,198,103,.13),transparent 66%),
+    radial-gradient(520px 300px at 6% 96%,rgba(176,92,242,.1),transparent 68%),
+    var(--bg-2)}
+.close-card .sec-en{display:block;margin:0 0 16px}
+.close-card h2{font-size:clamp(30px,4.2vw,52px);letter-spacing:-.04em;line-height:1.12;padding-bottom:.06em;margin-bottom:16px;
+  background:linear-gradient(168deg,#FFFFFF,#FFE0B0 70%,#E8A63C);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.close-card p{color:var(--tx-2);max-width:620px;font-size:15px;line-height:1.9}
+.close-meta{display:flex;gap:10px;margin-top:32px;flex-wrap:wrap}
+.close-meta span{font-size:11.5px;color:var(--tx-2);border:1px solid var(--line-2);border-radius:99px;padding:6px 14px}
+@media(max-width:600px){.close-card{padding:40px 24px}}
+.foot{max-width:var(--max);margin:52px auto 0;display:flex;justify-content:space-between;gap:18px;
+  font-size:11.5px;color:var(--tx-3);flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px}
+
+/* ---- 超窄屏（手机 / iframe 嵌入） ---- */
+@media(max-width:480px){
+  .hero-stack{height:340px}
+  .hero-phone{width:100px;
+    transform:translateX(calc((var(--i) - 2.5) * 42px)) rotate(calc((var(--i) - 2.5) * 3deg))
+              translateY(calc(abs(var(--i) - 2.5) * 11px))}
+  .sw{flex-direction:column;align-items:flex-start;gap:9px}
+  .sw-chip{flex:0 0 38px;width:38px;height:38px}
+  .sw-meta code,.sw-meta span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+
+/* ---- reveal ---- */
+body.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+body.js .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body.js .reveal{opacity:1;transform:none}
+  .hero-phone,.scroll-hint,.eyebrow .pulse,.brand .dot{animation:none}
+}
+
+/* ---- lightbox ---- */
+.lightbox{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;
+  background:rgba(4,4,6,.94);backdrop-filter:blur(22px);padding:56px 84px}
+.lightbox.on{display:flex}
+.lightbox img{max-height:calc(100vh - 130px);max-width:100%;width:auto;border-radius:16px;
+  box-shadow:0 40px 100px -20px #000;border:1px solid var(--line-2)}
+.lb-close,.lb-prev,.lb-next{position:absolute;border:1px solid var(--line-2);background:rgba(20,20,26,.85);
+  color:var(--tx);border-radius:50%;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(10px)}
+.lb-close{top:24px;right:28px;width:40px;height:40px;font-size:22px}
+.lb-prev,.lb-next{top:50%;transform:translateY(-50%);width:46px;height:46px;font-size:26px}
+.lb-prev{left:24px}.lb-next{right:24px}
+.lb-close:hover,.lb-prev:hover,.lb-next:hover{background:var(--amber);color:#141414;border-color:var(--amber)}
+.lb-name{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:12.5px;color:var(--tx-2);
+  background:rgba(20,20,26,.85);border:1px solid var(--line);border-radius:99px;padding:7px 18px;backdrop-filter:blur(10px)}
+@media(max-width:760px){.lightbox{padding:40px 12px}.lb-prev{left:6px}.lb-next{right:6px}
+  .lb-prev,.lb-next{width:38px;height:38px}}
+
+</style>
+</head>
+<body>
+
+<div class="progress"><i id="bar"></i></div>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="dot"></span>BabyGram</a>
+  <nav class="nav-links">
+    <a href="#overview">项目概览</a>
+    <a href="#system">设计系统</a>
+    <a href="#index">模块索引</a>
+    <a href="#modules">界面全览</a>
+    <a href="#states">状态设计</a>
+  </nav>
+  <span class="nav-badge">UI Portfolio</span>
+</header>
+
+<main id="top">
+
+<!-- ============================= HERO ============================= -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse"></span>Baby Memory · AI Creation · iOS / Android</div>
+      <h1>BabyGram</h1>
+      <p class="hero-sub">把每一次成长，讲成一个故事。<br>
+        为新手父母设计的母婴记录 App —— 以「成长相册」为核心单元，串联拍摄、编辑、AI 风格化与分享的完整创作闭环。</p>
+      <div class="hero-meta">
+        <div><strong>129</strong><span>高保真界面</span></div>
+        <div><strong>25</strong><span>功能模块</span></div>
+        <div><strong>55,336</strong><span>图层节点</span></div>
+        <div><strong>390×844</strong><span>基准画板</span></div>
+      </div>
+    </div>
+    <div class="hero-stack">
+<div class="hero-phone" style="--i:0"><img src="shots/onboarding-2-01.webp" alt="启动页" loading="eager"></div>
+<div class="hero-phone" style="--i:1"><img src="shots/home-01.webp" alt="首页v1" loading="eager"></div>
+<div class="hero-phone" style="--i:2"><img src="shots/timeline-edit-new-17.webp" alt="默认编辑页面" loading="eager"></div>
+<div class="hero-phone" style="--i:3"><img src="shots/photo-edit-06.webp" alt="图片/编辑素材/布局-调节" loading="eager"></div>
+<div class="hero-phone" style="--i:4"><img src="shots/ai-style-07.webp" alt="Baby ai style-home" loading="eager"></div>
+<div class="hero-phone" style="--i:5"><img src="shots/export-share-04.webp" alt="导出/查看图片" loading="eager"></div>
+    </div>
+  </div>
+  <div class="scroll-hint">向下滚动 &darr;</div>
+</section>
+
+<!-- ============================= OVERVIEW ============================= -->
+<section class="sec" id="overview">
+  <div class="sec-head reveal">
+    <span class="sec-no">01</span>
+    <h2>项目概览</h2>
+    <span class="sec-en">Overview</span>
+  </div>
+  <div class="overview">
+    <div class="ov-col reveal">
+      <h4>产品定位</h4>
+      <p>BabyGram 面向 0–3 岁婴幼儿家庭，解决一个具体矛盾：父母每天产生大量影像，却几乎没有时间整理。产品把「整理」重新定义为「讲述」——以日期 + 月龄为锚点建立成长相册，每本相册配一句心情与一枚 Emoji，让记录从存储行为变成一次轻量的表达。</p>
+    </div>
+    <div class="ov-col reveal">
+      <h4>设计目标</h4>
+      <p>三条主线贯穿全局：<b>降低创作门槛</b>（模板优先、参数预设），<b>强化情感留存</b>（月龄、心情、故事化的相册结构），<b>平衡商业转化</b>（Pro 素材、去水印、点数体系均以「不阻断」为原则落在决策终点）。</p>
+    </div>
+    <div class="ov-col reveal">
+      <h4>本次交付</h4>
+      <p>从 Figma 源文件完整解析出的高保真界面集，覆盖启动、首页、时间轴、图片/视频编辑、贴纸、草稿、AI 风格化、导出分享、个人中心与设置共 20 个功能簇，并配套输出设计系统与状态设计规范。</p>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="fact reveal"><b>129</b><span>高保真界面</span><em>depth-1 screens</em></div>
+    <div class="fact reveal"><b>25</b><span>设计模块</span><em>sections</em></div>
+    <div class="fact reveal"><b>55,336</b><span>图层节点</span><em>layers</em></div>
+    <div class="fact reveal"><b>4,065</b><span>文字图层</span><em>text layers</em></div>
+    <div class="fact reveal"><b>6,065</b><span>组件实例</span><em>instances</em></div>
+    <div class="fact reveal"><b>18,086</b><span>矢量图形</span><em>vectors</em></div>
+  </div>
+</section>
+
+<!-- ============================= DESIGN SYSTEM ============================= -->
+<section class="sec" id="system">
+  <div class="sec-head reveal">
+    <span class="sec-no">02</span>
+    <h2>设计系统</h2>
+    <span class="sec-en">Design System</span>
+  </div>
+
+  <div class="sys-block reveal">
+    <h4 class="sys-title">色彩 <em>Color</em></h4>
+    <p class="sys-desc">以暖橙 <code>#FFC667</code> 作为唯一品牌主色，承载全部行动点与情绪高光；深棕 <code>#5D3D11</code> 与奶咖渐变负责母婴温度，冷色仅保留给系统与链接，AI 能力单独用紫粉标识，四个色域互不越界。</p>
+    <div class="swatches">
+<div class="sw reveal"><div class="sw-chip" style="background:#FFFFFF"></div><div class="sw-meta"><code>#FFFFFF</code><span>Canvas</span><em>卡片与内容底</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#131415"></div><div class="sw-meta"><code>#131415</code><span>Ink 900</span><em>主文字与深色底</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#333333"></div><div class="sw-meta"><code>#333333</code><span>Ink 700</span><em>正文</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#979797"></div><div class="sw-meta"><code>#979797</code><span>Ink 400</span><em>次要说明</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#D9D9D9"></div><div class="sw-meta"><code>#D9D9D9</code><span>Line 200</span><em>分隔与占位</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#FFC667"></div><div class="sw-meta"><code>#FFC667</code><span>Amber 500</span><em>品牌主色 · 行动点</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#BF7D23"></div><div class="sw-meta"><code>#BF7D23</code><span>Amber 700</span><em>按下与强调</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#FF7072"></div><div class="sw-meta"><code>#FF7072</code><span>Coral 500</span><em>情绪与提醒</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#A43333"></div><div class="sw-meta"><code>#A43333</code><span>Coral 800</span><em>深色强调底</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#5D3D11"></div><div class="sw-meta"><code>#5D3D11</code><span>Cocoa 800</span><em>母婴氛围深棕</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#4582F4"></div><div class="sw-meta"><code>#4582F4</code><span>Blue 500</span><em>系统与链接</em></div></div>
+<div class="sw reveal"><div class="sw-chip" style="background:#F664CE"></div><div class="sw-meta"><code>#F664CE</code><span>Magenta · AI</span><em>AI 能力标识</em></div></div>
+    </div>
+  </div>
+
+  <div class="sys-block reveal">
+    <h4 class="sys-title">渐变 <em>Gradients</em></h4>
+    <p class="sys-desc">渐变承担氛围而非装饰：暖金用于转化路径，奶咖与柔粉用于页面底，主色渐隐用于图片上的文字兜底可读性。</p>
+    <div class="grads">
+<div class="grad reveal" style="background:linear-gradient(135deg,#F5CD8B,#EA9948)"><span>暖金 · 主要行动</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#F5CD8B,#C59E7C)"><span>奶咖 · 卡片底</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#3981FF,#67B5FF)"><span>晴空 · 系统态</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#F2E1EB,#FFFBF5)"><span>柔粉 · 页面底</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#F2E9E1,#FFFFFF)"><span>燕麦 · 内容底</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#FFC667,rgba(255,198,103,0))"><span>主色渐隐</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#F58B9D,rgba(255,255,255,0))"><span>珊瑚渐隐</span></div>
+<div class="grad reveal" style="background:linear-gradient(135deg,#F664CE,#B05CF2)"><span>AI 紫粉</span></div>
+    </div>
+  </div>
+
+  <div class="sys-block reveal">
+    <h4 class="sys-title">字体层级 <em>Type Scale</em></h4>
+    <p class="sys-desc">字族以 Roboto 与 Inter 为主，品牌标题使用自研 Boston 字重加粗。正文锁定 14px，辅助 12px，标签 10px，形成稳定的三档阅读节奏。</p>
+    <div class="types">
+<div class="type-row reveal"><span class="type-size" style="font-size:34px">64</span><span class="type-name">Display XL</span><span class="type-use">运营大标题</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:34px">48</span><span class="type-name">Display L</span><span class="type-use">欢迎页主视觉</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:32px">32</span><span class="type-name">Display M</span><span class="type-use">模块大标题</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:24px">24</span><span class="type-name">Title L</span><span class="type-use">弹窗标题</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:20px">20</span><span class="type-name">Title M</span><span class="type-use">卡片主标题</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:18px">18</span><span class="type-name">Title S</span><span class="type-use">列表分组标题</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:16px">16</span><span class="type-name">Body L</span><span class="type-use">面板标题 / 按钮</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:14px">14</span><span class="type-name">Body M</span><span class="type-use">正文与列表项</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:12px">12</span><span class="type-name">Caption</span><span class="type-use">辅助说明 / Tab</span></div>
+<div class="type-row reveal"><span class="type-size" style="font-size:10px">10</span><span class="type-name">Micro</span><span class="type-use">标签 / 角标</span></div>
+    </div>
+    <div class="fam-row">
+      <span>Roboto<em>2,457</em></span>
+      <span>Inter<em>1,391</em></span>
+      <span>Boston<em>183</em></span>
+      <span>SF Pro<em>15</em></span>
+      <span>Baloo 2<em>19</em></span>
+    </div>
+  </div>
+
+  <div class="sys-block reveal">
+    <h4 class="sys-title">圆角与容器 <em>Radius</em></h4>
+    <p class="sys-desc">8px 是绝对主力（2,094 处），覆盖按钮与输入；12–24px 用于卡片与弹层；55px 胶囊专供主行动按钮与 Tab 胶囊。</p>
+    <div class="radii">
+<div class="rad reveal"><div class="rad-demo" style="border-radius:2px"></div><code>2px</code><span>hairline / 分割</span></div>
+<div class="rad reveal"><div class="rad-demo" style="border-radius:8px"></div><code>8px</code><span>控件默认</span></div>
+<div class="rad reveal"><div class="rad-demo" style="border-radius:12px"></div><code>12px</code><span>卡片</span></div>
+<div class="rad reveal"><div class="rad-demo" style="border-radius:20px"></div><code>20px</code><span>面板</span></div>
+<div class="rad reveal"><div class="rad-demo" style="border-radius:24px"></div><code>24px</code><span>弹层</span></div>
+<div class="rad reveal"><div class="rad-demo" style="border-radius:28px"></div><code>55px</code><span>胶囊按钮</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= MODULE INDEX ============================= -->
+<section class="sec" id="index">
+  <div class="sec-head reveal">
+    <span class="sec-no">03</span>
+    <h2>模块索引</h2>
+    <span class="sec-en">Module Index</span>
+  </div>
+  <div class="idx-grid">
+<a class="idx-card reveal" href="#m-onboarding-2">
+      <span class="idx-tag">01</span>
+      <span class="idx-cn">启动与引导</span>
+      <span class="idx-en">Onboarding &amp; First Run</span>
+      <span class="idx-n">4<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-onboarding">
+      <span class="idx-tag">01a</span>
+      <span class="idx-cn">启动页早期版本</span>
+      <span class="idx-en">Legacy Splash</span>
+      <span class="idx-n">2<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-home">
+      <span class="idx-tag">02</span>
+      <span class="idx-cn">首页与模板推荐</span>
+      <span class="idx-en">Home &amp; Template Discovery</span>
+      <span class="idx-n">2<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-home-babyname">
+      <span class="idx-tag">02a</span>
+      <span class="idx-cn">首页 · 宝宝姓名态</span>
+      <span class="idx-en">Home · Named State</span>
+      <span class="idx-n">1<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-timeline">
+      <span class="idx-tag">03</span>
+      <span class="idx-cn">时间轴 · 首次进入</span>
+      <span class="idx-en">Timeline · Empty State</span>
+      <span class="idx-n">2<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-timeline-edit-new">
+      <span class="idx-tag">04</span>
+      <span class="idx-cn">时间轴与成长相册</span>
+      <span class="idx-en">Timeline &amp; Story Album</span>
+      <span class="idx-n">17<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-album-detail">
+      <span class="idx-tag">05</span>
+      <span class="idx-cn">相册详情与心情填写</span>
+      <span class="idx-en">Album Detail &amp; Mood</span>
+      <span class="idx-n">14<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-album">
+      <span class="idx-tag">06</span>
+      <span class="idx-cn">相册与素材选择器</span>
+      <span class="idx-en">Asset Picker</span>
+      <span class="idx-n">8<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-photo-edit">
+      <span class="idx-tag">07</span>
+      <span class="idx-cn">图片编辑器</span>
+      <span class="idx-en">Photo Editor</span>
+      <span class="idx-n">10<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-photo-sticker">
+      <span class="idx-tag">08</span>
+      <span class="idx-cn">贴纸系统</span>
+      <span class="idx-en">Sticker Library</span>
+      <span class="idx-n">5<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-photo-border">
+      <span class="idx-tag">08a</span>
+      <span class="idx-cn">Pro 素材拦截</span>
+      <span class="idx-en">Pro Gate</span>
+      <span class="idx-n">1<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-collage-swap">
+      <span class="idx-tag">09</span>
+      <span class="idx-cn">拼图交互引导</span>
+      <span class="idx-en">Collage Interaction</span>
+      <span class="idx-n">2<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-video-edit">
+      <span class="idx-tag">10</span>
+      <span class="idx-cn">视频编辑器</span>
+      <span class="idx-en">Video Editor</span>
+      <span class="idx-n">5<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-drafts">
+      <span class="idx-tag">11</span>
+      <span class="idx-cn">草稿箱</span>
+      <span class="idx-en">Drafts</span>
+      <span class="idx-n">3<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-drafts-ai">
+      <span class="idx-tag">12</span>
+      <span class="idx-cn">AI 草稿</span>
+      <span class="idx-en">AI Drafts</span>
+      <span class="idx-n">5<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-ai-style">
+      <span class="idx-tag">13</span>
+      <span class="idx-cn">Baby AI Style</span>
+      <span class="idx-en">Baby AI Style</span>
+      <span class="idx-n">14<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-logic-update">
+      <span class="idx-tag">13a</span>
+      <span class="idx-cn">AI 逻辑更新</span>
+      <span class="idx-en">AI Logic Update</span>
+      <span class="idx-n">3<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-export">
+      <span class="idx-tag">14</span>
+      <span class="idx-cn">导出面板</span>
+      <span class="idx-en">Export Options</span>
+      <span class="idx-n">1<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-video-export">
+      <span class="idx-tag">15</span>
+      <span class="idx-cn">视频导出与去水印</span>
+      <span class="idx-en">Video Export &amp; Watermark</span>
+      <span class="idx-n">2<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-export-share">
+      <span class="idx-tag">16</span>
+      <span class="idx-cn">导出结果与分享</span>
+      <span class="idx-en">Export Result &amp; Share</span>
+      <span class="idx-n">9<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-profile">
+      <span class="idx-tag">17</span>
+      <span class="idx-cn">个人中心</span>
+      <span class="idx-en">Baby Profile</span>
+      <span class="idx-n">12<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-settings">
+      <span class="idx-tag">18</span>
+      <span class="idx-cn">设置与订阅</span>
+      <span class="idx-en">Settings &amp; Subscription</span>
+      <span class="idx-n">3<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-dialog">
+      <span class="idx-tag">19</span>
+      <span class="idx-cn">弹窗与动效</span>
+      <span class="idx-en">Dialogs &amp; Motion</span>
+      <span class="idx-n">2<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-timeline-guide">
+      <span class="idx-tag">19a</span>
+      <span class="idx-cn">时间轴引导提示</span>
+      <span class="idx-en">Timeline Coach Marks</span>
+      <span class="idx-n">1<em>屏</em></span>
+    </a>
+<a class="idx-card reveal" href="#m-misc">
+      <span class="idx-tag">20</span>
+      <span class="idx-cn">其他探索</span>
+      <span class="idx-en">Explorations</span>
+      <span class="idx-n">1<em>屏</em></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================= ALL SCREENS ============================= -->
+<section class="sec" id="modules">
+  <div class="sec-head reveal">
+    <span class="sec-no">04</span>
+    <h2>界面全览</h2>
+    <span class="sec-en">All Screens</span>
+  </div>
+  <p class="sec-lead">按功能簇组织的全部高保真界面。左右拖动或使用两侧按钮浏览，点击任意界面可查看大图。</p>
+
+<section class="module" id="m-onboarding-2">
+  <div class="module-head reveal">
+    <div class="module-tag">01</div>
+    <div class="module-title">
+      <h3>启动与引导</h3>
+      <span class="en">Onboarding &amp; First Run</span>
+    </div>
+    <div class="module-count">04 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">从欢迎页到宝宝姓名录入的完整首次启动链路。用一句 "Start from this moment — capture every beautiful part of your life" 建立情感锚点，把冷启动变成一段仪式的开始。</p>
+    <ul class="points"><li>欢迎页用暖金渐变 + 婴儿影像建立第一印象</li><li>姓名录入即建档案，为后续时间轴打好数据基础</li><li>节日运营位（Halloween stickers）前置到首启，提升次日留存</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/onboarding-2-01.webp" data-name="启动页"><div class="shot-frame"><img src="shots/onboarding-2-01.webp" alt="启动页" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>启动页</figcaption></figure>
+<figure class="shot" data-full="shots/onboarding-2-02.webp" data-name="启动页"><div class="shot-frame"><img src="shots/onboarding-2-02.webp" alt="启动页" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>启动页</figcaption></figure>
+<figure class="shot" data-full="shots/onboarding-2-03.webp" data-name="启动页"><div class="shot-frame"><img src="shots/onboarding-2-03.webp" alt="启动页" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>启动页</figcaption></figure>
+<figure class="shot" data-full="shots/onboarding-2-04.webp" data-name="启动页"><div class="shot-frame"><img src="shots/onboarding-2-04.webp" alt="启动页" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>启动页</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-onboarding">
+  <div class="module-head reveal">
+    <div class="module-tag">01a</div>
+    <div class="module-title">
+      <h3>启动页早期版本</h3>
+      <span class="en">Legacy Splash</span>
+    </div>
+    <div class="module-count">02 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">早期探索版本，与定稿版对照可见信息密度与视觉重心的收敛过程。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/onboarding-01.webp" data-name="启动页v1"><div class="shot-frame"><img src="shots/onboarding-01.webp" alt="启动页v1" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>启动页v1</figcaption></figure>
+<figure class="shot" data-full="shots/onboarding-02.webp" data-name="启动页v1"><div class="shot-frame"><img src="shots/onboarding-02.webp" alt="启动页v1" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>启动页v1</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-home">
+  <div class="module-head reveal">
+    <div class="module-tag">02</div>
+    <div class="module-title">
+      <h3>首页与模板推荐</h3>
+      <span class="en">Home &amp; Template Discovery</span>
+    </div>
+    <div class="module-count">02 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">首页承担"创作入口 + 内容发现"双职责。顶部 Create 提供 Photo / Video 双路径，下方以 Featured Layout 卡片流承载模板分发，配合节日主题运营位形成持续的内容新鲜度。</p>
+    <ul class="points"><li>Create / Drafts 双入口固定于拇指热区</li><li>Featured Layout 卡片用真实宝宝影像做样例，降低决策成本</li><li>模板分组：Colorful Frame / Studio Backdrop / Pregnant Journey / Birthday Message</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/home-01.webp" data-name="首页v1"><div class="shot-frame"><img src="shots/home-01.webp" alt="首页v1" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>首页v1</figcaption></figure>
+<figure class="shot" data-full="shots/home-02.webp" data-name="首页/草稿"><div class="shot-frame"><img src="shots/home-02.webp" alt="首页/草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>首页/草稿</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-home-babyname">
+  <div class="module-head reveal">
+    <div class="module-tag">02a</div>
+    <div class="module-title">
+      <h3>首页 · 宝宝姓名态</h3>
+      <span class="en">Home · Named State</span>
+    </div>
+    <div class="module-count">01 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">完成宝宝姓名填写后的首页问候态，从 "Welcomes You!" 切换为 "Hi, Maya!"。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/home-babyname-01.webp" data-name="首页/草稿"><div class="shot-frame"><img src="shots/home-babyname-01.webp" alt="首页/草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>首页/草稿</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-timeline">
+  <div class="module-head reveal">
+    <div class="module-tag">03</div>
+    <div class="module-title">
+      <h3>时间轴 · 首次进入</h3>
+      <span class="en">Timeline · Empty State</span>
+    </div>
+    <div class="module-count">02 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">空态用一张虚线占位卡 "Click upload baby photo" 引导创建第一本 Story Album，把空数据变成明确的下一步动作。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/timeline-01.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/timeline-01.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>时间轴/首次进入</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-02.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/timeline-02.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>时间轴/首次进入</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-timeline-edit-new">
+  <div class="module-head reveal">
+    <div class="module-tag">04</div>
+    <div class="module-title">
+      <h3>时间轴与成长相册</h3>
+      <span class="en">Timeline &amp; Story Album</span>
+    </div>
+    <div class="module-count">17 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">产品核心。以"相册"为记录单元，每本相册锚定一个日期与一句心情。编辑页同时支持 2 / 5 / 9 张及以上三种图片排布，并可在 Grid Layout 与 Horizontal Layout 之间切换。</p>
+    <ul class="points"><li>日期 + 宝宝月龄（2 years 3 months）双维度定位</li><li>Current Mood 心情描述 + Emoji 贴纸，把记录从"存照片"升级为"讲故事"</li><li>更多弹窗聚合 Edit Album Title / Slide Preview / Edit Capture Time / Edit Mood / Delete Album</li><li>删除相册带二次确认，避免误删不可逆的成长记录</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/timeline-edit-new-01.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/timeline-edit-new-01.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>时间轴/首次进入</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-02.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/timeline-edit-new-02.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>时间轴/首次进入</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-03.webp" data-name="五张图显示"><div class="shot-frame"><img src="shots/timeline-edit-new-03.webp" alt="五张图显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>五张图显示</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-04.webp" data-name="五张图显示"><div class="shot-frame"><img src="shots/timeline-edit-new-04.webp" alt="五张图显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>五张图显示</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-05.webp" data-name="默认编辑页面"><div class="shot-frame"><img src="shots/timeline-edit-new-05.webp" alt="默认编辑页面" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>默认编辑页面</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-06.webp" data-name="默认编辑页面"><div class="shot-frame"><img src="shots/timeline-edit-new-06.webp" alt="默认编辑页面" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>默认编辑页面</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-07.webp" data-name="已填写心情描述"><div class="shot-frame"><img src="shots/timeline-edit-new-07.webp" alt="已填写心情描述" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>已填写心情描述</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-08.webp" data-name="二次进入编辑页面"><div class="shot-frame"><img src="shots/timeline-edit-new-08.webp" alt="二次进入编辑页面" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>二次进入编辑页面</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-09.webp" data-name="清空内容"><div class="shot-frame"><img src="shots/timeline-edit-new-09.webp" alt="清空内容" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">09</span>清空内容</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-10.webp" data-name="图片/相册"><div class="shot-frame"><img src="shots/timeline-edit-new-10.webp" alt="图片/相册" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">10</span>图片/相册</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-11.webp" data-name="填写心情描述状态"><div class="shot-frame"><img src="shots/timeline-edit-new-11.webp" alt="填写心情描述状态" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">11</span>填写心情描述状态</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-12.webp" data-name="填写心情描述状态"><div class="shot-frame"><img src="shots/timeline-edit-new-12.webp" alt="填写心情描述状态" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">12</span>填写心情描述状态</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-13.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/timeline-edit-new-13.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">13</span>时间轴/首次进入</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-14.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/timeline-edit-new-14.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">14</span>时间轴/首次进入</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-15.webp" data-name="时间轴/心情展示"><div class="shot-frame"><img src="shots/timeline-edit-new-15.webp" alt="时间轴/心情展示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">15</span>时间轴/心情展示</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-16.webp" data-name="五张图显示"><div class="shot-frame"><img src="shots/timeline-edit-new-16.webp" alt="五张图显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">16</span>五张图显示</figcaption></figure>
+<figure class="shot" data-full="shots/timeline-edit-new-17.webp" data-name="默认编辑页面"><div class="shot-frame"><img src="shots/timeline-edit-new-17.webp" alt="默认编辑页面" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">17</span>默认编辑页面</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-album-detail">
+  <div class="module-head reveal">
+    <div class="module-tag">05</div>
+    <div class="module-title">
+      <h3>相册详情与心情填写</h3>
+      <span class="en">Album Detail &amp; Mood</span>
+    </div>
+    <div class="module-count">14 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">相册详情页的信息层级：日期与月龄在第一视线，图片网格占据主体，心情描述与操作区沉底。图片数量变化时布局自适应重排。</p>
+    <ul class="points"><li>Emoji 更换面板与心情文案共存</li><li>单张照片查看支持素材丢失态兜底</li><li>清空内容、二次进入编辑等分支状态均已覆盖</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/album-detail-01.webp" data-name="两张图显示"><div class="shot-frame"><img src="shots/album-detail-01.webp" alt="两张图显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>两张图显示</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-02.webp" data-name="五张图显示"><div class="shot-frame"><img src="shots/album-detail-02.webp" alt="五张图显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>五张图显示</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-03.webp" data-name="九张图及以上显示"><div class="shot-frame"><img src="shots/album-detail-03.webp" alt="九张图及以上显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>九张图及以上显示</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-04.webp" data-name="再次进入编辑"><div class="shot-frame"><img src="shots/album-detail-04.webp" alt="再次进入编辑" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>再次进入编辑</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-05.webp" data-name="再次进入编辑/更多弹窗"><div class="shot-frame"><img src="shots/album-detail-05.webp" alt="再次进入编辑/更多弹窗" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>再次进入编辑/更多弹窗</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-06.webp" data-name="删除相册/二次确认弹窗"><div class="shot-frame"><img src="shots/album-detail-06.webp" alt="删除相册/二次确认弹窗" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>删除相册/二次确认弹窗</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-07.webp" data-name="更换emoji"><div class="shot-frame"><img src="shots/album-detail-07.webp" alt="更换emoji" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>更换emoji</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-08.webp" data-name="编辑时间弹窗"><div class="shot-frame"><img src="shots/album-detail-08.webp" alt="编辑时间弹窗" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>编辑时间弹窗</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-09.webp" data-name="查看单张照片"><div class="shot-frame"><img src="shots/album-detail-09.webp" alt="查看单张照片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">09</span>查看单张照片</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-10.webp" data-name="查看单张照片/素材丢失"><div class="shot-frame"><img src="shots/album-detail-10.webp" alt="查看单张照片/素材丢失" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">10</span>查看单张照片/素材丢失</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-11.webp" data-name="查看单张照片"><div class="shot-frame"><img src="shots/album-detail-11.webp" alt="查看单张照片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">11</span>查看单张照片</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-12.webp" data-name="填写心情描述状态"><div class="shot-frame"><img src="shots/album-detail-12.webp" alt="填写心情描述状态" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">12</span>填写心情描述状态</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-13.webp" data-name="五张图显示"><div class="shot-frame"><img src="shots/album-detail-13.webp" alt="五张图显示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">13</span>五张图显示</figcaption></figure>
+<figure class="shot" data-full="shots/album-detail-14.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/album-detail-14.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">14</span>时间轴/首次进入</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-album">
+  <div class="module-head reveal">
+    <div class="module-tag">06</div>
+    <div class="module-title">
+      <h3>相册与素材选择器</h3>
+      <span class="en">Asset Picker</span>
+    </div>
+    <div class="module-count">08 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">统一的素材选择器，Recent / All / Photo / Video / Material / GIF / Imported 多级筛选，支持多选、AI Cut 智能剪裁与按时间/地点排序。</p>
+    <ul class="points"><li>多选态底部固定 "Next(n)" 计数按钮</li><li>按地点分组（Toronto / Boulder / Karachi / Havana）</li><li>放大预览支持选中与未选中两种态</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/album-01.webp" data-name="图片/相册"><div class="shot-frame"><img src="shots/album-01.webp" alt="图片/相册" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片/相册</figcaption></figure>
+<figure class="shot" data-full="shots/album-02.webp" data-name="图片/相册/多选"><div class="shot-frame"><img src="shots/album-02.webp" alt="图片/相册/多选" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>图片/相册/多选</figcaption></figure>
+<figure class="shot" data-full="shots/album-03.webp" data-name="图片/相册/多选"><div class="shot-frame"><img src="shots/album-03.webp" alt="图片/相册/多选" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>图片/相册/多选</figcaption></figure>
+<figure class="shot" data-full="shots/album-04.webp" data-name="图片/相册"><div class="shot-frame"><img src="shots/album-04.webp" alt="图片/相册" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>图片/相册</figcaption></figure>
+<figure class="shot" data-full="shots/album-05.webp" data-name="视频/相册"><div class="shot-frame"><img src="shots/album-05.webp" alt="视频/相册" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>视频/相册</figcaption></figure>
+<figure class="shot" data-full="shots/album-06.webp" data-name="时间排序"><div class="shot-frame"><img src="shots/album-06.webp" alt="时间排序" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>时间排序</figcaption></figure>
+<figure class="shot" data-full="shots/album-07.webp" data-name="放大展示/选择"><div class="shot-frame"><img src="shots/album-07.webp" alt="放大展示/选择" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>放大展示/选择</figcaption></figure>
+<figure class="shot" data-full="shots/album-08.webp" data-name="放大展示/不选择"><div class="shot-frame"><img src="shots/album-08.webp" alt="放大展示/不选择" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>放大展示/不选择</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-photo-edit">
+  <div class="module-head reveal">
+    <div class="module-tag">07</div>
+    <div class="module-title">
+      <h3>图片编辑器</h3>
+      <span class="en">Photo Editor</span>
+    </div>
+    <div class="module-count">10 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">底部工具条按 Layout / Template / Style / Adjust / Ratio 组织，二级面板承载 filter / crop / background / border / text / sticker。素材进入选中态后切换为对象操作条（Swap / Effect / Crop / Mirror / Flip / Rotate / Zoom±）。</p>
+    <ul class="points"><li>工具条与对象操作条分层，避免功能堆叠</li><li>Pro 素材命中时以底部弹层拦截，而非直接禁用</li><li>退出时弹出 Saved To Drafts / Discard / Cancel 三选，保护创作成果</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/photo-edit-01.webp" data-name="图片/编辑素材/模板"><div class="shot-frame"><img src="shots/photo-edit-01.webp" alt="图片/编辑素材/模板" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片/编辑素材/模板</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-02.webp" data-name="图片/编辑素材/选中素材"><div class="shot-frame"><img src="shots/photo-edit-02.webp" alt="图片/编辑素材/选中素材" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>图片/编辑素材/选中素材</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-03.webp" data-name="图片/编辑素材/使用pro素材"><div class="shot-frame"><img src="shots/photo-edit-03.webp" alt="图片/编辑素材/使用pro素材" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>图片/编辑素材/使用pro素材</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-04.webp" data-name="图片/编辑素材/布局-样式"><div class="shot-frame"><img src="shots/photo-edit-04.webp" alt="图片/编辑素材/布局-样式" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>图片/编辑素材/布局-样式</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-05.webp" data-name="图片/编辑素材/布局-样式"><div class="shot-frame"><img src="shots/photo-edit-05.webp" alt="图片/编辑素材/布局-样式" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>图片/编辑素材/布局-样式</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-06.webp" data-name="图片/编辑素材/布局-调节"><div class="shot-frame"><img src="shots/photo-edit-06.webp" alt="图片/编辑素材/布局-调节" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>图片/编辑素材/布局-调节</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-07.webp" data-name="图片/编辑素材/布局-调节"><div class="shot-frame"><img src="shots/photo-edit-07.webp" alt="图片/编辑素材/布局-调节" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>图片/编辑素材/布局-调节</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-08.webp" data-name="图片/编辑素材"><div class="shot-frame"><img src="shots/photo-edit-08.webp" alt="图片/编辑素材" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>图片/编辑素材</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-09.webp" data-name="图片/编辑素材/模板"><div class="shot-frame"><img src="shots/photo-edit-09.webp" alt="图片/编辑素材/模板" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">09</span>图片/编辑素材/模板</figcaption></figure>
+<figure class="shot" data-full="shots/photo-edit-10.webp" data-name="退出保存"><div class="shot-frame"><img src="shots/photo-edit-10.webp" alt="退出保存" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">10</span>退出保存</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-photo-sticker">
+  <div class="module-head reveal">
+    <div class="module-tag">08</div>
+    <div class="module-title">
+      <h3>贴纸系统</h3>
+      <span class="en">Sticker Library</span>
+    </div>
+    <div class="module-count">05 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">贴纸库支持分类浏览、详情预览、下载与调色。Palette 面板可对单个贴纸改色，让素材复用率最大化。</p>
+    <ul class="points"><li>贴纸详情页含 Animation Stickers 动效分类</li><li>调色盘直接作用于当前贴纸实例</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/photo-sticker-01.webp" data-name="图片/编辑素材/贴纸"><div class="shot-frame"><img src="shots/photo-sticker-01.webp" alt="图片/编辑素材/贴纸" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片/编辑素材/贴纸</figcaption></figure>
+<figure class="shot" data-full="shots/photo-sticker-02.webp" data-name="图片/编辑素材/贴纸/修改颜色"><div class="shot-frame"><img src="shots/photo-sticker-02.webp" alt="图片/编辑素材/贴纸/修改颜色" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>图片/编辑素材/贴纸/修改颜色</figcaption></figure>
+<figure class="shot" data-full="shots/photo-sticker-03.webp" data-name="贴纸详情"><div class="shot-frame"><img src="shots/photo-sticker-03.webp" alt="贴纸详情" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>贴纸详情</figcaption></figure>
+<figure class="shot" data-full="shots/photo-sticker-04.webp" data-name="Frame 2609631"><div class="shot-frame"><img src="shots/photo-sticker-04.webp" alt="Frame 2609631" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>Frame 2609631</figcaption></figure>
+<figure class="shot" data-full="shots/photo-sticker-05.webp" data-name="Frame 2609632"><div class="shot-frame"><img src="shots/photo-sticker-05.webp" alt="Frame 2609632" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>Frame 2609632</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-photo-border">
+  <div class="module-head reveal">
+    <div class="module-tag">08a</div>
+    <div class="module-title">
+      <h3>Pro 素材拦截</h3>
+      <span class="en">Pro Gate</span>
+    </div>
+    <div class="module-count">01 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">Pro 素材被选中时，以 "Remove watermark and save / Unlock unlimited access" 双路径转化，并提供 Watch AD 的免费替代方案。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/photo-border-01.webp" data-name="图片/编辑素材/pro到处提示"><div class="shot-frame"><img src="shots/photo-border-01.webp" alt="图片/编辑素材/pro到处提示" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片/编辑素材/pro到处提示</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-collage-swap">
+  <div class="module-head reveal">
+    <div class="module-tag">09</div>
+    <div class="module-title">
+      <h3>拼图交互引导</h3>
+      <span class="en">Collage Interaction</span>
+    </div>
+    <div class="module-count">02 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">用一次性浮层提示"长按交换图片位置"与"双击画板重置图片"，把隐式手势显性化。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/collage-swap-01.webp" data-name="图片/编辑素材"><div class="shot-frame"><img src="shots/collage-swap-01.webp" alt="图片/编辑素材" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片/编辑素材</figcaption></figure>
+<figure class="shot" data-full="shots/collage-swap-02.webp" data-name="图片/编辑素材"><div class="shot-frame"><img src="shots/collage-swap-02.webp" alt="图片/编辑素材" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>图片/编辑素材</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-video-edit">
+  <div class="module-head reveal">
+    <div class="module-tag">10</div>
+    <div class="module-title">
+      <h3>视频编辑器</h3>
+      <span class="en">Video Editor</span>
+    </div>
+    <div class="module-count">05 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">与图片编辑器同构的时间轴式编辑体验：Template / Opening / Effect / Photos / Duration / Ratio 六大维度，音乐库支持替换与编辑。</p>
+    <ul class="points"><li>音乐卡片展示曲名与作者（Happy indie Ukulele · james）</li><li>无音乐态提供 Add music 空位引导</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/video-edit-01.webp" data-name="特效"><div class="shot-frame"><img src="shots/video-edit-01.webp" alt="特效" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>特效</figcaption></figure>
+<figure class="shot" data-full="shots/video-edit-02.webp" data-name="音乐/有音乐"><div class="shot-frame"><img src="shots/video-edit-02.webp" alt="音乐/有音乐" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>音乐/有音乐</figcaption></figure>
+<figure class="shot" data-full="shots/video-edit-03.webp" data-name="音乐/无音乐"><div class="shot-frame"><img src="shots/video-edit-03.webp" alt="音乐/无音乐" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>音乐/无音乐</figcaption></figure>
+<figure class="shot" data-full="shots/video-edit-04.webp" data-name="音乐"><div class="shot-frame"><img src="shots/video-edit-04.webp" alt="音乐" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>音乐</figcaption></figure>
+<figure class="shot" data-full="shots/video-edit-05.webp" data-name="组合包"><div class="shot-frame"><img src="shots/video-edit-05.webp" alt="组合包" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>组合包</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-drafts">
+  <div class="module-head reveal">
+    <div class="module-tag">11</div>
+    <div class="module-title">
+      <h3>草稿箱</h3>
+      <span class="en">Drafts</span>
+    </div>
+    <div class="module-count">03 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">按 Photo / Video / GIF / Imported 分栏管理未完成作品，Select 进入批量模式，素材损坏时给出 Asset Missing 明确标识。</p>
+    <ul class="points"><li>分栏 Tab 与素材类型一一对应</li><li>损坏素材单独标注而非静默隐藏</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/drafts-01.webp" data-name="图片草稿"><div class="shot-frame"><img src="shots/drafts-01.webp" alt="图片草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片草稿</figcaption></figure>
+<figure class="shot" data-full="shots/drafts-02.webp" data-name="视频草稿"><div class="shot-frame"><img src="shots/drafts-02.webp" alt="视频草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>视频草稿</figcaption></figure>
+<figure class="shot" data-full="shots/drafts-03.webp" data-name="图片损坏"><div class="shot-frame"><img src="shots/drafts-03.webp" alt="图片损坏" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>图片损坏</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-drafts-ai">
+  <div class="module-head reveal">
+    <div class="module-tag">12</div>
+    <div class="module-title">
+      <h3>AI 草稿</h3>
+      <span class="en">AI Drafts</span>
+    </div>
+    <div class="module-count">05 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">AI 生成任务独立成栏，用 Completed / Creating... / Failed 三态映射异步任务的真实生命周期。</p>
+    <ul class="points"><li>长按菜单支持 Delete / Rename / Show in editing / Save Local</li><li>生成中与失败态均可从草稿箱继续，任务不丢失</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/drafts-ai-01.webp" data-name="AI草稿"><div class="shot-frame"><img src="shots/drafts-ai-01.webp" alt="AI草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>AI草稿</figcaption></figure>
+<figure class="shot" data-full="shots/drafts-ai-02.webp" data-name="AI草稿-菜单"><div class="shot-frame"><img src="shots/drafts-ai-02.webp" alt="AI草稿-菜单" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>AI草稿-菜单</figcaption></figure>
+<figure class="shot" data-full="shots/drafts-ai-03.webp" data-name="草稿-生成中"><div class="shot-frame"><img src="shots/drafts-ai-03.webp" alt="草稿-生成中" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>草稿-生成中</figcaption></figure>
+<figure class="shot" data-full="shots/drafts-ai-04.webp" data-name="草稿-失败"><div class="shot-frame"><img src="shots/drafts-ai-04.webp" alt="草稿-失败" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>草稿-失败</figcaption></figure>
+<figure class="shot" data-full="shots/drafts-ai-05.webp" data-name="草稿-完成"><div class="shot-frame"><img src="shots/drafts-ai-05.webp" alt="草稿-完成" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>草稿-完成</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-ai-style">
+  <div class="module-head reveal">
+    <div class="module-tag">13</div>
+    <div class="module-title">
+      <h3>Baby AI Style</h3>
+      <span class="en">Baby AI Style</span>
+    </div>
+    <div class="module-count">14 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">AI 风格化创作模块。预设风格（Healing Trave / Eggshell Baby / Vintage Car）之外，提供自定义风格与提示词输入，产物可一键"Make Similar"继续衍生。</p>
+    <ul class="points"><li>异步轮询进度可视化（Image generating…20%）</li><li>灵感生成中 / 失败 / 结束重试三态完整</li><li>点数体系 My Points · Cost · Gain · Image Creation 透明可查</li><li>AI 产物统一附带免责声明</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/ai-style-01.webp" data-name="点数消耗"><div class="shot-frame"><img src="shots/ai-style-01.webp" alt="点数消耗" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>点数消耗</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-02.webp" data-name="点数消耗（从订阅进的）"><div class="shot-frame"><img src="shots/ai-style-02.webp" alt="点数消耗（从订阅进的）" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>点数消耗（从订阅进的）</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-03.webp" data-name="保存"><div class="shot-frame"><img src="shots/ai-style-03.webp" alt="保存" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>保存</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-04.webp" data-name="已保存"><div class="shot-frame"><img src="shots/ai-style-04.webp" alt="已保存" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>已保存</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-05.webp" data-name="创作中 （异步 轮询）"><div class="shot-frame"><img src="shots/ai-style-05.webp" alt="创作中 （异步 轮询）" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>创作中 （异步 轮询）</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-06.webp" data-name="创作失败 （异步 轮询）"><div class="shot-frame"><img src="shots/ai-style-06.webp" alt="创作失败 （异步 轮询）" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>创作失败 （异步 轮询）</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-07.webp" data-name="Baby ai style-home"><div class="shot-frame"><img src="shots/ai-style-07.webp" alt="Baby ai style-home" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>Baby ai style-home</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-08.webp" data-name="风格化"><div class="shot-frame"><img src="shots/ai-style-08.webp" alt="风格化" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>风格化</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-09.webp" data-name="自定义"><div class="shot-frame"><img src="shots/ai-style-09.webp" alt="自定义" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">09</span>自定义</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-10.webp" data-name="灵感生成中"><div class="shot-frame"><img src="shots/ai-style-10.webp" alt="灵感生成中" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">10</span>灵感生成中</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-11.webp" data-name="灵感生成失败"><div class="shot-frame"><img src="shots/ai-style-11.webp" alt="灵感生成失败" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">11</span>灵感生成失败</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-12.webp" data-name="灵感生成结束（重试）"><div class="shot-frame"><img src="shots/ai-style-12.webp" alt="灵感生成结束（重试）" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">12</span>灵感生成结束（重试）</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-13.webp" data-name="替换图片"><div class="shot-frame"><img src="shots/ai-style-13.webp" alt="替换图片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">13</span>替换图片</figcaption></figure>
+<figure class="shot" data-full="shots/ai-style-14.webp" data-name="尺寸"><div class="shot-frame"><img src="shots/ai-style-14.webp" alt="尺寸" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">14</span>尺寸</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-logic-update">
+  <div class="module-head reveal">
+    <div class="module-tag">13a</div>
+    <div class="module-title">
+      <h3>AI 逻辑更新</h3>
+      <span class="en">AI Logic Update</span>
+    </div>
+    <div class="module-count">03 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">风格化选图前后的状态差异与创作中态，体现对交互分支的持续打磨。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/logic-update-01.webp" data-name="创作中 （异步 轮询）"><div class="shot-frame"><img src="shots/logic-update-01.webp" alt="创作中 （异步 轮询）" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>创作中 （异步 轮询）</figcaption></figure>
+<figure class="shot" data-full="shots/logic-update-02.webp" data-name="风格化 未选图"><div class="shot-frame"><img src="shots/logic-update-02.webp" alt="风格化 未选图" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>风格化 未选图</figcaption></figure>
+<figure class="shot" data-full="shots/logic-update-03.webp" data-name="风格化 已选图"><div class="shot-frame"><img src="shots/logic-update-03.webp" alt="风格化 已选图" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>风格化 已选图</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-export">
+  <div class="module-head reveal">
+    <div class="module-tag">14</div>
+    <div class="module-title">
+      <h3>导出面板</h3>
+      <span class="en">Export Options</span>
+    </div>
+    <div class="module-count">01 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">把导出参数一次摊开：Template / Effect / Music / Duration / Photos / Ratio / Resolution / Frames Rate / Size，并以 Watermark 行承载去水印转化。</p>
+    <ul class="points"><li>参数实时汇总（0.4MB / 16:9 / 1:1）</li><li>底部提示 "Ads may appear during saving" 做预期管理</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/export-01.webp" data-name="图片/编辑素材/贴纸"><div class="shot-frame"><img src="shots/export-01.webp" alt="图片/编辑素材/贴纸" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>图片/编辑素材/贴纸</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-video-export">
+  <div class="module-head reveal">
+    <div class="module-tag">15</div>
+    <div class="module-title">
+      <h3>视频导出与去水印</h3>
+      <span class="en">Video Export &amp; Watermark</span>
+    </div>
+    <div class="module-count">02 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">导出前置去水印决策：Watch AD to Unlock 与 Unlock Unlimited Access 并置，给免费用户留出通路。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/video-export-01.webp" data-name="导出"><div class="shot-frame"><img src="shots/video-export-01.webp" alt="导出" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>导出</figcaption></figure>
+<figure class="shot" data-full="shots/video-export-02.webp" data-name="导出/去水印"><div class="shot-frame"><img src="shots/video-export-02.webp" alt="导出/去水印" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>导出/去水印</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-export-share">
+  <div class="module-head reveal">
+    <div class="module-tag">16</div>
+    <div class="module-title">
+      <h3>导出结果与分享</h3>
+      <span class="en">Export Result &amp; Share</span>
+    </div>
+    <div class="module-count">09 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">导出进行中以 "Please don't close BabyGram or lock your screen" 明确约束；完成后落到平台分享，Instagram / TikTok / YouTube / Messenger / WhatsApp 按尺寸差异动态出现。</p>
+    <ul class="points"><li>进度百分比明确到 80%</li><li>16:9 与 1:1 对应不同的分享平台集合</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/export-share-01.webp" data-name="导出/加载完毕/平台分享"><div class="shot-frame"><img src="shots/export-share-01.webp" alt="导出/加载完毕/平台分享" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>导出/加载完毕/平台分享</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-02.webp" data-name="导出/加载完毕/平台分享"><div class="shot-frame"><img src="shots/export-share-02.webp" alt="导出/加载完毕/平台分享" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>导出/加载完毕/平台分享</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-03.webp" data-name="导出/查看视频"><div class="shot-frame"><img src="shots/export-share-03.webp" alt="导出/查看视频" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>导出/查看视频</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-04.webp" data-name="导出/查看图片"><div class="shot-frame"><img src="shots/export-share-04.webp" alt="导出/查看图片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>导出/查看图片</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-05.webp" data-name="导出/加载完毕/平台分享"><div class="shot-frame"><img src="shots/export-share-05.webp" alt="导出/加载完毕/平台分享" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>导出/加载完毕/平台分享</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-06.webp" data-name="导出尺寸16:9"><div class="shot-frame"><img src="shots/export-share-06.webp" alt="导出尺寸16:9" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>导出尺寸16:9</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-07.webp" data-name="导出尺寸1:1"><div class="shot-frame"><img src="shots/export-share-07.webp" alt="导出尺寸1:1" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>导出尺寸1:1</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-08.webp" data-name="导出/加载中/80%"><div class="shot-frame"><img src="shots/export-share-08.webp" alt="导出/加载中/80%" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>导出/加载中/80%</figcaption></figure>
+<figure class="shot" data-full="shots/export-share-09.webp" data-name="导出/加载中/80%"><div class="shot-frame"><img src="shots/export-share-09.webp" alt="导出/加载中/80%" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">09</span>导出/加载中/80%</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-profile">
+  <div class="module-head reveal">
+    <div class="module-tag">17</div>
+    <div class="module-title">
+      <h3>个人中心</h3>
+      <span class="en">Baby Profile</span>
+    </div>
+    <div class="module-count">12 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">Baby Profile 承担档案管理：Name / Gender / Birthday-Due Date 为必填项，About 承载宝宝故事，头像支持从相册选取并裁剪。</p>
+    <ul class="points"><li>必填项与保存按钮的置灰状态联动</li><li>头像裁剪复用相册选择器，链路一致</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/profile-01.webp" data-name="个人简介/保存置灰状态"><div class="shot-frame"><img src="shots/profile-01.webp" alt="个人简介/保存置灰状态" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>个人简介/保存置灰状态</figcaption></figure>
+<figure class="shot" data-full="shots/profile-02.webp" data-name="个人简介/保存置灰状态"><div class="shot-frame"><img src="shots/profile-02.webp" alt="个人简介/保存置灰状态" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>个人简介/保存置灰状态</figcaption></figure>
+<figure class="shot" data-full="shots/profile-03.webp" data-name="个人简介/保存置灰状态"><div class="shot-frame"><img src="shots/profile-03.webp" alt="个人简介/保存置灰状态" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>个人简介/保存置灰状态</figcaption></figure>
+<figure class="shot" data-full="shots/profile-04.webp" data-name="个人简介/添加名字"><div class="shot-frame"><img src="shots/profile-04.webp" alt="个人简介/添加名字" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">04</span>个人简介/添加名字</figcaption></figure>
+<figure class="shot" data-full="shots/profile-05.webp" data-name="个人简介/添加名字"><div class="shot-frame"><img src="shots/profile-05.webp" alt="个人简介/添加名字" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">05</span>个人简介/添加名字</figcaption></figure>
+<figure class="shot" data-full="shots/profile-06.webp" data-name="时间轴/设置头像/相册"><div class="shot-frame"><img src="shots/profile-06.webp" alt="时间轴/设置头像/相册" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">06</span>时间轴/设置头像/相册</figcaption></figure>
+<figure class="shot" data-full="shots/profile-07.webp" data-name="时间轴/设置头像/相册"><div class="shot-frame"><img src="shots/profile-07.webp" alt="时间轴/设置头像/相册" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">07</span>时间轴/设置头像/相册</figcaption></figure>
+<figure class="shot" data-full="shots/profile-08.webp" data-name="时间轴/设置头像/裁剪图片"><div class="shot-frame"><img src="shots/profile-08.webp" alt="时间轴/设置头像/裁剪图片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">08</span>时间轴/设置头像/裁剪图片</figcaption></figure>
+<figure class="shot" data-full="shots/profile-09.webp" data-name="时间轴/设置头像/裁剪图片"><div class="shot-frame"><img src="shots/profile-09.webp" alt="时间轴/设置头像/裁剪图片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">09</span>时间轴/设置头像/裁剪图片</figcaption></figure>
+<figure class="shot" data-full="shots/profile-10.webp" data-name="时间轴/设置头像/裁剪图片"><div class="shot-frame"><img src="shots/profile-10.webp" alt="时间轴/设置头像/裁剪图片" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">10</span>时间轴/设置头像/裁剪图片</figcaption></figure>
+<figure class="shot" data-full="shots/profile-11.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/profile-11.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">11</span>时间轴/首次进入</figcaption></figure>
+<figure class="shot" data-full="shots/profile-12.webp" data-name="时间轴/首次进入"><div class="shot-frame"><img src="shots/profile-12.webp" alt="时间轴/首次进入" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">12</span>时间轴/首次进入</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-settings">
+  <div class="module-head reveal">
+    <div class="module-tag">18</div>
+    <div class="module-title">
+      <h3>设置与订阅</h3>
+      <span class="en">Settings &amp; Subscription</span>
+    </div>
+    <div class="module-count">03 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">设置页兼顾工具属性与商业化：成就系统（Collected 3 Stickers）、App Icon、11 种语言、存储路径，以及 Pro 订阅、恢复购买与广告个性化开关。</p>
+    <ul class="points"><li>未订阅 / 已订阅两态分别设计</li><li>Beta 招募入口与 Get Featured 形成社区运营闭环</li></ul>
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/settings-01.webp" data-name="语言选择"><div class="shot-frame"><img src="shots/settings-01.webp" alt="语言选择" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>语言选择</figcaption></figure>
+<figure class="shot" data-full="shots/settings-02.webp" data-name="设置-未订阅"><div class="shot-frame"><img src="shots/settings-02.webp" alt="设置-未订阅" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>设置-未订阅</figcaption></figure>
+<figure class="shot" data-full="shots/settings-03.webp" data-name="设置-已订阅"><div class="shot-frame"><img src="shots/settings-03.webp" alt="设置-已订阅" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">03</span>设置-已订阅</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-dialog">
+  <div class="module-head reveal">
+    <div class="module-tag">19</div>
+    <div class="module-title">
+      <h3>弹窗与动效</h3>
+      <span class="en">Dialogs &amp; Motion</span>
+    </div>
+    <div class="module-count">02 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">全局弹窗与过度动效规范，统一各模块的浮层出现方式与时间曲线。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/dialog-01.webp" data-name="首页/草稿"><div class="shot-frame"><img src="shots/dialog-01.webp" alt="首页/草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>首页/草稿</figcaption></figure>
+<figure class="shot" data-full="shots/dialog-02.webp" data-name="首页/草稿"><div class="shot-frame"><img src="shots/dialog-02.webp" alt="首页/草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">02</span>首页/草稿</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-timeline-guide">
+  <div class="module-head reveal">
+    <div class="module-tag">19a</div>
+    <div class="module-title">
+      <h3>时间轴引导提示</h3>
+      <span class="en">Timeline Coach Marks</span>
+    </div>
+    <div class="module-count">01 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">首次进入时间轴时的引导提示，降低新功能的学习成本。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/timeline-guide-01.webp" data-name="首页/草稿"><div class="shot-frame"><img src="shots/timeline-guide-01.webp" alt="首页/草稿" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>首页/草稿</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="m-misc">
+  <div class="module-head reveal">
+    <div class="module-tag">20</div>
+    <div class="module-title">
+      <h3>其他探索</h3>
+      <span class="en">Explorations</span>
+    </div>
+    <div class="module-count">01 <em>screens</em></div>
+  </div>
+  <div class="module-body reveal">
+    <p class="module-desc">设计过程中的中间态与探索稿，保留完整的设计推演痕迹。</p>
+    
+  </div>
+  <div class="rail reveal">
+    <button class="rail-btn prev" aria-label="上一屏">&lsaquo;</button>
+    <button class="rail-btn next" aria-label="下一屏">&rsaquo;</button>
+    <div class="rail-track">
+<figure class="shot" data-full="shots/misc-01.webp" data-name="Frame 2609561"><div class="shot-frame"><img src="shots/misc-01.webp" alt="Frame 2609561" loading="lazy" decoding="async"></div><figcaption><span class="shot-idx">01</span>Frame 2609561</figcaption></figure>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ============================= STATES ============================= -->
+<section class="sec" id="states">
+  <div class="sec-head reveal">
+    <span class="sec-no">05</span>
+    <h2>状态设计</h2>
+    <span class="sec-en">States &amp; Edge Cases</span>
+  </div>
+  <p class="sec-lead">一个产品的完成度，体现在非理想路径上。以下为全局统一覆盖的空态、加载、失败、成功、异常与转化态。</p>
+  <div class="states">
+<figure class="state-card reveal" data-full="shots/album-detail-04.webp" data-name="再次进入编辑">
+      <div class="state-img"><img src="shots/album-detail-04.webp" alt="再次进入编辑" loading="lazy"></div>
+      <figcaption><strong>空态 · 未填心情</strong><span>Write the story of today...</span></figcaption>
+    </figure><figure class="state-card reveal" data-full="shots/drafts-ai-04.webp" data-name="草稿-失败">
+      <div class="state-img"><img src="shots/drafts-ai-04.webp" alt="草稿-失败" loading="lazy"></div>
+      <figcaption><strong>加载态 · 生成中</strong><span>Creating... 异步任务轮询</span></figcaption>
+    </figure><figure class="state-card reveal" data-full="shots/drafts-ai-03.webp" data-name="草稿-生成中">
+      <div class="state-img"><img src="shots/drafts-ai-03.webp" alt="草稿-生成中" loading="lazy"></div>
+      <figcaption><strong>失败态 · AI 超时</strong><span>Creation timed out, please try again later.</span></figcaption>
+    </figure><figure class="state-card reveal" data-full="shots/drafts-ai-05.webp" data-name="草稿-完成">
+      <div class="state-img"><img src="shots/drafts-ai-05.webp" alt="草稿-完成" loading="lazy"></div>
+      <figcaption><strong>成功态 · 已完成</strong><span>Completed</span></figcaption>
+    </figure><figure class="state-card reveal" data-full="shots/album-detail-11.webp" data-name="查看单张照片">
+      <div class="state-img"><img src="shots/album-detail-11.webp" alt="查看单张照片" loading="lazy"></div>
+      <figcaption><strong>异常态 · 素材丢失</strong><span>Oops! The photo seems to be deleted.</span></figcaption>
+    </figure><figure class="state-card reveal" data-full="shots/photo-border-01.webp" data-name="图片/编辑素材/pro到处提示">
+      <div class="state-img"><img src="shots/photo-border-01.webp" alt="图片/编辑素材/pro到处提示" loading="lazy"></div>
+      <figcaption><strong>转化态 · Pro 拦截</strong><span>Watch AD to save</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================= CLOSING ============================= -->
+<section class="sec closing">
+  <div class="close-card reveal">
+    <span class="sec-en">Thanks for watching</span>
+    <h2>从一张照片，<br>到一本成长故事。</h2>
+    <p>BabyGram 覆盖 129 屏高保真界面、25 个功能模块与完整设计系统。设计价值不在界面数量，而在于把「记录孩子」这件长期而琐碎的事，变成父母愿意每天回来完成一次的小仪式。</p>
+    <div class="close-meta">
+      <span>UI / UX Design</span>
+      <span>Mobile App · iOS &amp; Android</span>
+      <span>Figma · 2025</span>
+    </div>
+  </div>
+  <footer class="foot">
+    <span>BabyGram · UI Portfolio</span>
+    <span>全部界面由 Figma 源文件解析生成，数据截止 2026-09-16</span>
+  </footer>
+</section>
+
+</main>
+
+<div class="lightbox" id="lb" aria-hidden="true">
+  <button class="lb-close" aria-label="关闭">&times;</button>
+  <button class="lb-prev" aria-label="上一张">&lsaquo;</button>
+  <img id="lb-img" alt="">
+  <button class="lb-next" aria-label="下一张">&rsaquo;</button>
+  <div class="lb-name" id="lb-name"></div>
+</div>
+
+<script>
+(function () {
+  document.body.classList.add('js');
+  // progress bar
+  var bar = document.getElementById('bar');
+  function onScroll() {
+    var h = document.documentElement;
+    var p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+    bar.style.transform = 'scaleX(' + Math.min(p, 1) + ')';
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // reveal
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(function (el, i) {
+    el.style.transitionDelay = (Math.min(i % 6, 5) * 55) + 'ms';
+    io.observe(el);
+  });
+
+  // rails: buttons + drag + wheel
+  document.querySelectorAll('.rail').forEach(function (rail) {
+    var track = rail.querySelector('.rail-track');
+    var step = 320;
+    var p = rail.querySelector('.prev'), n = rail.querySelector('.next');
+    function upd() {
+      p.classList.toggle('off', track.scrollLeft < 8);
+      n.classList.toggle('off', track.scrollLeft > track.scrollWidth - track.clientWidth - 8);
+    }
+    p.onclick = function () { track.scrollBy({ left: -step * 2, behavior: 'smooth' }); };
+    n.onclick = function () { track.scrollBy({ left: step * 2, behavior: 'smooth' }); };
+    track.addEventListener('scroll', upd, { passive: true });
+    setTimeout(upd, 100);
+    var down = false, sx = 0, sl = 0;
+    track.addEventListener('pointerdown', function (e) { down = true; sx = e.clientX; sl = track.scrollLeft; track.classList.add('grab'); });
+    addEventListener('pointerup', function () { down = false; track.classList.remove('grab'); });
+    addEventListener('pointermove', function (e) { if (!down) return; track.scrollLeft = sl - (e.clientX - sx); });
+    track.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { track.scrollLeft += e.deltaY; e.preventDefault(); }
+    }, { passive: false });
+  });
+
+  // lightbox
+  var lb = document.getElementById('lb'), img = document.getElementById('lb-img'), nm = document.getElementById('lb-name');
+  var list = [], cur = 0;
+  document.querySelectorAll('.shot, .state-card').forEach(function (f) {
+    var inner = f.querySelector('img');
+    list.push({ src: f.dataset.full || (inner ? inner.getAttribute('src') : ''), name: f.dataset.name, el: f });
+  });
+  function open(i) {
+    cur = i; var it = list[i];
+    img.src = it.src; nm.textContent = it.name;
+    lb.classList.add('on'); lb.setAttribute('aria-hidden', 'false');
+  }
+  function close() { lb.classList.remove('on'); lb.setAttribute('aria-hidden', 'true'); img.src = ''; }
+  function go(d) { cur = (cur + d + list.length) % list.length; open(cur); }
+  list.forEach(function (it, i) { it.el.addEventListener('click', function () { open(i); }); });
+  lb.querySelector('.lb-close').onclick = close;
+  lb.querySelector('.lb-prev').onclick = function (e) { e.stopPropagation(); go(-1); };
+  lb.querySelector('.lb-next').onclick = function (e) { e.stopPropagation(); go(1); };
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target === img) close(); });
+  addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+})();
+</script>
+</body>
+</html>

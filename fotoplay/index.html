@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FotoPlay · UI/UX 设计作品集</title>
+<style>
+  :root{
+    --bg:#0e0e12; --bg2:#141419; --card:#1a1a21; --card2:#202028;
+    --line:rgba(255,255,255,.08); --txt:#f2f2f5; --txt2:#9b9ba6; --txt3:#6c6c78;
+    --g-main:linear-gradient(135deg,#F763CE 0%,#B05CF2 100%);
+    --g-sub:linear-gradient(135deg,#FF71EC 0%,#D043FE 100%);
+    --g-red:linear-gradient(135deg,#FF807E 0%,#FA5078 100%);
+    --g-orange:linear-gradient(135deg,#EF7679 0%,#F6A558 100%);
+    --p1:#F763CE; --p2:#B05CF2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:"PingFang SC","Microsoft YaHei",-apple-system,"Segoe UI",sans-serif;line-height:1.7;overflow-x:hidden}
+  ::selection{background:rgba(247,99,206,.35)}
+
+  /* ===== 顶部导航 ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:8px;
+      padding:0 28px;height:56px;background:rgba(14,14,18,.82);backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line)}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-right:auto}
+  nav .brand img{height:26px;border-radius:6px}
+  nav a{color:var(--txt2);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:99px;transition:.25s;white-space:nowrap}
+  nav a:hover,nav a.on{color:#fff;background:rgba(255,255,255,.08)}
+  nav a.num{display:inline-flex;align-items:center;gap:4px}
+  nav a.num i{font-style:normal;font-size:10px;color:var(--p1);font-weight:800}
+
+  section{max-width:1180px;margin:0 auto;padding:110px 40px 90px}
+  .sec-head{margin-bottom:48px}
+  .sec-tag{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--p1);font-weight:700;letter-spacing:.2em}
+  .sec-tag::before{content:"";width:34px;height:2px;background:var(--g-main);border-radius:2px}
+  h2{font-size:38px;font-weight:800;margin-top:14px;letter-spacing:.02em}
+  h2 em{font-style:normal;background:var(--g-main);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sec-desc{color:var(--txt2);max-width:760px;margin-top:14px;font-size:15px}
+
+  .phone{border-radius:26px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px var(--line);position:relative}
+  .phone img{display:block;width:100%;height:auto}
+  .cap{font-size:12.5px;color:var(--txt3);text-align:center;margin-top:12px}
+  .cap b{color:var(--txt2);font-weight:600}
+
+  .grid{display:grid;gap:26px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)} .g5{grid-template-columns:repeat(5,1fr)}
+  .g6{grid-template-columns:repeat(6,1fr)}
+  @media(max-width:900px){.g4,.g5,.g6{grid-template-columns:repeat(3,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.g2,.g3,.g4,.g5,.g6{grid-template-columns:1fr}section{padding:80px 22px}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 26px 24px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(247,99,206,.4)}
+  .card h4{font-size:17px;margin-bottom:8px}
+  .card p{font-size:13.5px;color:var(--txt2)}
+  .card .idx{position:absolute;top:18px;right:22px;font-size:26px;font-weight:800;color:rgba(255,255,255,.07)}
+  .chip{display:inline-block;font-size:11.5px;padding:3px 11px;border-radius:99px;background:rgba(247,99,206,.12);color:#f9a8dd;border:1px solid rgba(247,99,206,.25);margin:3px 4px 0 0}
+  .chip.b{background:rgba(176,92,242,.12);color:#c8a4fa;border-color:rgba(176,92,242,.25)}
+  .chip.c{background:rgba(255,255,255,.07);color:var(--txt2);border-color:var(--line)}
+
+  /* ===== 封面 ===== */
+  #cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:140px}
+  #cover::before{content:"";position:absolute;inset:-30% -20% auto;height:900px;
+    background:radial-gradient(600px 320px at 20% 30%,rgba(247,99,206,.22),transparent 65%),
+               radial-gradient(700px 380px at 80% 20%,rgba(176,92,242,.20),transparent 65%);
+    pointer-events:none}
+  .cover-kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+  .cover-kicker img{height:44px;border-radius:10px;box-shadow:0 8px 30px rgba(176,92,242,.35)}
+  .cover-kicker span{font-size:13px;color:var(--txt2);letter-spacing:.35em}
+  #cover h1{font-size:clamp(42px,4.8vw,68px);font-weight:900;line-height:1.1;letter-spacing:-.01em}
+  #cover h1 .grad{background:var(--g-main);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  #cover .sub{font-size:clamp(15px,1.6vw,17.5px);color:var(--txt2);margin-top:20px;max-width:520px}
+  .cover-meta{display:flex;flex-wrap:wrap;gap:22px 30px;margin-top:38px;max-width:520px}
+  .cover-meta div{font-size:12.5px;color:var(--txt3);min-width:118px}
+  .cover-meta b{display:block;font-size:14.5px;color:var(--txt);font-weight:600;margin-bottom:2px}
+  /* 左内容 + 右手机 的两栏首屏 */
+  .cover-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:44px;align-items:center}
+  .cover-shot{position:relative;height:min(62vh,600px);min-height:460px;margin-bottom:34px}
+  .cover-shot .phone{position:absolute;width:clamp(176px,16.5vw,232px);top:46%;left:50%;transition:transform .5s ease}
+  .cover-shot .s1{transform:translate(-114%,-48%) rotate(-10deg);z-index:1}
+  .cover-shot .s2{transform:translate(-50%,-54%) scale(1.04);z-index:3}
+  .cover-shot .s3{transform:translate(14%,-48%) rotate(10deg);z-index:2}
+  .cover-shot .s1:hover{transform:translate(-114%,-52%) rotate(-10deg) scale(1.03)}
+  .cover-shot .s2:hover{transform:translate(-50%,-58%) scale(1.07)}
+  .cover-shot .s3:hover{transform:translate(14%,-52%) rotate(10deg) scale(1.03)}
+  .cover-shot .cap{position:absolute;left:50%;bottom:0;transform:translateX(-50%);white-space:nowrap;z-index:5;background:rgba(15,15,20,.72);padding:7px 16px;border-radius:99px;border:1px solid var(--line);backdrop-filter:blur(6px)}
+  @media(max-width:960px){
+    .cover-grid{grid-template-columns:1fr;gap:20px}
+    .cover-shot{height:430px;margin-top:26px}
+  }
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--txt3);font-size:12px;letter-spacing:.3em;animation:updown 2s infinite}
+  @keyframes updown{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ===== 时间线 ===== */
+  .timeline{position:relative;margin-top:20px;padding-left:26px}
+  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--p1),var(--p2),rgba(255,255,255,.05))}
+  .tl-item{position:relative;padding:0 0 26px 18px}
+  .tl-item::before{content:"";position:absolute;left:-24px;top:8px;width:12px;height:12px;border-radius:99px;background:var(--g-main);box-shadow:0 0 0 4px rgba(247,99,206,.18)}
+  .tl-item h5{font-size:15px}
+  .tl-item h5 span{color:var(--p1);font-weight:800;margin-right:10px;font-variant-numeric:tabular-nums}
+  .tl-item p{font-size:13px;color:var(--txt2)}
+
+  /* ===== 色板 ===== */
+  .swatch{border-radius:18px;padding:20px;border:1px solid var(--line);overflow:hidden}
+  .swatch .bar{height:64px;border-radius:12px;margin-bottom:14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+  .swatch h5{font-size:14px}
+  .swatch code{font-size:11.5px;color:var(--txt3);font-family:ui-monospace,Menlo,monospace}
+
+  /* ===== 对比 ===== */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative}
+  .vs .arrow{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:99px;background:var(--g-main);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;box-shadow:0 10px 30px rgba(176,92,242,.5);z-index:2}
+  @media(max-width:640px){.vs{grid-template-columns:1fr}.vs .arrow{display:none}}
+  .tagline{display:inline-block;font-size:12px;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:14px}
+  .tagline.old{background:rgba(255,255,255,.08);color:var(--txt2)}
+  .tagline.new{background:rgba(247,99,206,.15);color:#f9a8dd;border:1px solid rgba(247,99,206,.3)}
+
+  /* ===== 字体表 ===== */
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{color:var(--txt3);font-weight:600;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--txt2);vertical-align:middle}
+  tr:hover td{background:rgba(255,255,255,.025)}
+  .fs-demo{color:#fff;font-weight:600}
+  .fs12{font-size:12px}.fs14{font-size:14px}.fs16{font-size:16px}.fs20{font-size:20px}.fs24{font-size:24px}.fs32{font-size:32px}
+
+  /* ===== 大数字 ===== */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:46px}
+  @media(max-width:640px){.stats{grid-template-columns:1fr 1fr}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
+  .stat b{font-size:34px;font-weight:800;background:var(--g-main);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block}
+  .stat span{font-size:12.5px;color:var(--txt2)}
+
+  .note{font-size:12.5px;color:var(--txt3);margin-top:26px;padding:14px 18px;border-left:2px solid rgba(247,99,206,.4);background:rgba(247,99,206,.05);border-radius:0 10px 10px 0}
+  .note b{color:var(--txt2)}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:70px 40px 90px;text-align:center}
+  footer h3{font-size:30px;font-weight:800}
+  footer h3 em{font-style:normal;background:var(--g-main);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  footer p{color:var(--txt2);font-size:14px;margin-top:14px}
+  .divider{height:1px;background:var(--line);max-width:1180px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><img src="assets/logo_dark.png" alt="FotoPlay">FotoPlay 作品集</div>
+  <a href="#cover">封面</a>
+  <a href="#background">背景</a>
+  <a href="#role">职责</a>
+  <a href="#research">调研</a>
+  <a href="#process">过程</a>
+  <a href="#visual">视觉</a>
+  <a href="#interaction">交互</a>
+  <a href="#system">设计系统</a>
+</nav>
+
+<!-- ═══════════ 01 封面 ═══════════ -->
+<section id="cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-kicker">
+        <img src="assets/logo_dark.png" alt="FotoPlay Logo">
+        <span>UI / UX · PORTFOLIO · 2024 – 2026</span>
+      </div>
+      <h1>让每个人<br>都能<span class="grad">一键成片</span></h1>
+      <p class="sub">FotoPlay —— 面向全球用户的 AI 照片 · 视频创作工具。负责 Android / iOS 双端全链路体验设计与设计系统建设，从 2.2.1 迭代至 7.8.1，覆盖首页、剪辑、相册、模板、订阅等核心业务。</p>
+      <div class="cover-meta">
+        <div><b>程家乐</b>UI/UX 设计师 · 主设</div>
+        <div><b>移动端 · 双端</b>Android + iOS</div>
+        <div><b>16 个设计域</b>首页 / 剪辑 / 相册 / 模板…</div>
+        <div><b>131 个样式规范</b>颜色 · 字体 · 组件</div>
+      </div>
+    </div>
+    <div class="cover-shot" aria-label="FotoPlay 核心界面预览">
+      <div class="phone s1"><img src="assets/templates_dark.png" alt="视频模板"></div>
+      <div class="phone s2"><img src="assets/home_dark.png" alt="首页"></div>
+      <div class="phone s3"><img src="assets/try_dark.png" alt="AI Try 频道"></div>
+      <p class="cap"><b>首页 · Try 频道 · 视频模板</b>　深色版 4.0</p>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL ↓</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 02 项目背景 ═══════════ -->
+<section id="background">
+  <div class="sec-head">
+    <span class="sec-tag">01 / PROJECT</span>
+    <h2>项目<em>背景</em></h2>
+    <p class="sec-desc">FotoPlay 是一款「照片 → 视频」的一站式创作 App：一键成片、卡点视频、AI 图片编辑与模板化创作是三大核心能力。产品服务全球市场，支持深浅双主题、Android / iOS 双端，采用「免费 + 订阅」的商业化模型。</p>
+  </div>
+
+  <div class="grid g3">
+    <div class="card"><span class="idx">A</span><h4>一键成片 · AI 创作</h4><p>用户选择素材后由 AI 自动配乐、卡点、转场成片；App 内置 Try 频道与 FotoPlay AI（Beat）入口，把专业剪辑流程压缩为一次点击。</p></div>
+    <div class="card"><span class="idx">B</span><h4>模板 + 卡点生态</h4><p>视频模板、卡点节拍、文字动画、特效与 GIPHY 素材构成内容生态，用户跟随模板即可产出社交平台规格的成片。</p></div>
+    <div class="card"><span class="idx">C</span><h4>全球化 + 订阅制</h4><p>多语言、多档位订阅（周 / 月 / 年）配合节日化运营（圣诞、元旦、情人节活动订阅页），支撑海外增长。</p></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>2.2 → 7.8</b><span>两年间主导的版本迭代跨度</span></div>
+    <div class="stat"><b>16</b><span>设计域 / Figma 页面</span></div>
+    <div class="stat"><b>100+</b><span>功能组件（双端组件库）</span></div>
+    <div class="stat"><b>50+</b><span>本次精选输出页面</span></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:60px;margin-top:60px" class="g2">
+    <div>
+      <h4 style="font-size:19px;margin-bottom:20px">我的参与版本</h4>
+      <div class="timeline">
+        <div class="tl-item"><h5><span>2.2.1</span>引导页 + 订阅改版</h5><p>重设计 Onboarding 与订阅 Plan 体系，统一弹窗规范</p></div>
+        <div class="tl-item"><h5><span>2.3.0</span>新功能提示</h5><p>版本更新引导体系，降低新功能认知成本</p></div>
+        <div class="tl-item"><h5><span>2.4.0 – 2.4.1</span>首页大改版 · New Home</h5><p>Try 频道、iOS 快速入口、首页滑动交互定稿</p></div>
+        <div class="tl-item"><h5><span>7.3.1 / 7.5.1</span>Try 交互优化 · 一键成片</h5><p>Try 频道交互重构、一键成片打通新建草稿、AI 按钮优化</p></div>
+        <div class="tl-item"><h5><span>7.8.1</span>保存弹窗 · 相册能力升级</h5><p>保存流程弹窗重构、相册拼图与素材排序优化</p></div>
+      </div>
+    </div>
+    <div>
+      <h4 style="font-size:19px;margin-bottom:20px">产品骨架（最新版）</h4>
+      <div class="grid g2" style="gap:16px">
+        <div class="card" style="padding:18px"><h4 style="font-size:14.5px">首页 / Try</h4><p>推荐流 + AI Try 频道 + 创建入口</p></div>
+        <div class="card" style="padding:18px"><h4 style="font-size:14.5px">草稿</h4><p>重命名 / 多选 / 排序 / 防丢失提醒</p></div>
+        <div class="card" style="padding:18px"><h4 style="font-size:14.5px">相册</h4><p>排序、长按滑动、拼图 Collage</p></div>
+        <div class="card" style="padding:18px"><h4 style="font-size:14.5px">剪辑器</h4><p>轨道 / 转场 / 特效 / 文字 / 音乐</p></div>
+        <div class="card" style="padding:18px"><h4 style="font-size:14.5px">模板 / 卡点</h4><p>模板生态与卡点节拍编辑</p></div>
+        <div class="card" style="padding:18px"><h4 style="font-size:14.5px">设置 / 订阅</h4><p>主题切换 / 帮助中心 / FAQ / 订阅</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 03 我的职责 ═══════════ -->
+<section id="role">
+  <div class="sec-head">
+    <span class="sec-tag">02 / MY ROLE</span>
+    <h2>我的<em>职责</em></h2>
+    <p class="sec-desc">作为项目主设 UI/UX 设计师，负责 FotoPlay 双端体验的「一条龙」：从需求分析到组件交付。</p>
+  </div>
+  <div class="grid g3">
+    <div class="card"><span class="idx">01</span><span class="chip">策略</span><h4>需求分析与体验定位</h4><p>参与产品需求评审，拆解用户目标与业务目标，将「降低创作门槛」翻译为可落地的体验方案。</p><div style="margin-top:10px"><span class="chip c">用户旅程</span><span class="chip c">竞品分析</span><span class="chip c">体验地图</span></div></div>
+    <div class="card"><span class="idx">02</span><span class="chip">交互</span><h4>交互流程与原型</h4><p>输出全链路交互流程图与高保真原型：剪辑手势、轨道吸附、长按滑动、加载动效等微交互定义。</p><div style="margin-top:10px"><span class="chip c">流程图</span><span class="chip c">Figma 原型</span><span class="chip c">动效标注</span></div></div>
+    <div class="card"><span class="idx">03</span><span class="chip">视觉</span><h4>双端视觉设计</h4><p>Android / iOS 双端全套视觉稿，深浅双主题版本 4.0；节日化订阅运营视觉（圣诞 / 元旦 / 情人节）。</p><div style="margin-top:10px"><span class="chip c">视觉稿</span><span class="chip c">深浅主题</span><span class="chip c">运营视觉</span></div></div>
+    <div class="card"><span class="idx">04</span><span class="chip">系统</span><h4>设计系统建设</h4><p>维护 131 个颜色 / 文字样式与 100+ 双端组件库（系统组件、导航 Tab、功能组件、图标库），保障多版本迭代的一致性。</p><div style="margin-top:10px"><span class="chip c">组件库</span><span class="chip c">样式规范</span><span class="chip c">图标治理</span></div></div>
+    <div class="card"><span class="idx">05</span><span class="chip">协作</span><h4>跨端落地与走查</h4><p>与 Android / iOS 工程团队协作，交付设计标注与切图；版本上线前 UI 走查，跟进还原度。</p><div style="margin-top:10px"><span class="chip c">标注切图</span><span class="chip c">UI 走查</span></div></div>
+    <div class="card"><span class="idx">06</span><span class="chip">增长</span><h4>数据驱动迭代</h4><p>结合崩溃反馈（Sentry Feedback）、用户反馈与埋点数据，持续优化保存、订阅、引导等关键漏斗。</p><div style="margin-top:10px"><span class="chip c">A/B 对比</span><span class="chip c">反馈闭环</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 04 前期调研 ═══════════ -->
+<section id="research">
+  <div class="sec-head">
+    <span class="sec-tag">03 / RESEARCH</span>
+    <h2>前期<em>调研</em></h2>
+    <p class="sec-desc">围绕「创作门槛高、素材管理乱、成片链路长」三大核心问题展开调研：梳理用户旅程、分析竞品（模板类 / 剪辑类 / AI 类产品）、回收应用商店评论与站内反馈，归纳出六个关键洞察。</p>
+  </div>
+
+  <div class="grid g3">
+    <div class="card"><span class="chip">痛点 1</span><h4>创作门槛高</h4><p>普通用户面对「轨道 / 时间线」望而却步，调研中大部分放弃发生在进入剪辑器前 30 秒。</p></div>
+    <div class="card"><span class="chip">痛点 2</span><h4>素材难找难选</h4><p>相册素材多而乱，找不到「最新 / 最常用」的照片；跨页多选操作成本极高。</p></div>
+    <div class="card"><span class="chip">痛点 3</span><h4>成片链路长</h4><p>从选图到导出平均经过 6+ 步，等待过程缺少反馈，用户误以为卡死而流失。</p></div>
+  </div>
+
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><span class="chip b">洞察 1</span><h4>把剪辑器藏到「结果」后面</h4><p>先给成片、再允许精修 ——「一键成片 + Try 频道」由此成为首页第一层级。</p></div>
+    <div class="card"><span class="chip b">洞察 2</span><h4>管理动作要轻</h4><p>重命名、排序、多选改为轻量弹窗与手势（长按滑动），不再打断浏览状态。</p></div>
+    <div class="card"><span class="chip b">洞察 3</span><h4>等待必须被设计</h4><p>加载动画、进度反馈、防丢失提醒，把「AI 处理中」变成可感知的仪式感。</p></div>
+    <div class="card"><span class="chip b">洞察 4</span><h4>新手需要脚手架</h4><p>三步引导 + 新功能提示 + 教程中心，让学习成本前置且可跳过。</p></div>
+    <div class="card"><span class="chip b">洞察 5</span><h4>反馈即调研</h4><p>内置崩溃 / 问题反馈（Sentry Feedback）与帮助中心 FAQ，形成持续的用户之声通道。</p></div>
+    <div class="card"><span class="chip b">洞察 6</span><h4>深色即生产力</h4><p>剪辑场景长时间注视屏幕，深色主题版本 4.0 全量铺开并支持系统级外观切换。</p></div>
+  </div>
+
+  <h4 style="font-size:19px;margin:54px 0 22px">调研落点 → 对应设计域</h4>
+  <div class="grid g4">
+    <div><div class="phone"><img src="assets/onboarding1.png" alt="引导页"></div><p class="cap"><b>新手引导</b>三步降低门槛</p></div>
+    <div><div class="phone"><img src="assets/album_sort.png" alt="排序弹窗"></div><p class="cap"><b>相册排序</b>管理动作轻量化</p></div>
+    <div><div class="phone"><img src="assets/onetap_loading.png" alt="一键成片加载"></div><p class="cap"><b>一键成片</b>等待被设计</p></div>
+    <div><div class="phone"><img src="assets/settings_dark.png" alt="设置·帮助中心"></div><p class="cap"><b>帮助中心 / FAQ</b>反馈闭环</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 05 设计过程 ═══════════ -->
+<section id="process">
+  <div class="sec-head">
+    <span class="sec-tag">04 / PROCESS</span>
+    <h2>设计<em>过程</em></h2>
+    <p class="sec-desc">采用「问题定义 → 方案发散 → 方案收敛 → 双端适配 → 落地走查」的节奏推进每个迭代。以下选取三条最具代表性的设计线索：首页改版、弹窗规范化、AiCut 功能整合。</p>
+  </div>
+
+  <div class="grid g5" style="margin-bottom:14px">
+    <div class="card" style="padding:20px"><h4 style="font-size:14px;color:var(--p1)">① 问题定义</h4><p style="font-size:12.5px">旅程图 + 反馈数据定位问题层级</p></div>
+    <div class="card" style="padding:20px"><h4 style="font-size:14px;color:var(--p1)">② 方案发散</h4><p style="font-size:12.5px">多方案探索，低保证原型快速验证</p></div>
+    <div class="card" style="padding:20px"><h4 style="font-size:14px;color:var(--p1)">③ 方案收敛</h4><p style="font-size:12.5px">与产品 / 工程评审收敛最终方案</p></div>
+    <div class="card" style="padding:20px"><h4 style="font-size:14px;color:var(--p1)">④ 双端适配</h4><p style="font-size:12.5px">Android / iOS 差异化组件适配</p></div>
+    <div class="card" style="padding:20px"><h4 style="font-size:14px;color:var(--p1)">⑤ 落地走查</h4><p style="font-size:12.5px">标注切图交付，上线 UI 走查</p></div>
+  </div>
+
+  <h4 style="font-size:19px;margin:50px 0 22px">线索 A · 首页改版：从「工具列表」到「内容即创作」</h4>
+  <div class="grid g4">
+    <div><div class="phone"><img src="assets/home_240.png" alt="首页 2.4.0"></div><p class="cap"><b>2.4.0</b>首页信息流化，Try 入口前置</p></div>
+    <div><div class="phone"><img src="assets/try_light.png" alt="Try"></div><p class="cap"><b>2.4.0</b>Try 频道：AI 一键生成</p></div>
+    <div><div class="phone"><img src="assets/try_751.png" alt="Try 7.5.1"></div><p class="cap"><b>7.5.1</b>Try 交互重构：详情态直达</p></div>
+    <div><div class="phone"><img src="assets/beat_btn.png" alt="AI Beat 按钮"></div><p class="cap"><b>最新</b>FotoPlay AI (Beat) 按钮优化</p></div>
+  </div>
+
+  <h4 style="font-size:19px;margin:50px 0 22px">线索 B · 弹窗规范化：一次全局性的体验升级</h4>
+  <div class="vs">
+    <div>
+      <span class="tagline old">Before · 旧弹窗</span>
+      <div class="phone"><img src="assets/dialog_before.png" alt="旧弹窗"></div>
+      <p class="cap" style="text-align:left;margin-top:10px">旧版弹窗：样式各自为政、插图风格不统一、按钮层级混乱，用户在关键操作（重命名 / 删除 / 保存）上频繁误触。</p>
+    </div>
+    <div>
+      <span class="tagline new">After · 弹窗组件化</span>
+      <div class="phone"><img src="assets/dialog_rename.png" alt="重命名弹窗"></div>
+      <p class="cap" style="text-align:left;margin-top:10px">优化后：统一的弹窗组件 —— 输入态 / 字数限制 / 错误提示均有明确规范，情绪化插图统一语言，主次按钮层级清晰。</p>
+    </div>
+    <div class="arrow">→</div>
+  </div>
+
+  <h4 style="font-size:19px;margin:50px 0 22px">线索 C · AiCut 图片功能整合：功能岛收敛</h4>
+  <div class="grid g4">
+    <div><div class="phone"><img src="assets/aicut_photo.png" alt="AiCut 照片"></div><p class="cap"><b>照片</b>图片能力统一收纳</p></div>
+    <div><div class="phone"><img src="assets/aicut_music.png" alt="AiCut 音乐"></div><p class="cap"><b>音乐</b>音乐库与 AI 选曲</p></div>
+    <div><div class="phone"><img src="assets/collage_home.png" alt="拼图入口"></div><p class="cap"><b>拼图入口</b>相册页 Collage</p></div>
+    <div><div class="phone"><img src="assets/collage_edit.png" alt="拼图素材编辑"></div><p class="cap"><b>拼图 · 素材编辑</b>与主剪辑器共用组件</p></div>
+  </div>
+  <p class="note"><b>设计决策：</b>原本分散在多处的图片编辑、音乐、时长、比例能力，收敛为统一的 AiCut 编辑面板；相册新增拼图（布局 · 内外边距拉杆 · 比例 · 素材编辑），与主剪辑工具栏共用同一套组件，降低认知与维护成本。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 06 视觉方案 ═══════════ -->
+<section id="visual">
+  <div class="sec-head">
+    <span class="sec-tag">05 / VISUAL</span>
+    <h2>视觉<em>方案</em></h2>
+    <p class="sec-desc">品牌视觉以「紫粉渐变 × 深色画布」为核心：渐变承载品牌识别与 CTA，深色版本 4.0 让内容（照片 / 视频）成为绝对主角。色彩、字阶、圆角、投影全部沉淀为可复用样式。</p>
+  </div>
+
+  <h4 style="font-size:19px;margin-bottom:22px">品牌渐变体系</h4>
+  <div class="grid g5">
+    <div class="swatch"><div class="bar" style="background:var(--g-main)"></div><h5>主渐变 · Primary</h5><code>#F763CE → #B05CF2</code><p style="font-size:12px;color:var(--txt3)">CTA / 品牌 / 重点标识</p></div>
+    <div class="swatch"><div class="bar" style="background:var(--g-sub)"></div><h5>次渐变 · Secondary</h5><code>#FF71EC → #D043FE</code><p style="font-size:12px;color:var(--txt3)">辅助强调 / 运营氛围</p></div>
+    <div class="swatch"><div class="bar" style="background:var(--g-red)"></div><h5>红渐变</h5><code>#FF807E → #FA5078</code><p style="font-size:12px;color:var(--txt3)">警示 / 删除 / 热区</p></div>
+    <div class="swatch"><div class="bar" style="background:var(--g-orange)"></div><h5>橙红渐变</h5><code>#EF7679 → #F6A558</code><p style="font-size:12px;color:var(--txt3)">活动 / 温和提示</p></div>
+    <div class="swatch"><div class="bar" style="background:linear-gradient(135deg,#171717,#252525,#171717)"></div><h5>黑渐变 · 深色画布</h5><code>#171717 → #252525</code><p style="font-size:12px;color:var(--txt3)">深色版 4.0 底层</p></div>
+  </div>
+
+  <h4 style="font-size:19px;margin:54px 0 22px">深色版本 4.0 · 全量页面</h4>
+  <div class="grid g6">
+    <div><div class="phone"><img src="assets/home_dark.png" alt="首页"></div><p class="cap"><b>首页</b></p></div>
+    <div><div class="phone"><img src="assets/drafts_dark.png" alt="草稿"></div><p class="cap"><b>草稿</b></p></div>
+    <div><div class="phone"><img src="assets/templates_dark.png" alt="模板"></div><p class="cap"><b>视频模板</b></p></div>
+    <div><div class="phone"><img src="assets/settings_dark.png" alt="设置"></div><p class="cap"><b>设置</b></p></div>
+    <div><div class="phone"><img src="assets/try_dark.png" alt="Try"></div><p class="cap"><b>Try 频道</b></p></div>
+    <div><div class="phone"><img src="assets/theme_switch.png" alt="主题切换"></div><p class="cap"><b>主题切换</b></p></div>
+  </div>
+
+  <h4 style="font-size:19px;margin:54px 0 22px">深色版 4.0 · 剪辑工具全览</h4>
+  <div class="grid g4">
+    <div><div class="phone"><img src="assets/duration_dark.png" alt="持续时间"></div><p class="cap"><b>持续时间</b></p></div>
+    <div><div class="phone"><img src="assets/replace_dark.png" alt="图片替换"></div><p class="cap"><b>图片替换</b></p></div>
+    <div><div class="phone"><img src="assets/bg_dark.png" alt="添加背景"></div><p class="cap"><b>添加背景</b></p></div>
+    <div><div class="phone"><img src="assets/ratio_dark.png" alt="调整比例"></div><p class="cap"><b>调整比例</b></p></div>
+    <div><div class="phone"><img src="assets/speed_dark.png" alt="调整视频速度"></div><p class="cap"><b>调整视频速度</b></p></div>
+    <div><div class="phone"><img src="assets/audio_sep_dark.png" alt="音频分离"></div><p class="cap"><b>音频分离</b></p></div>
+    <div><div class="phone"><img src="assets/record_dark.png" alt="录音"></div><p class="cap"><b>录音</b></p></div>
+    <div><div class="phone"><img src="assets/text_style_dark.png" alt="添加文字样式"></div><p class="cap"><b>添加文字样式 / 动画</b></p></div>
+  </div>
+
+  <h4 style="font-size:19px;margin:54px 0 22px">浅色版 · 双主题并存</h4>
+  <div class="grid g5">
+    <div><div class="phone"><img src="assets/templates_light.png" alt="模板浅色"></div><p class="cap"><b>视频模板 · 浅色</b></p></div>
+    <div><div class="phone"><img src="assets/beat_edit.png" alt="卡点编辑"></div><p class="cap"><b>卡点编辑</b></p></div>
+    <div><div class="phone"><img src="assets/beat_timeline.png" alt="卡点时间轴"></div><p class="cap"><b>卡点时间轴</b></p></div>
+    <div><div class="phone"><img src="assets/editor_main.png" alt="剪辑主界面"></div><p class="cap"><b>剪辑主界面</b></p></div>
+    <div><div class="phone"><img src="assets/sub_plan.png" alt="订阅"></div><p class="cap"><b>订阅 Plan</b></p></div>
+  </div>
+
+  <p class="note"><b>深浅主题策略：</b>深色版 4.0 以「黑渐变」画布统一全局底色，内容卡片悬浮于其上；浅色版保留同等信息架构。用户可在设置中切换「跟随系统 / 浅色 / 深色」，切换弹窗与状态即时反馈，保障两端体验一致。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 07 交互与细节 ═══════════ -->
+<section id="interaction">
+  <div class="sec-head">
+    <span class="sec-tag">06 / INTERACTION</span>
+    <h2>交互与<em>细节</em></h2>
+    <p class="sec-desc">微交互是这款产品「体感」的关键：手势化操作、可感知的等待、精确到帧的轨道交互。每一处细节都经过状态穷举（默认 / 进行中 / 极限 / 异常）。</p>
+  </div>
+
+  <div class="grid g3">
+    <div><div class="phone"><img src="assets/home_swipe.png" alt="首页滑动"></div><p class="cap"><b>首页滑动 · 滑动开始态</b><br>顶栏折叠与底部滑动联动，新建按钮收纳为 min 态</p></div>
+    <div><div class="phone"><img src="assets/album_longpress.png" alt="相册长按"></div><p class="cap"><b>相册长按左右滑动</b><br>长按进入连续选择，左右滑动批量勾选，含单素材边界态</p></div>
+    <div><div class="phone"><img src="assets/snap1.png" alt="手势吸附"></div><p class="cap"><b>剪辑手势吸附</b><br>拖拽素材时的磁吸对齐与自动吸附反馈</p></div>
+    <div><div class="phone"><img src="assets/onetap_loading.png" alt="一键成片加载"></div><p class="cap"><b>一键成片 · 加载动画</b><br>AI 处理过程的仪式感反馈，消除等待焦虑</p></div>
+    <div><div class="phone"><img src="assets/try_refresh.png" alt="Try 刷新"></div><p class="cap"><b>Try 首页刷新动画</b><br>下拉刷新与内容更新的动效闭环</p></div>
+    <div><div class="phone"><img src="assets/feature_tip.png" alt="新功能提示"></div><p class="cap"><b>新功能提示 2.3.0</b><br>版本更新引导，可跳过、不打断</p></div>
+    <div><div class="phone"><img src="assets/snap2.png" alt="手势吸附2"></div><p class="cap"><b>手势吸附 · 多素材态</b><br>多素材并置时的对齐策略</p></div>
+    <div><div class="phone"><img src="assets/editor_track.png" alt="选中轨道"></div><p class="cap"><b>轨道选中态</b><br>选中 / 满载等轨道边界状态</p></div>
+    <div><div class="phone"><img src="assets/switch_dialog.png" alt="切换弹窗"></div><p class="cap"><b>主题切换弹窗</b><br>深浅切换的即时预览确认</p></div>
+    <div><div class="phone"><img src="assets/collage_layout.png" alt="拼图布局"></div><p class="cap"><b>拼图 · 布局与拉杆</b><br>内外边距拉杆实时预览</p></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:26px">
+    <div class="card">
+      <h4>状态穷举示例 · 草稿重命名</h4>
+      <p>同一弹窗组件覆盖四种状态：<b style="color:var(--txt)">未输入 → 正在输入 → 字数限制 → 确认删除</b>，输入法弹起、光标位置、按钮可用性均有定义，避免「能用但不能用对」的实现盲区。</p>
+      <div style="margin-top:12px"><span class="chip c">默认态</span><span class="chip c">输入态</span><span class="chip c">极限态</span><span class="chip c">异常态</span></div>
+    </div>
+    <div class="card">
+      <h4>防丢失与容错</h4>
+      <p>草稿防丢失提醒、素材缺失提示、多个音乐版权弹窗、App 下架提醒…… 把「异常」当作正常流程的一部分来设计，是这款工具类产品留存的关键细节。</p>
+      <div style="margin-top:12px"><span class="chip c">防丢失</span><span class="chip c">版权提示</span><span class="chip c">素材缺失</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 08 设计系统 ═══════════ -->
+<section id="system">
+  <div class="sec-head">
+    <span class="sec-tag">07 / DESIGN SYSTEM</span>
+    <h2>设计<em>系统</em></h2>
+    <p class="sec-desc">以 Figma 组件库为核心的单源体系：131 个颜色 / 文字样式、100+ 双端组件，分为系统组件、导航 Tab、功能组件三层，支撑 16 个设计域的快速迭代 —— 新页面平均 1.5 天即可完成高保真稿。</p>
+  </div>
+
+  <h4 style="font-size:19px;margin-bottom:22px">双端字阶规范（节选）</h4>
+  <div class="card" style="padding:10px 4px">
+    <table>
+      <tr><th>层级</th><th>Android</th><th>iOS</th><th>示例</th><th>用途</th></tr>
+      <tr><td>Display</td><td>Black 32</td><td>Heavy 32</td><td class="fs-demo fs32">Aa 卡点</td><td>大标题 / 空状态</td></tr>
+      <tr><td>Title L</td><td>Bold 24</td><td>Bold 24</td><td class="fs-demo fs24">Aa 模板</td><td>页面主标题</td></tr>
+      <tr><td>Title S</td><td>Semibold 20</td><td>Heavy 18</td><td class="fs-demo fs20">Aa 草稿</td><td>卡片标题</td></tr>
+      <tr><td>Body L</td><td>Regular 16</td><td>Regular 15</td><td class="fs-demo fs16">Aa 编辑</td><td>正文</td></tr>
+      <tr><td>Body S</td><td>Medium 14</td><td>Medium 14</td><td class="fs-demo fs14">Aa 音乐</td><td>列表 / 按钮</td></tr>
+      <tr><td>Caption</td><td>Regular 12</td><td>Regular 12</td><td class="fs-demo fs12">Aa 说明</td><td>辅助说明 / 角标</td></tr>
+    </table>
+  </div>
+
+  <h4 style="font-size:19px;margin:50px 0 22px">组件库 · 三层架构</h4>
+  <div class="grid g3">
+    <div class="card"><span class="chip">Layer 1 系统组件</span><h4 style="margin-top:8px">按钮 · 弹窗 · 开关 · Toast</h4><p>状态栏 / 遮罩 / 分割线 / Toast / 各类 Button，遵循各端原生规范并统一品牌皮肤。</p></div>
+    <div class="card"><span class="chip">Layer 2 导航 Tab</span><h4 style="margin-top:8px">顶部导航 · 底部菜单 · 选项卡</h4><p>首页顶部导航栏、剪辑底部菜单栏、二级导航与选项卡，适配横竖屏与滚动折叠态。</p></div>
+    <div class="card"><span class="chip">Layer 3 功能组件</span><h4 style="margin-top:8px">轨道 · 滑块 · 刻度尺 · 裁剪框</h4><p>剪辑域高复杂组件：时间轨道、滑杆、刻度尺、裁剪框、角标、Pro 卡片、水印等。</p></div>
+  </div>
+
+  <div class="grid g4" style="margin-top:26px">
+    <div><div class="phone" style="border-radius:18px"><img src="assets/sys_dialog_ios.png" alt="弹窗组件"></div><p class="cap"><b>系统弹窗组件</b>统一布局与按钮层级</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/bottom_tab_ios.png" alt="底部菜单栏"></div><p class="cap"><b>剪辑底部菜单栏</b>全部工具态</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/track_ios.png" alt="轨道组件"></div><p class="cap"><b>轨道组件</b>主轨道 / 多轨 / 指示条</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/slider_ios.png" alt="滑块组件"></div><p class="cap"><b>滑块 / 刻度尺</b>数值微调体系</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/track_indicator.png" alt="轨道指示条"></div><p class="cap"><b>轨道指示条</b>播放定位反馈</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/mask_ios.png" alt="遮罩组件"></div><p class="cap"><b>系统遮罩</b>弹层背景规范</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/icon_bottombar.png" alt="图标"></div><p class="cap"><b>图标库</b>线性图标统一栅格</p></div>
+    <div><div class="phone" style="border-radius:18px"><img src="assets/logo_light.png" alt="Logo"></div><p class="cap"><b>品牌 Logo</b>深浅双版 + 节日延展</p></div>
+  </div>
+
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><h4>🔄 单源同步</h4><p>样式与组件全部发布为 Figma Library，16 个设计域的 500+ 页面共享同一套变量，改一处全局生效。</p></div>
+    <div class="card"><h4>📐 双端差异化</h4><p>Android / iOS 组件平行维护（命名前缀区分），字号字重按各端规范微调，交互习惯互不妥协。</p></div>
+    <div class="card"><h4>🎨 渐变 Token 化</h4><p>主 / 次 / 红 / 橙红 / 黑五大渐变与品牌色全部 Token 化，运营视觉（节日订阅页）复用同一体系。</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ 尾页 ═══════════ -->
+<footer>
+  <img src="assets/logo_dark.png" alt="" style="height:56px;border-radius:14px;box-shadow:0 10px 40px rgba(176,92,242,.35);margin-bottom:26px">
+  <h3>Thanks for <em>Watching</em></h3>
+  <p>程家乐 · UI/UX 设计师 —— FotoPlay 双端体验设计 & 设计系统 2024–2026<br>
+  本作品集基于 Figma 设计源文件《FotoPlay 新版（含ios）》各板块最新设计页面整理生成</p>
+  <p style="margin-top:22px;color:var(--txt3);font-size:12.5px">Figma · Design System · Android / iOS · Light &amp; Dark 4.0</p>
+</footer>
+
+<script>
+// 被嵌入 iframe 时隐藏内部固定导航（外层站点已有导航）
+if (window.self !== window.top) {
+  const style = document.createElement('style');
+  style.textContent = 'nav{display:none!important}section{padding-top:70px!important}';
+  document.head.appendChild(style);
+}
+// 导航高亮
+const secs=[...document.querySelectorAll('section[id],footer')];
+const links=[...document.querySelectorAll('nav a[href^="#"]')];
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    const id='#'+e.target.id;
+    links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')===id));
+  }});
+},{rootMargin:'-40% 0px -55% 0px'});
+secs.forEach(s=>io.observe(s));
+// 图片淡入
+document.querySelectorAll('.phone img, .swatch img').forEach(im=>{
+  im.style.opacity=0; im.style.transition='opacity .6s';
+  im.onload=()=>requestAnimationFrame(()=>im.style.opacity=1);
+  if(im.complete) im.style.opacity=1;
+});
+</script>
+</body>
+</html>

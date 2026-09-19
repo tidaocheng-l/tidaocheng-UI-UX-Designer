@@ -1,0 +1,568 @@
+{
+ "MODULES": [
+  {
+   "slug": "onboarding-2",
+   "cn": "启动与引导",
+   "en": "Onboarding & First Run",
+   "tag": "01",
+   "desc": "从欢迎页到宝宝姓名录入的完整首次启动链路。用一句 \"Start from this moment — capture every beautiful part of your life\" 建立情感锚点，把冷启动变成一段仪式的开始。",
+   "points": [
+    "欢迎页用暖金渐变 + 婴儿影像建立第一印象",
+    "姓名录入即建档案，为后续时间轴打好数据基础",
+    "节日运营位（Halloween stickers）前置到首启，提升次日留存"
+   ],
+   "n": 4
+  },
+  {
+   "slug": "onboarding",
+   "cn": "启动页早期版本",
+   "en": "Legacy Splash",
+   "tag": "01a",
+   "desc": "早期探索版本，与定稿版对照可见信息密度与视觉重心的收敛过程。",
+   "points": [],
+   "n": 2
+  },
+  {
+   "slug": "home",
+   "cn": "首页与模板推荐",
+   "en": "Home & Template Discovery",
+   "tag": "02",
+   "desc": "首页承担\"创作入口 + 内容发现\"双职责。顶部 Create 提供 Photo / Video 双路径，下方以 Featured Layout 卡片流承载模板分发，配合节日主题运营位形成持续的内容新鲜度。",
+   "points": [
+    "Create / Drafts 双入口固定于拇指热区",
+    "Featured Layout 卡片用真实宝宝影像做样例，降低决策成本",
+    "模板分组：Colorful Frame / Studio Backdrop / Pregnant Journey / Birthday Message"
+   ],
+   "n": 2
+  },
+  {
+   "slug": "home-babyname",
+   "cn": "首页 · 宝宝姓名态",
+   "en": "Home · Named State",
+   "tag": "02a",
+   "desc": "完成宝宝姓名填写后的首页问候态，从 \"Welcomes You!\" 切换为 \"Hi, Maya!\"。",
+   "points": [],
+   "n": 1
+  },
+  {
+   "slug": "timeline",
+   "cn": "时间轴 · 首次进入",
+   "en": "Timeline · Empty State",
+   "tag": "03",
+   "desc": "空态用一张虚线占位卡 \"Click upload baby photo\" 引导创建第一本 Story Album，把空数据变成明确的下一步动作。",
+   "points": [],
+   "n": 2
+  },
+  {
+   "slug": "timeline-edit-new",
+   "cn": "时间轴与成长相册",
+   "en": "Timeline & Story Album",
+   "tag": "04",
+   "desc": "产品核心。以\"相册\"为记录单元，每本相册锚定一个日期与一句心情。编辑页同时支持 2 / 5 / 9 张及以上三种图片排布，并可在 Grid Layout 与 Horizontal Layout 之间切换。",
+   "points": [
+    "日期 + 宝宝月龄（2 years 3 months）双维度定位",
+    "Current Mood 心情描述 + Emoji 贴纸，把记录从\"存照片\"升级为\"讲故事\"",
+    "更多弹窗聚合 Edit Album Title / Slide Preview / Edit Capture Time / Edit Mood / Delete Album",
+    "删除相册带二次确认，避免误删不可逆的成长记录"
+   ],
+   "n": 17
+  },
+  {
+   "slug": "album-detail",
+   "cn": "相册详情与心情填写",
+   "en": "Album Detail & Mood",
+   "tag": "05",
+   "desc": "相册详情页的信息层级：日期与月龄在第一视线，图片网格占据主体，心情描述与操作区沉底。图片数量变化时布局自适应重排。",
+   "points": [
+    "Emoji 更换面板与心情文案共存",
+    "单张照片查看支持素材丢失态兜底",
+    "清空内容、二次进入编辑等分支状态均已覆盖"
+   ],
+   "n": 14
+  },
+  {
+   "slug": "album",
+   "cn": "相册与素材选择器",
+   "en": "Asset Picker",
+   "tag": "06",
+   "desc": "统一的素材选择器，Recent / All / Photo / Video / Material / GIF / Imported 多级筛选，支持多选、AI Cut 智能剪裁与按时间/地点排序。",
+   "points": [
+    "多选态底部固定 \"Next(n)\" 计数按钮",
+    "按地点分组（Toronto / Boulder / Karachi / Havana）",
+    "放大预览支持选中与未选中两种态"
+   ],
+   "n": 8
+  },
+  {
+   "slug": "photo-edit",
+   "cn": "图片编辑器",
+   "en": "Photo Editor",
+   "tag": "07",
+   "desc": "底部工具条按 Layout / Template / Style / Adjust / Ratio 组织，二级面板承载 filter / crop / background / border / text / sticker。素材进入选中态后切换为对象操作条（Swap / Effect / Crop / Mirror / Flip / Rotate / Zoom±）。",
+   "points": [
+    "工具条与对象操作条分层，避免功能堆叠",
+    "Pro 素材命中时以底部弹层拦截，而非直接禁用",
+    "退出时弹出 Saved To Drafts / Discard / Cancel 三选，保护创作成果"
+   ],
+   "n": 10
+  },
+  {
+   "slug": "photo-sticker",
+   "cn": "贴纸系统",
+   "en": "Sticker Library",
+   "tag": "08",
+   "desc": "贴纸库支持分类浏览、详情预览、下载与调色。Palette 面板可对单个贴纸改色，让素材复用率最大化。",
+   "points": [
+    "贴纸详情页含 Animation Stickers 动效分类",
+    "调色盘直接作用于当前贴纸实例"
+   ],
+   "n": 5
+  },
+  {
+   "slug": "photo-border",
+   "cn": "Pro 素材拦截",
+   "en": "Pro Gate",
+   "tag": "08a",
+   "desc": "Pro 素材被选中时，以 \"Remove watermark and save / Unlock unlimited access\" 双路径转化，并提供 Watch AD 的免费替代方案。",
+   "points": [],
+   "n": 1
+  },
+  {
+   "slug": "collage-swap",
+   "cn": "拼图交互引导",
+   "en": "Collage Interaction",
+   "tag": "09",
+   "desc": "用一次性浮层提示\"长按交换图片位置\"与\"双击画板重置图片\"，把隐式手势显性化。",
+   "points": [],
+   "n": 2
+  },
+  {
+   "slug": "video-edit",
+   "cn": "视频编辑器",
+   "en": "Video Editor",
+   "tag": "10",
+   "desc": "与图片编辑器同构的时间轴式编辑体验：Template / Opening / Effect / Photos / Duration / Ratio 六大维度，音乐库支持替换与编辑。",
+   "points": [
+    "音乐卡片展示曲名与作者（Happy indie Ukulele · james）",
+    "无音乐态提供 Add music 空位引导"
+   ],
+   "n": 5
+  },
+  {
+   "slug": "drafts",
+   "cn": "草稿箱",
+   "en": "Drafts",
+   "tag": "11",
+   "desc": "按 Photo / Video / GIF / Imported 分栏管理未完成作品，Select 进入批量模式，素材损坏时给出 Asset Missing 明确标识。",
+   "points": [
+    "分栏 Tab 与素材类型一一对应",
+    "损坏素材单独标注而非静默隐藏"
+   ],
+   "n": 3
+  },
+  {
+   "slug": "drafts-ai",
+   "cn": "AI 草稿",
+   "en": "AI Drafts",
+   "tag": "12",
+   "desc": "AI 生成任务独立成栏，用 Completed / Creating... / Failed 三态映射异步任务的真实生命周期。",
+   "points": [
+    "长按菜单支持 Delete / Rename / Show in editing / Save Local",
+    "生成中与失败态均可从草稿箱继续，任务不丢失"
+   ],
+   "n": 5
+  },
+  {
+   "slug": "ai-style",
+   "cn": "Baby AI Style",
+   "en": "Baby AI Style",
+   "tag": "13",
+   "desc": "AI 风格化创作模块。预设风格（Healing Trave / Eggshell Baby / Vintage Car）之外，提供自定义风格与提示词输入，产物可一键\"Make Similar\"继续衍生。",
+   "points": [
+    "异步轮询进度可视化（Image generating…20%）",
+    "灵感生成中 / 失败 / 结束重试三态完整",
+    "点数体系 My Points · Cost · Gain · Image Creation 透明可查",
+    "AI 产物统一附带免责声明"
+   ],
+   "n": 14
+  },
+  {
+   "slug": "logic-update",
+   "cn": "AI 逻辑更新",
+   "en": "AI Logic Update",
+   "tag": "13a",
+   "desc": "风格化选图前后的状态差异与创作中态，体现对交互分支的持续打磨。",
+   "points": [],
+   "n": 3
+  },
+  {
+   "slug": "export",
+   "cn": "导出面板",
+   "en": "Export Options",
+   "tag": "14",
+   "desc": "把导出参数一次摊开：Template / Effect / Music / Duration / Photos / Ratio / Resolution / Frames Rate / Size，并以 Watermark 行承载去水印转化。",
+   "points": [
+    "参数实时汇总（0.4MB / 16:9 / 1:1）",
+    "底部提示 \"Ads may appear during saving\" 做预期管理"
+   ],
+   "n": 1
+  },
+  {
+   "slug": "video-export",
+   "cn": "视频导出与去水印",
+   "en": "Video Export & Watermark",
+   "tag": "15",
+   "desc": "导出前置去水印决策：Watch AD to Unlock 与 Unlock Unlimited Access 并置，给免费用户留出通路。",
+   "points": [],
+   "n": 2
+  },
+  {
+   "slug": "export-share",
+   "cn": "导出结果与分享",
+   "en": "Export Result & Share",
+   "tag": "16",
+   "desc": "导出进行中以 \"Please don't close BabyGram or lock your screen\" 明确约束；完成后落到平台分享，Instagram / TikTok / YouTube / Messenger / WhatsApp 按尺寸差异动态出现。",
+   "points": [
+    "进度百分比明确到 80%",
+    "16:9 与 1:1 对应不同的分享平台集合"
+   ],
+   "n": 9
+  },
+  {
+   "slug": "profile",
+   "cn": "个人中心",
+   "en": "Baby Profile",
+   "tag": "17",
+   "desc": "Baby Profile 承担档案管理：Name / Gender / Birthday-Due Date 为必填项，About 承载宝宝故事，头像支持从相册选取并裁剪。",
+   "points": [
+    "必填项与保存按钮的置灰状态联动",
+    "头像裁剪复用相册选择器，链路一致"
+   ],
+   "n": 12
+  },
+  {
+   "slug": "settings",
+   "cn": "设置与订阅",
+   "en": "Settings & Subscription",
+   "tag": "18",
+   "desc": "设置页兼顾工具属性与商业化：成就系统（Collected 3 Stickers）、App Icon、11 种语言、存储路径，以及 Pro 订阅、恢复购买与广告个性化开关。",
+   "points": [
+    "未订阅 / 已订阅两态分别设计",
+    "Beta 招募入口与 Get Featured 形成社区运营闭环"
+   ],
+   "n": 3
+  },
+  {
+   "slug": "dialog",
+   "cn": "弹窗与动效",
+   "en": "Dialogs & Motion",
+   "tag": "19",
+   "desc": "全局弹窗与过度动效规范，统一各模块的浮层出现方式与时间曲线。",
+   "points": [],
+   "n": 2
+  },
+  {
+   "slug": "timeline-guide",
+   "cn": "时间轴引导提示",
+   "en": "Timeline Coach Marks",
+   "tag": "19a",
+   "desc": "首次进入时间轴时的引导提示，降低新功能的学习成本。",
+   "points": [],
+   "n": 1
+  },
+  {
+   "slug": "misc",
+   "cn": "其他探索",
+   "en": "Explorations",
+   "tag": "20",
+   "desc": "设计过程中的中间态与探索稿，保留完整的设计推演痕迹。",
+   "points": [],
+   "n": 1
+  }
+ ],
+ "FACTS": [
+  {
+   "v": "129",
+   "k": "高保真界面",
+   "s": "depth-1 screens"
+  },
+  {
+   "v": "25",
+   "k": "设计模块",
+   "s": "sections"
+  },
+  {
+   "v": "55,336",
+   "k": "图层节点",
+   "s": "layers"
+  },
+  {
+   "v": "4,065",
+   "k": "文字图层",
+   "s": "text layers"
+  },
+  {
+   "v": "6,065",
+   "k": "组件实例",
+   "s": "instances"
+  },
+  {
+   "v": "390×844",
+   "k": "基准画板",
+   "s": "iPhone logical px"
+  }
+ ],
+ "SECTIONS": [
+  {
+   "slug": "onboarding-2",
+   "thumbs": [
+    "shots/onboarding-2-01.webp",
+    "shots/onboarding-2-02.webp",
+    "shots/onboarding-2-03.webp",
+    "shots/onboarding-2-04.webp"
+   ]
+  },
+  {
+   "slug": "onboarding",
+   "thumbs": [
+    "shots/onboarding-01.webp",
+    "shots/onboarding-02.webp"
+   ]
+  },
+  {
+   "slug": "home",
+   "thumbs": [
+    "shots/home-01.webp",
+    "shots/home-02.webp"
+   ]
+  },
+  {
+   "slug": "home-babyname",
+   "thumbs": [
+    "shots/home-babyname-01.webp"
+   ]
+  },
+  {
+   "slug": "timeline",
+   "thumbs": [
+    "shots/timeline-01.webp",
+    "shots/timeline-02.webp"
+   ]
+  },
+  {
+   "slug": "timeline-edit-new",
+   "thumbs": [
+    "shots/timeline-edit-new-01.webp",
+    "shots/timeline-edit-new-02.webp",
+    "shots/timeline-edit-new-03.webp",
+    "shots/timeline-edit-new-04.webp",
+    "shots/timeline-edit-new-05.webp",
+    "shots/timeline-edit-new-06.webp",
+    "shots/timeline-edit-new-07.webp",
+    "shots/timeline-edit-new-08.webp",
+    "shots/timeline-edit-new-09.webp",
+    "shots/timeline-edit-new-10.webp",
+    "shots/timeline-edit-new-11.webp",
+    "shots/timeline-edit-new-12.webp",
+    "shots/timeline-edit-new-13.webp",
+    "shots/timeline-edit-new-14.webp"
+   ]
+  },
+  {
+   "slug": "album-detail",
+   "thumbs": [
+    "shots/album-detail-01.webp",
+    "shots/album-detail-02.webp",
+    "shots/album-detail-03.webp",
+    "shots/album-detail-04.webp",
+    "shots/album-detail-05.webp",
+    "shots/album-detail-06.webp",
+    "shots/album-detail-07.webp",
+    "shots/album-detail-08.webp",
+    "shots/album-detail-09.webp",
+    "shots/album-detail-10.webp",
+    "shots/album-detail-11.webp",
+    "shots/album-detail-12.webp",
+    "shots/album-detail-13.webp",
+    "shots/album-detail-14.webp"
+   ]
+  },
+  {
+   "slug": "album",
+   "thumbs": [
+    "shots/album-01.webp",
+    "shots/album-02.webp",
+    "shots/album-03.webp",
+    "shots/album-04.webp",
+    "shots/album-05.webp",
+    "shots/album-06.webp",
+    "shots/album-07.webp",
+    "shots/album-08.webp"
+   ]
+  },
+  {
+   "slug": "photo-edit",
+   "thumbs": [
+    "shots/photo-edit-01.webp",
+    "shots/photo-edit-02.webp",
+    "shots/photo-edit-03.webp",
+    "shots/photo-edit-04.webp",
+    "shots/photo-edit-05.webp",
+    "shots/photo-edit-06.webp",
+    "shots/photo-edit-07.webp",
+    "shots/photo-edit-08.webp",
+    "shots/photo-edit-09.webp",
+    "shots/photo-edit-10.webp"
+   ]
+  },
+  {
+   "slug": "photo-sticker",
+   "thumbs": [
+    "shots/photo-sticker-01.webp",
+    "shots/photo-sticker-02.webp",
+    "shots/photo-sticker-03.webp",
+    "shots/photo-sticker-04.webp",
+    "shots/photo-sticker-05.webp"
+   ]
+  },
+  {
+   "slug": "photo-border",
+   "thumbs": [
+    "shots/photo-border-01.webp"
+   ]
+  },
+  {
+   "slug": "collage-swap",
+   "thumbs": [
+    "shots/collage-swap-01.webp",
+    "shots/collage-swap-02.webp"
+   ]
+  },
+  {
+   "slug": "video-edit",
+   "thumbs": [
+    "shots/video-edit-01.webp",
+    "shots/video-edit-02.webp",
+    "shots/video-edit-03.webp",
+    "shots/video-edit-04.webp",
+    "shots/video-edit-05.webp"
+   ]
+  },
+  {
+   "slug": "drafts",
+   "thumbs": [
+    "shots/drafts-01.webp",
+    "shots/drafts-02.webp",
+    "shots/drafts-03.webp"
+   ]
+  },
+  {
+   "slug": "drafts-ai",
+   "thumbs": [
+    "shots/drafts-ai-01.webp",
+    "shots/drafts-ai-02.webp",
+    "shots/drafts-ai-03.webp",
+    "shots/drafts-ai-04.webp",
+    "shots/drafts-ai-05.webp"
+   ]
+  },
+  {
+   "slug": "ai-style",
+   "thumbs": [
+    "shots/ai-style-01.webp",
+    "shots/ai-style-02.webp",
+    "shots/ai-style-03.webp",
+    "shots/ai-style-04.webp",
+    "shots/ai-style-05.webp",
+    "shots/ai-style-06.webp",
+    "shots/ai-style-07.webp",
+    "shots/ai-style-08.webp",
+    "shots/ai-style-09.webp",
+    "shots/ai-style-10.webp",
+    "shots/ai-style-11.webp",
+    "shots/ai-style-12.webp",
+    "shots/ai-style-13.webp",
+    "shots/ai-style-14.webp"
+   ]
+  },
+  {
+   "slug": "logic-update",
+   "thumbs": [
+    "shots/logic-update-01.webp",
+    "shots/logic-update-02.webp",
+    "shots/logic-update-03.webp"
+   ]
+  },
+  {
+   "slug": "export",
+   "thumbs": [
+    "shots/export-01.webp"
+   ]
+  },
+  {
+   "slug": "video-export",
+   "thumbs": [
+    "shots/video-export-01.webp",
+    "shots/video-export-02.webp"
+   ]
+  },
+  {
+   "slug": "export-share",
+   "thumbs": [
+    "shots/export-share-01.webp",
+    "shots/export-share-02.webp",
+    "shots/export-share-03.webp",
+    "shots/export-share-04.webp",
+    "shots/export-share-05.webp",
+    "shots/export-share-06.webp",
+    "shots/export-share-07.webp",
+    "shots/export-share-08.webp",
+    "shots/export-share-09.webp"
+   ]
+  },
+  {
+   "slug": "profile",
+   "thumbs": [
+    "shots/profile-01.webp",
+    "shots/profile-02.webp",
+    "shots/profile-03.webp",
+    "shots/profile-04.webp",
+    "shots/profile-05.webp",
+    "shots/profile-06.webp",
+    "shots/profile-07.webp",
+    "shots/profile-08.webp",
+    "shots/profile-09.webp",
+    "shots/profile-10.webp",
+    "shots/profile-11.webp",
+    "shots/profile-12.webp"
+   ]
+  },
+  {
+   "slug": "settings",
+   "thumbs": [
+    "shots/settings-01.webp",
+    "shots/settings-02.webp",
+    "shots/settings-03.webp"
+   ]
+  },
+  {
+   "slug": "dialog",
+   "thumbs": [
+    "shots/dialog-01.webp",
+    "shots/dialog-02.webp"
+   ]
+  },
+  {
+   "slug": "timeline-guide",
+   "thumbs": [
+    "shots/timeline-guide-01.webp"
+   ]
+  },
+  {
+   "slug": "misc",
+   "thumbs": [
+    "shots/misc-01.webp"
+   ]
+  }
+ ]
+}
