@@ -66,7 +66,7 @@ const portfolioTagLabels = {
 const portfolioWorkCatalog = {
   "personal-site": {
     href: "work-detail.html",
-    image: "./assets/work-detail-hero.png",
+    image: "./assets/work-detail-hero.webp",
     imageWidth: 2400,
     imageHeight: 970,
     title: "我的个人网站，是怎么从一个想法变成现实的",
