@@ -13,7 +13,8 @@
   --figma:#F24E1E; --figma2:#A259FF;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; scrollbar-width:none}
+html::-webkit-scrollbar{display:none; width:0; height:0}
 body{margin:0; background:var(--bg); color:var(--txt);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
   font-size:15px; line-height:1.75; letter-spacing:.01em; -webkit-font-smoothing:antialiased;}
