@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FotoCollage · UI 作品集 / AI Photo Studio</title>
+<meta name="description" content="FotoCollage — AI 照片拼贴与修图 App 的完整 UI 作品集:18 个设计模块、30+ 组件变体、深浅双主题、季节换肤系统。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+<!-- ============ scroll progress ============ -->
+<div class="progress"><i id="bar"></i></div>
+
+<!-- ============ nav ============ -->
+<header class="nav">
+  <a class="brand" href="#top"><span class="dot"></span>FotoCollage</a>
+  <nav class="nav-links">
+    <a href="#overview">项目概览</a>
+    <a href="#system">设计系统</a>
+    <a href="#index">模块索引</a>
+    <a href="#modules">界面全览</a>
+    <a href="#states">状态设计</a>
+  </nav>
+  <span class="nav-badge">UI Portfolio</span>
+</header>
+
+<main id="top">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse"></span>AI Photo Studio · iOS / Android</div>
+      <h1>FotoCollage</h1>
+      <p class="hero-sub">把 AI 装进拼贴,把修复变轻一点。<br>
+        一款 AI 照片拼贴与修图 App — 以「季节换肤的首页」为情感锚点,串联文生图对话流、AI 换装 / 高清修复 / 智能擦除等创作闭环。
+      </p>
+      <div class="hero-meta">
+        <div><strong>18</strong><span>设计模块</span></div>
+        <div><strong>30+</strong><span>组件变体</span></div>
+        <div><strong>390×844</strong><span>基准画板</span></div>
+        <div><strong>2</strong><span>深浅主题</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="flank flank-left">
+        <div class="flank-item"><span class="flank-dot"></span><div><code>01</code><strong>5 套季节主题</strong><em>日常 / 春 / 冬 / 情人节 / 圣诞</em></div></div>
+        <div class="flank-item"><span class="flank-dot"></span><div><code>02</code><strong>8 宫格金刚区</strong><em>Editor · Template · DressUp …</em></div></div>
+        <div class="flank-item"><span class="flank-dot"></span><div><code>03</code><strong>双创作入口</strong><em>Collage / Freestyle</em></div></div>
+      </div>
+
+      <div class="showcase-wrap">
+        <div class="showcase-glow"></div>
+        <div class="showcase">
+          <img src="assets/cards/home_daily.png" alt="FotoCollage 首页 · 日常主题">
+        </div>
+        <div class="showcase-chip chip-a">Featured Layout 模板流</div>
+        <div class="showcase-chip chip-b">暖金渐变 · 拼贴手作感</div>
+      </div>
+
+      <div class="flank flank-right">
+        <div class="flank-item"><span class="flank-dot"></span><div><code>04</code><strong>AI 文生图对话</strong><em>Style 预设 · 灵感回填</em></div></div>
+        <div class="flank-item"><span class="flank-dot"></span><div><code>05</code><strong>3 大 AI 工具</strong><em>换装 / 高清修复 / 擦除</em></div></div>
+        <div class="flank-item"><span class="flank-dot"></span><div><code>06</code><strong>积分订阅闭环</strong><em>Pro 金 · 撕票弹窗</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">向下滚动 &darr;</div>
+</section>
+
+<!-- ============================================================
+     01 · OVERVIEW  —— 编辑式导读 + 台账
+     ============================================================ -->
+<section class="sec" id="overview">
+  <div class="sec-head reveal">
+    <span class="sec-no">01</span>
+    <div class="sec-titles"><span class="sec-en">Overview</span><h2>项目概览</h2></div>
+    <span class="sec-ghost">OV</span>
+  </div>
+
+  <div class="ov-grid">
+    <div class="ov-lead reveal">
+      <p class="lead-text">FotoCollage 面向轻量修图与拼贴用户,把<b>「工具」包装成「创作」</b>——同一套首页骨架,通过背景层 + 装饰元素 + 节日运营位,即可在五套季节主题之间零成本切换。</p>
+      <p class="lead-text">整个档案围绕三条主线展开:<b>降低创作门槛</b>(首页固定入口、Ai Style 预设、灵感一键回填)、<b>深浅主题分离</b>(AI 工具沉入深色画布,情绪化页面用浅色渐变,组件变体独立维护)、<b>不阻断商业转化</b>(Pro 提示卡固定在决策终点而非开端)。</p>
+    </div>
+
+    <aside class="ledger reveal" aria-label="项目台账">
+      <h4 class="ledger-cap">Archive Ledger</h4>
+      <div class="ledger-row"><span>设计模块 <em>sections</em></span><i></i><b>18</b></div>
+      <div class="ledger-row"><span>组件变体 <em>variants</em></span><i></i><b>30+</b></div>
+      <div class="ledger-row"><span>节日主题 <em>themes</em></span><i></i><b>5</b></div>
+      <div class="ledger-row"><span>深浅主题 <em>light / dark</em></span><i></i><b>2</b></div>
+      <div class="ledger-row"><span>基准画板 <em>frame</em></span><i></i><b>390×844</b></div>
+      <div class="ledger-row"><span>变现弹窗 <em>paywall</em></span><i></i><b>4</b></div>
+    </aside>
+  </div>
+
+  <div class="ov-principles">
+    <div class="p-card reveal">
+      <span class="p-no">P·1</span>
+      <h4>降低创作门槛</h4>
+      <p>首页固定双入口 + Ai Style 风格预设 + 灵感一键回填,把"怎么开始"这个最大流失点直接焊死在首屏。</p>
+    </div>
+    <div class="p-card reveal">
+      <span class="p-no">P·2</span>
+      <h4>深浅主题分离</h4>
+      <p>AI 工具页统一深色画布以保证沉浸;情绪化页面(修复 / 节日)用浅色渐变,两套组件变体独立维护互不污染。</p>
+    </div>
+    <div class="p-card reveal">
+      <span class="p-no">P·3</span>
+      <h4>不阻断商业化</h4>
+      <p>Pro 提示卡固定在决策终点而非开端;积分耗尽给软提示与 Claim points 兜底,付费永远有退路。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 · DESIGN SYSTEM —— Tab 面板
+     ============================================================ -->
+<section class="sec sec-alt" id="system">
+  <div class="sec-head reveal">
+    <span class="sec-no">02</span>
+    <div class="sec-titles"><span class="sec-en">Design System</span><h2>设计系统</h2></div>
+    <span class="sec-ghost">DS</span>
+  </div>
+
+  <div class="tabs reveal" data-tab-group="sys">
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn on" data-panel="sys-color">色彩</button>
+      <button class="tab-btn" data-panel="sys-grad">渐变</button>
+      <button class="tab-btn" data-panel="sys-type">字阶</button>
+      <button class="tab-btn" data-panel="sys-shape">圆角 &amp; 阴影</button>
+    </div>
+
+    <div class="tab-panel on" id="sys-color">
+      <p class="tab-desc">品牌红 <code>#F55574</code> 是唯一主行动色,Pro 权益用金色 <code>#A87024</code> 形成第二色域;AI 创作场景统一沉入深色画布 <code>#121114</code>,工具页与节日页面则使用浅色渐变,四个色域互不越界。</p>
+      <div class="sw-rows">
+        <div class="sw-row"><i style="background:#FFFFFF"></i><code>#FFFFFF</code><b>Canvas</b><span>卡片与内容底</span></div>
+        <div class="sw-row"><i style="background:#FAFAFA"></i><code>#FAFAFA</code><b>Surface</b><span>次级容器</span></div>
+        <div class="sw-row"><i style="background:#2B2B2B"></i><code>#2B2B2B</code><b>Line 700</b><span>深色底描边</span></div>
+        <div class="sw-row"><i style="background:#444444"></i><code>#444444</code><b>Gray 500</b><span>分组背景</span></div>
+        <div class="sw-row"><i style="background:#121114"></i><code>#121114</code><b>Ink 900</b><span>AI 工具画布</span></div>
+        <div class="sw-row"><i style="background:#1F1F1F"></i><code>#1F1F1F</code><b>Ink 800</b><span>深色面板</span></div>
+        <div class="sw-row"><i style="background:#FF5A5F"></i><code>#FF5A5F</code><b>Coral 500</b><span>品牌主色 · 行动点</span></div>
+        <div class="sw-row"><i style="background:#F55574"></i><code>#F55574</code><b>Coral 600</b><span>主色深态</span></div>
+        <div class="sw-row"><i style="background:#F87A6E"></i><code>#F87A6E</code><b>Coral 400</b><span>主色浅态</span></div>
+        <div class="sw-row"><i style="background:#A87024"></i><code>#A87024</code><b>Gold 700</b><span>Pro 权益金</span></div>
+        <div class="sw-row"><i style="background:linear-gradient(135deg,#728DFC,#5945F4)"></i><code>728DFC→5945F4</code><b>AI Blue</b><span>Pro AI 订阅按钮</span></div>
+        <div class="sw-row"><i style="background:#9747FF"></i><code>#9747FF</code><b>Violet 500</b><span>组件库标注</span></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="sys-grad">
+      <p class="tab-desc">渐变承担氛围:暖金用于运营与节日,品牌红渐变是常态行动点,AI 工具深色渐隐用于大图上的文字兜底可读性。</p>
+      <div class="grad-strip">
+        <figure class="grad" style="background:linear-gradient(135deg,#F87A6E,#F55574)"><figcaption>品牌红 · 行动点</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(135deg,#F55574,#FF5A5F)"><figcaption>主色全幅</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(157deg,#728DFC,#5945F4)"><figcaption>AI 蓝紫 · Pro</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(135deg,#F8E2C4,#EFC98A)"><figcaption>暖金 · 节日底</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(174deg,#FFFFFA,#F0FAFF)"><figcaption>冷白 · 浅色工具页</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(142deg,#FFFDEE,#FFFFFF)"><figcaption>暖白 · 怀旧修复</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(180deg,#121114,#09090A)"><figcaption>深夜 · AI 创作</figcaption></figure>
+        <figure class="grad" style="background:linear-gradient(180deg,#F55574,rgba(245,85,116,0))"><figcaption>主色渐隐蒙版</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="sys-type">
+      <p class="tab-desc">字族以 Roboto 与 Inter 为主,运营大标题使用 Inter ExtraBold 加负字距;正文锁定 14–16px,辅助 12px,标签 10–11px,形成稳定的三档阅读节奏。</p>
+      <div class="type-spec">
+        <div class="ts-row"><span class="ts-demo" style="font-size:34px">Aa</span><code>48</code><b>Display L</b><span>运营大标题 / 欢迎页</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:30px">Aa</span><code>32</code><b>Display M</b><span>模块主标题</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:22px">Aa</span><code>24</code><b>Title L</b><span>弹窗 / 详情页标题</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:19px">Aa</span><code>20</code><b>Title M</b><span>卡片主标题</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:17px">Aa</span><code>18</code><b>Title S</b><span>分组标题</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:15px">Aa</span><code>16</code><b>Body L</b><span>面板标题 / 按钮</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:13px">Aa</span><code>14</code><b>Body M</b><span>正文 / 列表项</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:11px">Aa</span><code>12</code><b>Caption</b><span>辅助说明 / Tab</span></div>
+        <div class="ts-row"><span class="ts-demo" style="font-size:10px">Aa</span><code>10</code><b>Micro</b><span>Pro 角标 / 标签</span></div>
+      </div>
+      <div class="fam-row">
+        <span>Roboto<em>title &amp; body</em></span>
+        <span>Inter<em>secondary body</em></span>
+        <span>SF Pro<em>system</em></span>
+        <span>JetBrains Mono<em>code · spec</em></span>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="sys-shape">
+      <p class="tab-desc">8–12px 是高频主力(按钮、输入、卡片),19–22px 用于手机设备画板,弹层胶囊 24–28px,Pro 主按钮 55px 胶囊强化仪式感;阴影强调暗色环境下的悬停可点击性。</p>
+      <div class="shape-grid">
+        <div class="rad-col">
+          <h5>Radius</h5>
+          <div class="rad"><div class="rad-demo" style="border-radius:2px"></div><code>2px</code><span>hairline / 分割</span></div>
+          <div class="rad"><div class="rad-demo" style="border-radius:8px"></div><code>8px</code><span>控件默认</span></div>
+          <div class="rad"><div class="rad-demo" style="border-radius:12px"></div><code>12px</code><span>卡片</span></div>
+          <div class="rad"><div class="rad-demo" style="border-radius:19px"></div><code>19px</code><span>手机画板</span></div>
+          <div class="rad"><div class="rad-demo" style="border-radius:24px"></div><code>24px</code><span>弹层</span></div>
+          <div class="rad"><div class="rad-demo" style="border-radius:28px"></div><code>55px</code><span>主行动胶囊</span></div>
+        </div>
+        <div class="rad-col">
+          <h5>Elevation</h5>
+          <div class="rad"><div class="rad-demo sh" style="box-shadow:0 1px 2px rgba(0,0,0,.06)"></div><code>0 1 2 / 6%</code><span>hairline · 内嵌元素</span></div>
+          <div class="rad"><div class="rad-demo sh" style="box-shadow:0 4px 4px rgba(0,0,0,.25)"></div><code>0 4 4 / 25%</code><span>card · 设备阴影</span></div>
+          <div class="rad"><div class="rad-demo sh" style="box-shadow:0 8px 18px rgba(0,0,0,.35)"></div><code>0 8 18 / 35%</code><span>overlay · 浮层</span></div>
+          <div class="rad"><div class="rad-demo sh" style="box-shadow:0 22px 46px -22px rgba(0,0,0,.95)"></div><code>0 22 46 -22 / 95%</code><span>popover · 弹窗</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 · MODULE INDEX —— 目录式索引 + 悬停预览
+     ============================================================ -->
+<section class="sec" id="index">
+  <div class="sec-head reveal">
+    <span class="sec-no">03</span>
+    <div class="sec-titles"><span class="sec-en">Module Index</span><h2>模块索引</h2></div>
+    <span class="sec-ghost">IDX</span>
+  </div>
+  <p class="sec-lead">十六个功能簇的完整目录。<b>悬停任意条目可预览对应界面</b>,点击跳转到该模块的完整展示。</p>
+
+  <div class="toc">
+    <a class="toc-row reveal" href="#m-home" data-img="assets/cards/home_daily.png">
+      <span class="toc-no">01</span><span class="toc-cn">首页主题优化</span><span class="toc-en">Home · Seasonal Skins</span><i class="toc-dots"></i><span class="toc-n">5 <em>主题</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-drafts" data-img="assets/cards/draft_list.png">
+      <span class="toc-no">02</span><span class="toc-cn">草稿箱</span><span class="toc-en">Drafts · Waterfall</span><i class="toc-dots"></i><span class="toc-n">3 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-settings" data-img="assets/cards/settings_subscribed.png">
+      <span class="toc-no">03</span><span class="toc-cn">设置</span><span class="toc-en">Settings &amp; Pro</span><i class="toc-dots"></i><span class="toc-n">3 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-badges" data-img="assets/cards/trial_popup.png">
+      <span class="toc-no">04</span><span class="toc-cn">角标与按钮</span><span class="toc-en">Badges &amp; Buttons</span><i class="toc-dots"></i><span class="toc-n">5 <em>组件</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-subscription" data-img="assets/cards/trial_popup.png">
+      <span class="toc-no">05</span><span class="toc-cn">订阅弹窗</span><span class="toc-en">Paywall &amp; Trial</span><i class="toc-dots"></i><span class="toc-n">4 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-credit" data-img="assets/cards/trial_popup.png">
+      <span class="toc-no">06</span><span class="toc-cn">积分体系</span><span class="toc-en">Credit History</span><i class="toc-dots"></i><span class="toc-n">3 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-login" data-img="assets/cards/login_google.png">
+      <span class="toc-no">07</span><span class="toc-cn">登录流程</span><span class="toc-en">Google OAuth Flow</span><i class="toc-dots"></i><span class="toc-n">5 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-chat" data-img="assets/cards/chat_t2i.png">
+      <span class="toc-no">08</span><span class="toc-cn">AI Chat · 文生图</span><span class="toc-en">AI Chat · Text to Image</span><i class="toc-dots"></i><span class="toc-n">7 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-inspire" data-img="assets/cards/inspire_ready.png">
+      <span class="toc-no">09</span><span class="toc-cn">灵感生成状态</span><span class="toc-en">Inspire · State Matrix</span><i class="toc-dots"></i><span class="toc-n">4 <em>状态</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-hd" data-img="assets/cards/hd_repair.png">
+      <span class="toc-no">10</span><span class="toc-cn">高清修复</span><span class="toc-en">HD Restore</span><i class="toc-dots"></i><span class="toc-n">3 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-dressup" data-img="assets/cards/dressup.png">
+      <span class="toc-no">11</span><span class="toc-cn">AI 换装</span><span class="toc-en">AI Outfit</span><i class="toc-dots"></i><span class="toc-n">4 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal" href="#m-erase" data-img="assets/cards/erase.png">
+      <span class="toc-no">12</span><span class="toc-cn">智能擦除</span><span class="toc-en">Smart Erase</span><i class="toc-dots"></i><span class="toc-n">1 <em>屏</em></span>
+    </a>
+    <a class="toc-row reveal dim" href="#modules" data-img="assets/cards/settings_sub.png">
+      <span class="toc-no">13</span><span class="toc-cn">设置图标组件</span><span class="toc-en">Settings · Icon Set</span><i class="toc-dots"></i><span class="toc-n">30 <em>变体</em></span>
+    </a>
+    <a class="toc-row reveal dim" href="#modules" data-img="assets/cards/home_daily.png">
+      <span class="toc-no">14</span><span class="toc-cn">状态栏与首页键</span><span class="toc-en">Status Bar</span><i class="toc-dots"></i><span class="toc-n">4 <em>变体</em></span>
+    </a>
+    <a class="toc-row reveal dim" href="#modules" data-img="assets/cards/draft_list.png">
+      <span class="toc-no">15</span><span class="toc-cn">页面切换动画</span><span class="toc-en">Page Transitions</span><i class="toc-dots"></i><span class="toc-n">3 <em>帧</em></span>
+    </a>
+    <a class="toc-row reveal dim" href="#modules" data-img="assets/cards/dressup.png">
+      <span class="toc-no">16</span><span class="toc-cn">素材按钮 5 态</span><span class="toc-en">Material Buttons</span><i class="toc-dots"></i><span class="toc-n">6 <em>组件</em></span>
+    </a>
+  </div>
+  <div class="toc-preview" id="tocPreview"><img src="" alt=""></div>
+</section>
+
+<!-- ============================================================
+     04 · ALL SCREENS —— 杂志式条带
+     ============================================================ -->
+<section class="sec sec-alt" id="modules">
+  <div class="sec-head reveal">
+    <span class="sec-no">04</span>
+    <div class="sec-titles"><span class="sec-en">All Screens</span><h2>界面全览</h2></div>
+    <span class="sec-ghost">SCR</span>
+  </div>
+  <p class="sec-lead">按功能簇组织的全部高保真界面。点击任意界面可查看大图。</p>
+
+  <section class="mod" id="m-home">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">01</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Home · Seasonal Skins</b><span>5 主题</span></div>
+        <h3>首页主题优化</h3>
+        <p>同一套首页骨架,在 5 种主题间切换:日常(暖金渐变) / 春(青蓝渐变) / 冬(冰蓝夜空) / 情人节(粉) / 圣诞节(雪花 + 专题模板运营位)。设计变更仅替换背景层与装饰元素,组件库零改动。</p>
+        <ul class="mod-points">
+          <li>双入口固定于顶部:Collage 自由拼 / Freestyle 创作</li>
+          <li>8 宫格金刚区固定功能位,节日期间只换装饰不换布局</li>
+          <li>Featured Layout 模板流用真实样例图片,降低决策成本</li>
+          <li>节日运营位挂底部,不打断主浏览动线</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/home_daily.png" data-name="首页 · 日常主题"><img src="assets/cards/home_daily.png" alt="首页日常主题" loading="lazy"><figcaption><b>日常</b><span>暖金渐变</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/home_spring.png" data-name="首页 · 春季主题"><img src="assets/cards/home_spring.png" alt="首页春季主题" loading="lazy"><figcaption><b>春季</b><span>青蓝渐变</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/home_winter.png" data-name="首页 · 冬季主题"><img src="assets/cards/home_winter.png" alt="首页冬主题" loading="lazy"><figcaption><b>冬季</b><span>冰蓝夜空</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/home_valentine.png" data-name="首页 · 情人节主题"><img src="assets/cards/home_valentine.png" alt="首页情人节主题" loading="lazy"><figcaption><b>情人节</b><span>粉红氛围</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/home_christmas.png" data-name="首页 · 圣诞节主题"><img src="assets/cards/home_christmas.png" alt="首页圣诞节主题" loading="lazy"><figcaption><b>圣诞节</b><span>圣诞运营位</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-drafts">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">02</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Drafts · Waterfall</b><span>3 screens</span></div>
+        <h3>草稿箱</h3>
+        <p>Drafts / Ai Works 双 Tab 承载草稿箱:双列瀑布流按日期倒序,每张卡片带更多操作入口;Ai Works 单独管理 AI 生成作品;空状态提供插画与主行动按钮。</p>
+        <ul class="mod-points">
+          <li>Drafts / Ai Works 双 Tab 切换,分别管理拼贴草稿与 AI 作品</li>
+          <li>瀑布流而非等高栅格,适配不同尺寸的拼贴草稿</li>
+          <li>长按卡片弹出"更多操作"菜单(编辑 / 复制 / 删除)</li>
+          <li>空态插画 + 主行动按钮:"创建你的第一张拼贴"</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/draft_list.png" data-name="草稿箱 · Drafts"><img src="assets/cards/draft_list.png" alt="草稿箱 Drafts 列表" loading="lazy"><figcaption><b>Drafts</b><span>拼贴草稿 · 双列瀑布流</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/draft_aiworks.png" data-name="草稿箱 · Ai Works"><img src="assets/cards/draft_aiworks.png" alt="Ai Works 列表" loading="lazy"><figcaption><b>Ai Works</b><span>AI 生成作品 · 更多操作</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/draft_empty.png" data-name="草稿箱 · 空状态"><img src="assets/cards/draft_empty.png" alt="草稿箱空状态" loading="lazy"><figcaption><b>空状态</b><span>插画 + 引导创建</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-settings">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">03</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Settings &amp; Pro</b><span>3 screens</span></div>
+        <h3>设置</h3>
+        <p>设置页承载双重身份:顶部 FotoCollage Pro 权益卡分两态——已订阅态用金色渐变卡展示会员权益,试用态以"7-Day Free trial"角标引导转化;下方分组列表覆盖偏好与社区入口。</p>
+        <ul class="mod-points">
+          <li>权益卡用品牌金渐变 + 拟物阴影,占据首屏视觉焦点</li>
+          <li>分组列表使用彩色应用图标,提升整页识别度</li>
+          <li>App Icon 玩法支持圣诞 / 春节限定皮肤</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/settings_subscribed.png" data-name="设置 · 已订阅"><img src="assets/cards/settings_subscribed.png" alt="设置已订阅" loading="lazy"><figcaption><b>已订阅</b><span>Pro 权益卡 · 金色渐变</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/settings_trial.png" data-name="设置 · 七天免费试用"><img src="assets/cards/settings_trial.png" alt="设置七天免费试用" loading="lazy"><figcaption><b>7-Day Free trial</b><span>试用态 · 转化引导</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-badges">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">04</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Badges &amp; Buttons</b><span>5 组件</span></div>
+        <h3>角标与按钮</h3>
+        <p>Pro 角标是产品里最高频的"转化触发器",围绕它沉淀 5 种变体:常规 Pro / 气泡 Pro / Free Trial 撕票 / 终身会员 / 节日限定,统一金色渐变 + 透明白描边规范。</p>
+        <ul class="mod-points">
+          <li>常规 Pro 角标 17px 圆角,小尺寸内嵌图标空间充足</li>
+          <li>气泡 Pro 角标带尾巴,用于 IM 卡片头部</li>
+          <li>撕票 Free Trial 84×24,虚线 + 撕痕模拟</li>
+          <li>按钮 = Pro 主体(蓝紫 120×50) + Pro 解锁(金色 160×50)</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/trial_popup.png" data-name="订阅弹窗 · 撕票样式"><img src="assets/cards/trial_popup.png" alt="订阅弹窗" loading="lazy"><figcaption><b>撕票弹窗</b><span>Pro 角标</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-subscription">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">05</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Paywall &amp; Trial</b><span>4 屏</span></div>
+        <h3>订阅弹窗</h3>
+        <p>围绕"不打断商业化"的克制原则,4 种订阅弹窗变体:Holiday Sale 30% OFF 撕票 / 7-Day Free Trial 双套餐 / 2026 元旦限定 / 订阅对比表;合规细则始终在底栏完整呈现。</p>
+        <ul class="mod-points">
+          <li>撕票样式虚线分割 + 折扣百分比,节日运营复用率最高</li>
+          <li>双套餐(年付 / 月付)胶囊 Tab,选中态主色描边</li>
+          <li>底部细则固定 Restore / Terms / Privacy</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/trial_popup.png" data-name="订阅 · Holiday Sale"><img src="assets/cards/trial_popup.png" alt="订阅弹窗" loading="lazy"><figcaption><b>Holiday Sale</b><span>30% OFF</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/trial_popup.png" data-name="订阅 · 双套餐"><img src="assets/cards/trial_popup.png" alt="订阅双套餐" loading="lazy"><figcaption><b>双套餐</b><span>Free Trial</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-credit">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">06</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Credit History</b><span>3 屏</span></div>
+        <h3>积分体系</h3>
+        <p>积分是 AI 工具的计量单位。点数消耗页用时间线呈现,领取积分弹窗(单卡 / 双卡对比)作为运营活动载体,订阅入口深度联动。</p>
+        <ul class="mod-points">
+          <li>点数消耗时间线:日 / 月分组,支持左右切换月份</li>
+          <li>领取积分弹窗 1 卡 / 2 卡版本,Daily Check-in 任务体系</li>
+          <li>点数耗尽时软提示订阅,不阻断不骚扰</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/trial_popup.png" data-name="积分历史入口"><img src="assets/cards/trial_popup.png" alt="积分历史" loading="lazy"><figcaption><b>点数消耗</b><span>入口</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-login">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">07</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Google OAuth Flow</b><span>5 屏</span></div>
+        <h3>登录流程</h3>
+        <p>Google OAuth 登录由 App 内 WebView 承载,覆盖完整分支:欢迎页 → 协议勾选 → 账号选择 → 头像确认 → 登录成功,并含账号绑定 / 解绑 / Pro+AI 升级态。</p>
+        <ul class="mod-points">
+          <li>协议勾选页强制勾选 Privacy &amp; Terms 才能继续</li>
+          <li>账号选择页与 Google 全局登录打通,WebView 内体验</li>
+          <li>成功落地页附 Pro+ai 升级引导,转化节点</li>
+          <li>异常态(网络失败 / 取消授权)提供重试,不静默失败</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/login_google.png" data-name="登录 · Google OAuth"><img src="assets/cards/login_google.png" alt="Google 登录" loading="lazy"><figcaption><b>Google OAuth</b><span>WebView</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-chat">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">08</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>AI Chat · Text to Image</b><span>7 屏</span></div>
+        <h3>AI Chat · 文生图</h3>
+        <p>文生图对话流核心 7 屏:灵感无图 → 选中 Style → 生成中 → 生成成功 → 点击灵感 → 选中换装 → 选中发型。整个链路在深色画布上进行,沉浸式聚焦图片内容。</p>
+        <ul class="mod-points">
+          <li>顶栏展示更多灵感案例,用户始终有下一动作可选</li>
+          <li>Ai Style 面板呈现风格参考图,参数区(4K / 3:4 / 积分)与键盘一体化</li>
+          <li>生成中态进度环渐隐到深夜画布;失败保留"再试一次"</li>
+          <li>键盘收起 / 展开态独立设计,避免误触</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/chat_t2i.png" data-name="AI Chat · Ai Style"><img src="assets/cards/chat_t2i.png" alt="文生图对话" loading="lazy"><figcaption><b>Ai Style</b><span>文生图</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/chat_t2i.png" data-name="AI Chat · 键盘展开"><img src="assets/cards/chat_t2i.png" alt="键盘展开" loading="lazy"><figcaption><b>键盘展开</b><span>输入态</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/inspire_ready.png" data-name="灵感 · 标签推荐"><img src="assets/cards/inspire_ready.png" alt="灵感标签" loading="lazy"><figcaption><b>灵感标签</b><span>一键回填</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-inspire">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">09</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Inspire · State Matrix</b><span>4 状态</span></div>
+        <h3>灵感生成状态</h3>
+        <p>完整覆盖文生图 / 灵感生成的 4 种状态:未生成 / 生成中(渐显加载) / 出错误(降级重试) / 应用后重置,状态切换有清晰视觉过渡(暗化 → 显亮)。</p>
+        <ul class="mod-points">
+          <li>未生成态:大图 + 提示文案 + Generate 主按钮</li>
+          <li>生成中态:渐变蒙版 + 进度环 + 积分预估</li>
+          <li>错误态:原图保留 + 错误插画 + 重试入口</li>
+          <li>应用后重置:toast 提示 + 列表回到首屏</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/inspire_ready.png" data-name="灵感 · 就绪态"><img src="assets/cards/inspire_ready.png" alt="灵感就绪" loading="lazy"><figcaption><b>就绪态</b><span>默认</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-hd">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">10</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>HD Restore</b><span>3 屏</span></div>
+        <h3>高清修复</h3>
+        <p>老照片 Before / After 对比呈现;双模式切换(Photo Restore 默认 / Ultra HD 增强);底部深色主按钮 + 积分标识;粉色渐变背景柔化修复场景的情感体验。</p>
+        <ul class="mod-points">
+          <li>浅色 + 暖白渐变是全 App 唯一一处怀旧氛围</li>
+          <li>Tab 切换普通 / 超清,二次进入默认上次选项</li>
+          <li>积分消耗透明化 + Claim points 引导</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/hd_repair.png" data-name="HD Restore · Before/After"><img src="assets/cards/hd_repair.png" alt="高清修复" loading="lazy"><figcaption><b>Before / After</b><span>默认</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-dressup">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">11</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>AI Outfit</b><span>4 屏</span></div>
+        <h3>AI 换装</h3>
+        <p>上传照片 → 选择服装九宫格 → 一键换装。选中态以红色对勾标记;Start Outfit Change 按钮明示积分消耗 +10;右上角 Claim points 引导积分获取。</p>
+        <ul class="mod-points">
+          <li>服装九宫格 8 张可选 + 1 张 UPLOAD 自定义</li>
+          <li>选中态除对勾外,主图轻微缩放反馈</li>
+          <li>顶栏保留"换发型"入口,组合工具</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/dressup.png" data-name="AI Outfit · 九宫格"><img src="assets/cards/dressup.png" alt="AI Outfit" loading="lazy"><figcaption><b>九宫格</b><span>默认</span></figcaption></figure>
+        <figure class="shot" data-full="assets/cards/dressup.png" data-name="AI Outfit · 选中"><img src="assets/cards/dressup.png" alt="选中" loading="lazy"><figcaption><b>选中</b><span>对勾态</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod" id="m-erase">
+    <div class="mod-band reveal">
+      <span class="mod-ghost">12</span>
+      <div class="mod-info">
+        <div class="mod-kicker"><b>Smart Erase</b><span>1 屏</span></div>
+        <h3>智能擦除</h3>
+        <p>全屏图片画布 + 圆形画笔光标;底部画笔 / 橡皮擦切换与笔刷大小滑杆;深色工具界面聚焦图片内容本身;顶部积分余额常显,消耗透明化。</p>
+        <ul class="mod-points">
+          <li>画笔光标跟随手指,圆形遮罩预览擦除范围</li>
+          <li>工具栏三件套:画笔 / 橡皮 / 撤销;长按滑杆调直径</li>
+          <li>深色画布压暗周边,避免误判触发区域</li>
+        </ul>
+      </div>
+      <div class="mod-shots">
+        <figure class="shot" data-full="assets/cards/erase.png" data-name="Smart Erase · 工具页"><img src="assets/cards/erase.png" alt="智能擦除" loading="lazy"><figcaption><b>擦除</b><span>工具页</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     05 · STATE DESIGN —— 分段切换
+     ============================================================ -->
+<section class="sec" id="states">
+  <div class="sec-head reveal">
+    <span class="sec-no">05</span>
+    <div class="sec-titles"><span class="sec-en">State Design</span><h2>状态设计</h2></div>
+    <span class="sec-ghost">ST</span>
+  </div>
+  <p class="sec-lead">围绕"不打断"原则,所有页面输出默认 / 加载 / 错误 / 空 / 转化五类核心状态;主行动点在不同状态间从禁用转为可点击,按钮始终存在。切换场景查看对应矩阵:</p>
+
+  <div class="tabs reveal" data-tab-group="state">
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn on" data-panel="st-chat">AI Chat · 文生图</button>
+      <button class="tab-btn" data-panel="st-home">首页 · 季节主题</button>
+      <button class="tab-btn" data-panel="st-pay">订阅 · 转化弹窗</button>
+    </div>
+
+    <div class="tab-panel on" id="st-chat">
+      <div class="st-grid">
+        <figure class="st-card" data-full="assets/cards/chat_t2i.png" data-name="AI Chat · 默认输入态">
+          <div class="st-img"><img src="assets/cards/chat_t2i.png" alt="默认态"><span class="st-tag t-brand">默认</span></div>
+          <figcaption><b>输入态</b><span>大图 + 提示文案 + Generate 主按钮</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/chat_t2i.png" data-name="AI Chat · 生成中">
+          <div class="st-img"><img src="assets/cards/chat_t2i.png" alt="加载态"><span class="st-tag t-gold">加载</span></div>
+          <figcaption><b>生成中</b><span>渐变蒙版 + 进度环 + 积分预估</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/chat_t2i.png" data-name="AI Chat · 成功">
+          <div class="st-img"><img src="assets/cards/chat_t2i.png" alt="成功态"><span class="st-tag t-ok">成功</span></div>
+          <figcaption><b>生成成功</b><span>保存 / 分享 / 再生成 / 满意 四个行动点</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/chat_t2i.png" data-name="AI Chat · 错误">
+          <div class="st-img"><img src="assets/cards/chat_t2i.png" alt="错误态"><span class="st-tag t-err">错误</span></div>
+          <figcaption><b>出错重试</b><span>原图保留 + 重试入口,3 秒内不弹 toast</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/trial_popup.png" data-name="AI Chat · 积分不足">
+          <div class="st-img"><img src="assets/cards/trial_popup.png" alt="积分不足"><span class="st-tag t-gold">转化</span></div>
+          <figcaption><b>积分不足</b><span>Claim points 兜底,弱化付费压迫</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/trial_popup.png" data-name="AI Chat · 空态">
+          <div class="st-img"><img src="assets/cards/trial_popup.png" alt="空态"><span class="st-tag">空</span></div>
+          <figcaption><b>未输入</b><span>主按钮禁用,提示"先描述你的创作想法"</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="st-home">
+      <div class="st-grid">
+        <figure class="st-card" data-full="assets/cards/home_daily.png" data-name="首页 · 日常">
+          <div class="st-img"><img src="assets/cards/home_daily.png" alt="日常"><span class="st-tag t-brand">日常</span></div>
+          <figcaption><b>默认主题</b><span>暖金渐变,运营位降级为模板推荐</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/home_spring.png" data-name="首页 · 春季">
+          <div class="st-img"><img src="assets/cards/home_spring.png" alt="春季"><span class="st-tag t-ok">春季</span></div>
+          <figcaption><b>限时主题</b><span>青蓝渐变 + 蝴蝶装饰,3–5 月生效</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/home_winter.png" data-name="首页 · 冬季">
+          <div class="st-img"><img src="assets/cards/home_winter.png" alt="冬季"><span class="st-tag t-gold">冬季</span></div>
+          <figcaption><b>季节主题</b><span>冰蓝夜空 + 雪花装饰,12–2 月生效</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/home_valentine.png" data-name="首页 · 情人节">
+          <div class="st-img"><img src="assets/cards/home_valentine.png" alt="情人节"><span class="st-tag t-err">情人节</span></div>
+          <figcaption><b>限时主题</b><span>粉红渐变 + 心形装饰,2 月生效</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/home_christmas.png" data-name="首页 · 圣诞节">
+          <div class="st-img"><img src="assets/cards/home_christmas.png" alt="圣诞节"><span class="st-tag t-ok">圣诞节</span></div>
+          <figcaption><b>节日运营</b><span>圣诞专题模板运营位 + 节日角标</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/home_daily.png" data-name="首页 · 默认降级">
+          <div class="st-img"><img src="assets/cards/home_daily.png" alt="默认降级"><span class="st-tag">回退</span></div>
+          <figcaption><b>默认降级</b><span>运营位空时按时间回退到日常主题</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="st-pay">
+      <div class="st-grid">
+        <figure class="st-card" data-full="assets/cards/trial_popup.png" data-name="订阅 · Holiday Sale">
+          <div class="st-img"><img src="assets/cards/trial_popup.png" alt="Holiday Sale"><span class="st-tag t-gold">大促</span></div>
+          <figcaption><b>Holiday Sale</b><span>30% OFF 撕票样式,年度大促入口</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/trial_popup.png" data-name="订阅 · Free Trial">
+          <div class="st-img"><img src="assets/cards/trial_popup.png" alt="Free Trial"><span class="st-tag t-brand">试用</span></div>
+          <figcaption><b>Free Trial</b><span>7 天试用,首次进入默认,转化最高</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/trial_popup.png" data-name="订阅 · 元旦限定">
+          <div class="st-img"><img src="assets/cards/trial_popup.png" alt="元旦限定"><span class="st-tag t-ok">节日</span></div>
+          <figcaption><b>元旦限定</b><span>2026 限定插画 + 倒计时</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/trial_popup.png" data-name="订阅 · 积分不足">
+          <div class="st-img"><img src="assets/cards/trial_popup.png" alt="积分不足"><span class="st-tag t-err">兜底</span></div>
+          <figcaption><b>积分不足</b><span>AI 工具耗尽时软提示,提供 50% 折扣</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/settings_sub.png" data-name="订阅 · 已订阅">
+          <div class="st-img"><img src="assets/cards/settings_sub.png" alt="已订阅"><span class="st-tag t-brand">已订阅</span></div>
+          <figcaption><b>会员态</b><span>金色权益卡,展示到期时间与剩余积分</span></figcaption>
+        </figure>
+        <figure class="st-card" data-full="assets/cards/settings_sub.png" data-name="订阅 · 降级提醒">
+          <div class="st-img"><img src="assets/cards/settings_sub.png" alt="降级提醒"><span class="st-tag">到期</span></div>
+          <figcaption><b>降级提醒</b><span>到期前 3 天升级提示,不打扰主流程</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     06 · CLOSING —— 封底分栏
+     ============================================================ -->
+<section class="sec sec-alt closing" id="closing">
+  <div class="sec-head reveal">
+    <span class="sec-no">06</span>
+    <div class="sec-titles"><span class="sec-en">Closing Notes</span><h2>总结</h2></div>
+    <span class="sec-ghost">END</span>
+  </div>
+
+  <div class="backcover">
+    <div class="bc-copy reveal">
+      <span class="bc-label">Summary</span>
+      <h2>把每次设计决策,<br>都缩到一个明确的原则里。</h2>
+      <p>FotoCollage 的设计语言围绕三条主线组织 —— <b>降低创作门槛</b>(首页固定入口 + Style 预设 + 灵感一键回填)、<b>深浅主题分离</b>(AI 工具用深色画布,情绪化页面用浅色渐变)、<b>不阻断商业化</b>(Pro 提示卡固定在决策终点而非开端)。希望这份归档能为后续接手的设计师提供完整的可复用上下文。</p>
+      <div class="bc-actions">
+        <a class="btn btn-primary" href="https://www.figma.com/design/muMrdflO1BHavqXHRRiFjl" target="_blank" rel="noopener">在 Figma 中查看源文件 →</a>
+        <a class="btn btn-secondary" href="#top">回到顶部</a>
+      </div>
+    </div>
+    <div class="bc-side reveal">
+      <div class="bc-strip">
+        <div class="bc-phone"><img src="assets/cards/home_spring.png" alt="春季主题"></div>
+        <div class="bc-phone"><img src="assets/cards/chat_t2i.png" alt="AI Chat"></div>
+        <div class="bc-phone"><img src="assets/cards/home_winter.png" alt="冬季主题"></div>
+      </div>
+      <dl class="bc-spec">
+        <div><dt>画板</dt><dd>390 × 844</dd></div>
+        <div><dt>色板</dt><dd>12 主色 · 8 渐变</dd></div>
+        <div><dt>形状</dt><dd>6 圆角 · 4 阴影阶</dd></div>
+        <div><dt>组件</dt><dd>30+ 设置图标变体</dd></div>
+        <div><dt>主题</dt><dd>深浅双轨 · 5 季节换肤</dd></div>
+        <div><dt>转化</dt><dd>4 种订阅弹窗规范</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>FotoCollage · 设计归档 / AI Photo Studio Portfolio</span>
+    <span>Canvas 1:2 · 18 sections · 30+ variants · 5 themes</span>
+  </div>
+</section>
+</main>
+
+<!-- ============ Lightbox ============ -->
+<div class="lightbox" id="lb">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-prev" id="lbPrev">&lsaquo;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" id="lbNext">&rsaquo;</button>
+  <div class="lb-name" id="lbName"></div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

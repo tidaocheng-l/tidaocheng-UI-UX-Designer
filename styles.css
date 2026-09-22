@@ -7761,11 +7761,22 @@ body.photos-page {
 .photos-page .site-nav.is-scrolled,
 .photos-page .site-nav.is-over-dark,
 .photos-page .site-nav.is-scrolled.is-over-dark {
-  background: transparent;
+  background:
+    radial-gradient(900px 380px at 100% 0%, rgba(140, 255, 114, 0.16), rgba(255, 254, 242, 0) 74%),
+    #fffef2;
 }
 
 .photos-page .site-nav.is-scrolled {
-  background: rgba(255, 254, 242, 0.92);
+  background:
+    radial-gradient(900px 380px at 100% 0%, rgba(140, 255, 114, 0.16), rgba(255, 254, 242, 0) 74%),
+    #fffef2;
+}
+
+[data-theme="dark"] .photos-page .site-nav,
+[data-theme="dark"] .photos-page .site-nav.is-scrolled,
+[data-theme="dark"] .photos-page .site-nav.is-over-dark,
+[data-theme="dark"] .photos-page .site-nav.is-scrolled.is-over-dark {
+  background: #11110f;
 }
 
 .photos-page .nav-inner,
@@ -8079,5 +8090,62 @@ body.is-poster-filter .portfolio-page-grid {
   body.is-poster-filter .portfolio-page-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 16px;
+  }
+}
+
+/* ===== 移动端滚动态导航在深色区块上的可读性（nav-scrolled-mobile-20260921） ===== */
+@media (max-width: 920px) {
+  .site-nav.is-scrolled .brand-text,
+  .site-nav.is-scrolled .nav-link,
+  .site-nav.is-scrolled.is-over-dark .brand-text,
+  .site-nav.is-scrolled.is-over-dark .nav-link,
+  .home-page .site-nav.is-scrolled .brand-text,
+  .home-page .site-nav.is-scrolled .nav-link,
+  .home-page .site-nav.is-scrolled.is-over-dark .brand-text,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link {
+    color: color-mix(in srgb, var(--ink) 82%, transparent);
+  }
+
+  .site-nav.is-scrolled.is-over-dark .brand-text,
+  .site-nav.is-scrolled.is-over-dark .nav-link,
+  .home-page .site-nav.is-scrolled.is-over-dark .brand-text,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .site-nav.is-scrolled .nav-link:hover,
+  .site-nav.is-scrolled .nav-link:focus-visible,
+  .site-nav.is-scrolled .nav-link.is-active,
+  .site-nav.is-scrolled.is-over-dark .nav-link:hover,
+  .site-nav.is-scrolled.is-over-dark .nav-link:focus-visible,
+  .site-nav.is-scrolled.is-over-dark .nav-link.is-active,
+  .home-page .site-nav.is-scrolled .nav-link:hover,
+  .home-page .site-nav.is-scrolled .nav-link:focus-visible,
+  .home-page .site-nav.is-scrolled .nav-link.is-active,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link:hover,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link:focus-visible,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link.is-active {
+    color: var(--ink);
+  }
+
+  .site-nav.is-scrolled.is-over-dark .nav-link:hover,
+  .site-nav.is-scrolled.is-over-dark .nav-link:focus-visible,
+  .site-nav.is-scrolled.is-over-dark .nav-link.is-active,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link:hover,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link:focus-visible,
+  .home-page .site-nav.is-scrolled.is-over-dark .nav-link.is-active {
+    color: #ffffff;
+  }
+
+  .site-nav.is-scrolled .theme-switch,
+  .site-nav.is-scrolled.is-over-dark .theme-switch,
+  .home-page .site-nav.is-scrolled .theme-switch,
+  .home-page .site-nav.is-scrolled.is-over-dark .theme-switch {
+    background: rgba(17, 17, 17, 0.05);
+  }
+
+  .site-nav.is-scrolled.is-over-dark .theme-switch,
+  .home-page .site-nav.is-scrolled.is-over-dark .theme-switch {
+    background: rgba(255, 255, 255, 0.12);
   }
 }

@@ -23,7 +23,6 @@ const navAnchors = Array.from(document.querySelectorAll(".nav-menu a[href^='#']"
 const navDropdowns = document.querySelectorAll(".nav-dropdown");
 const scrollMotionItems = Array.from(document.querySelectorAll(".motion-card:not(.capability-card), .tool-visual"));
 const workflowParticles = document.querySelector(".workflow-particles");
-const darkNavSections = Array.from(document.querySelectorAll(".workflow"));
 const toast = document.querySelector("[data-site-toast]");
 const portfolioFilterButtons = Array.from(document.querySelectorAll("[data-portfolio-filter]"));
 const portfolioCards = Array.from(document.querySelectorAll("[data-portfolio-card]"));
@@ -369,12 +368,8 @@ const setScrolledState = () => {
     nav.classList.toggle("is-scrolled", isNavScrolled);
   }
 
-  const navProbeY = nav.getBoundingClientRect().bottom - 1;
-  const isOverDarkSection = darkNavSections.some(section => {
-    const rect = section.getBoundingClientRect();
-    return rect.top <= navProbeY && rect.bottom >= navProbeY;
-  });
-  nav.classList.toggle("is-over-dark", isOverDarkSection);
+  // 导航滚动到深色区块时不再切换字体颜色：保持实底背景直接遮盖内容
+  nav.classList.remove("is-over-dark");
 };
 
 let scrollRaf = 0;
