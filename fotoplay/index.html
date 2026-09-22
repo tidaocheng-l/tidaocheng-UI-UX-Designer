@@ -315,17 +315,16 @@ h1 .grad{background:linear-gradient(100deg,#b9a8ff 0%,var(--accent) 46%,var(--ac
 .shot.wide .ph{background:var(--panel2)}
 .shot.wide figcaption{text-align:left}
 
-/* ---------- 组件库：单一 dense 网格，横长图一行 2 个、竖图一行 3 个 ---------- */
-.ov-lib .grid{grid-template-columns:repeat(12,1fr); gap:16px 12px; grid-auto-flow:dense}
-.ov-lib .shot{grid-column:span 4}
-.ov-lib .shot.wide{grid-column:span 4; max-width:none}
-.ov-lib .shot.r-wide{grid-column:span 6}
-.ov-lib .shot .ph{background:var(--panel2)}
-.ov-lib .shot .ph img{max-height:300px; width:100%; object-fit:contain}
-.ov-lib .shot figcaption{font-size:11px; margin-top:6px}
-/* 分组标题作为整行条目嵌入网格；关闭 dense 防止跨组回填串位 */
-.ov-lib .lib-grid{grid-auto-flow:row}
-.ov-lib .lib-h{grid-column:1/-1; display:flex; align-items:center; gap:11px; margin:10px 0 0; font-size:15px; font-weight:600; color:var(--txt)}
+/* ---------- 组件库：统一两列大卡（图撑满卡片、行行对齐不散碎） ---------- */
+.lib-grid{grid-template-columns:repeat(2,1fr); gap:30px 26px; grid-auto-flow:row}
+.lib-grid .shot{width:auto; min-width:0; grid-column:auto}
+.lib-grid .shot.wide, .lib-grid .shot.r-wide{grid-column:auto; max-width:none}
+.lib-grid .shot .ph{aspect-ratio:3/2; display:grid; place-items:center; background:var(--panel2);
+  border:1px solid var(--line); border-radius:14px; overflow:hidden; padding:20px}
+.lib-grid .shot .ph img{width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain}
+.lib-grid .shot figcaption{font-size:11.5px; margin-top:9px}
+/* 分组标题作为整行条目嵌入网格 */
+.ov-lib .lib-h{grid-column:1/-1; display:flex; align-items:center; gap:11px; margin:14px 0 0; font-size:15px; font-weight:600; color:var(--txt)}
 .ov-lib .lib-h .gt{position:relative; padding-left:13px}
 .ov-lib .lib-h .gt:before{content:""; position:absolute; left:0; top:50%; transform:translateY(-50%);
   width:4px; height:15px; border-radius:2px; background:linear-gradient(180deg,var(--accent),var(--accent2))}
