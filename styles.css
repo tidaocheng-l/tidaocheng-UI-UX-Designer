@@ -7853,9 +7853,9 @@ body.photos-page {
 .photo-panorama-row {
   display: grid;
   grid-template-columns: 254px minmax(0, 1fr) 239px;
-  gap: 4px;
+  gap: 12px;
   height: 342px;
-  margin: 0;
+  margin: 8px 0 0;
   padding: 2px 0;
   overflow: hidden;
 }
@@ -7956,7 +7956,7 @@ body.photos-page {
 
   .photo-panorama-row {
     grid-template-columns: 22% minmax(0, 1fr) 20%;
-    gap: 3px;
+    gap: 12px;
     height: 220px;
   }
 
