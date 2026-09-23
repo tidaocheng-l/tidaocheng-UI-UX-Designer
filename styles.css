@@ -3901,8 +3901,7 @@ main {
   max-width: 1440px;
   margin: 48px auto 0;
   padding-inline: 120px;
-  column-gap: 30px;
-  row-gap: 50px;
+  gap: 20px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -3914,6 +3913,30 @@ main {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   filter: none;
+}
+
+.portfolio-page:not(.portfolio-filter-ready) .portfolio-page-card[data-portfolio-exclude-all] {
+  display: none;
+}
+
+.portfolio-page .portfolio-page-card.motion-card {
+  transform: none;
+  will-change: auto;
+}
+
+.portfolio-page .portfolio-page-card.motion-card.reveal {
+  transition-property: opacity, background-color;
+  transition-duration: 480ms, 220ms;
+  transition-timing-function: ease-out, ease;
+  transition-delay: 0ms;
+}
+
+.motion-ready .portfolio-page .portfolio-page-card.reveal {
+  opacity: 0;
+}
+
+.motion-ready .portfolio-page .portfolio-page-card.reveal.is-visible {
+  opacity: 1;
 }
 
 .portfolio-page .portfolio-page-card::after {
@@ -4342,8 +4365,6 @@ main {
 
   .portfolio-page .portfolio-page-grid {
     grid-template-columns: 1fr;
-    column-gap: 30px;
-    row-gap: 50px;
     margin-top: 34px;
     padding-inline: 18px;
   }
@@ -8061,21 +8082,17 @@ body.photos-page {
 /* ===== 海报筛选视图一行五个（poster-five-20260919） ===== */
 body.is-poster-filter .portfolio-page-grid {
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  column-gap: 24px;
-  row-gap: 28px;
 }
 
 @media (max-width: 1180px) {
   body.is-poster-filter .portfolio-page-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 30px;
   }
 }
 
 @media (max-width: 920px) {
   body.is-poster-filter .portfolio-page-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 16px;
   }
 }
 

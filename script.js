@@ -21,7 +21,8 @@ const navMenu = document.querySelector(".nav-menu");
 const navLinks = Array.from(document.querySelectorAll(".nav-link[href^='#']"));
 const navAnchors = Array.from(document.querySelectorAll(".nav-menu a[href^='#']"));
 const navDropdowns = document.querySelectorAll(".nav-dropdown");
-const scrollMotionItems = Array.from(document.querySelectorAll(".motion-card:not(.capability-card), .tool-visual"));
+const scrollMotionItems = Array.from(document.querySelectorAll(".motion-card:not(.capability-card), .tool-visual"))
+  .filter(item => !item.closest(".photos-page, .portfolio-page"));
 const workflowParticles = document.querySelector(".workflow-particles");
 const toast = document.querySelector("[data-site-toast]");
 const portfolioFilterButtons = Array.from(document.querySelectorAll("[data-portfolio-filter]"));
@@ -31,6 +32,7 @@ const portfolioIntro = document.querySelector(".portfolio-page-intro");
 const portfolioIntroTitle = portfolioIntro?.querySelector("#portfolio-page-title");
 const portfolioIntroTagline = portfolioIntro?.querySelector(".portfolio-page-intro-tagline");
 const photoTiles = Array.from(document.querySelectorAll("[data-photo-index]"));
+const photoGallery = document.querySelector(".photos-gallery");
 const photoLightbox = document.querySelector("[data-photo-lightbox]");
 const photoLightboxDialog = photoLightbox?.querySelector(".photo-lightbox-dialog");
 const photoLightboxImage = photoLightbox?.querySelector("[data-photo-lightbox-image]");
@@ -40,6 +42,46 @@ const photoLightboxClose = photoLightbox?.querySelector(".photo-lightbox-close")
 const photoLightboxPrev = photoLightbox?.querySelector("[data-photo-prev]");
 const photoLightboxNext = photoLightbox?.querySelector("[data-photo-next]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+const layoutPhotoMasonry = () => {
+  if (!photoGallery || !photoTiles.length) return;
+
+  const columnCount = window.matchMedia("(max-width: 680px)").matches
+    ? 1
+    : window.matchMedia("(max-width: 920px)").matches
+      ? 2
+      : 4;
+  let columns = Array.from(photoGallery.querySelectorAll(":scope > .photo-masonry-column"));
+
+  if (columns.length !== columnCount) {
+    columns.forEach(column => column.remove());
+    columns = Array.from({ length: columnCount }, () => {
+      const column = document.createElement("div");
+      column.className = "photo-masonry-column";
+      photoGallery.append(column);
+      return column;
+    });
+  } else {
+    columns.forEach(column => column.replaceChildren());
+  }
+
+  const columnHeights = Array(columnCount).fill(0);
+  photoTiles.forEach(tile => {
+    const image = tile.querySelector("img");
+    const width = Number(image?.getAttribute("width")) || 1;
+    const height = Number(image?.getAttribute("height")) || 1;
+    const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
+    columns[shortestColumn].append(tile);
+    columnHeights[shortestColumn] += height / width;
+  });
+};
+
+layoutPhotoMasonry();
+let photoMasonryResizeFrame = 0;
+window.addEventListener("resize", () => {
+  window.cancelAnimationFrame(photoMasonryResizeFrame);
+  photoMasonryResizeFrame = window.requestAnimationFrame(layoutPhotoMasonry);
+});
 const mobileNavMedia = window.matchMedia("(max-width: 920px)");
 const canAnimateScroll = !prefersReducedMotion.matches;
 
@@ -499,6 +541,7 @@ const applyPortfolioFilter = filter => {
     card.hidden = !isVisible;
     card.classList.toggle("is-hidden", !isVisible);
   });
+  body.classList.add("portfolio-filter-ready");
 };
 
 const getPortfolioFilterFromHash = () => {
