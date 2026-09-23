@@ -7819,7 +7819,7 @@ body.photos-page {
 .photo-grid-framed {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 4px;
+  gap: 12px;
   margin: 0;
   padding: 2px 0;
 }
