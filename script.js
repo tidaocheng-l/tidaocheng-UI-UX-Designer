@@ -22,7 +22,7 @@ const navLinks = Array.from(document.querySelectorAll(".nav-link[href^='#']"));
 const navAnchors = Array.from(document.querySelectorAll(".nav-menu a[href^='#']"));
 const navDropdowns = document.querySelectorAll(".nav-dropdown");
 const scrollMotionItems = Array.from(document.querySelectorAll(".motion-card:not(.capability-card), .tool-visual"))
-  .filter(item => !item.closest(".photos-page, .portfolio-page"));
+  .filter(item => !item.closest(".photos-page, .portfolio-page") && !item.matches(".home-page .expression-card, .home-page .work-row"));
 const workflowParticles = document.querySelector(".workflow-particles");
 const toast = document.querySelector("[data-site-toast]");
 const portfolioFilterButtons = Array.from(document.querySelectorAll("[data-portfolio-filter]"));

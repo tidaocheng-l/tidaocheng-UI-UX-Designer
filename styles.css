@@ -3973,6 +3973,12 @@ main {
 
 .portfolio-page .portfolio-media img {
   object-fit: cover;
+  transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 300ms ease;
+}
+
+.portfolio-page .portfolio-page-card:hover .portfolio-media img,
+.portfolio-page .portfolio-page-card:focus-within .portfolio-media img {
+  transform: scale(1.025);
 }
 
 .portfolio-page .portfolio-link {
@@ -5684,17 +5690,28 @@ main {
 }
 
 .expression-card.motion-card.reveal {
-  transition-property: opacity, transform, box-shadow;
-  transition-duration: 760ms, 260ms, 220ms;
-  transition-timing-function: ease, cubic-bezier(0.2, 0.7, 0.2, 1), ease;
+  transform: none;
+  transition: opacity 520ms ease, box-shadow 220ms ease;
 }
 
 .expression-card:hover,
 .expression-card:focus-within {
   background: var(--surface);
   background-color: var(--surface);
-  transform: translateY(-4px);
+  transform: none;
   box-shadow: 0 16px 30px rgba(17, 17, 17, 0.08);
+}
+
+.motion-ready .home-page .expression-card.reveal,
+.motion-ready .home-page .work-row.reveal {
+  --reveal-x: 0px;
+  --reveal-y: 0px;
+  --reveal-scale: 1;
+}
+
+.home-page .work-row.motion-card.reveal {
+  transform: none;
+  transition: opacity 520ms ease;
 }
 
 [data-theme="dark"] .expression-card {
@@ -5743,7 +5760,7 @@ main {
 .expression-card:hover .expression-media img,
 .expression-card:focus-within .expression-media img {
   filter: none;
-  transform: none;
+  transform: scale(1.025);
 }
 
 .expression-media-uiux img {
@@ -7886,8 +7903,18 @@ body.photos-page {
   --scroll-scale: 1;
   opacity: 1;
   transform: none;
-  transition: none;
-  will-change: auto;
+  overflow: hidden;
+  transition: opacity 520ms ease;
+  will-change: opacity;
+}
+
+.motion-ready .photos-gallery .photo-tile.reveal:not(.is-visible) {
+  opacity: 0;
+}
+
+.photos-gallery .photo-tile.motion-card.is-visible,
+.photos-gallery .photo-tile.reveal.is-visible {
+  opacity: 1;
 }
 
 .photos-gallery .photo-tile img {
@@ -7896,12 +7923,22 @@ body.photos-page {
   height: auto;
   aspect-ratio: auto;
   object-fit: contain;
+  transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 240ms ease;
+  will-change: transform;
 }
 
 .photos-gallery .photo-tile:hover img,
 .photos-gallery .photo-tile:focus-visible img {
   filter: saturate(1.04);
-  transform: scale(1.008);
+  transform: scale(1.025);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photos-gallery .photo-tile.motion-card,
+  .photos-gallery .photo-tile.reveal,
+  .photos-gallery .photo-tile img {
+    transition: none;
+  }
 }
 
 .photos-page .site-footer {
