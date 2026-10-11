@@ -8116,6 +8116,33 @@ body.photos-page {
   }
 }
 
+/* ===== 平面设计 Logo 卡片（logo-grid-20261011） ===== */
+.portfolio-page .portfolio-page-card.logo-card {
+  padding-bottom: 14px;
+}
+
+.portfolio-page .portfolio-page-card.logo-card .portfolio-media {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.portfolio-page .portfolio-page-card.logo-card .portfolio-media img {
+  object-fit: cover;
+}
+
+.portfolio-page .portfolio-page-card.logo-card:hover .portfolio-media img,
+.portfolio-page .portfolio-page-card.logo-card:focus-within .portfolio-media img {
+  transform: none;
+}
+
+@media (max-width: 680px) {
+  .portfolio-page .portfolio-page-card.logo-card .portfolio-media {
+    border-radius: 10px;
+  }
+}
+
 /* ===== 海报筛选视图一行五个（poster-five-20260919） ===== */
 body.is-poster-filter .portfolio-page-grid {
   grid-template-columns: repeat(5, minmax(0, 1fr));
